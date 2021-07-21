@@ -32,7 +32,7 @@ public class Game {
             
             Collections.shuffle(weaponCards);
             Collections.shuffle(estateCards);
-            Collections.shuffle(charCards);
+            Collections.shuffle(characterCards);
             murderSet.add(weaponCards.get(0));
             murderSet.add(charCards.get(0));
             murderSet.add(estateCards.get(0));
