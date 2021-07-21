@@ -27,9 +27,9 @@ public class Game {
             int numplayers  = br.read();
             players = new ArrayList<>();
 
-           
-            
-            
+            /**
+             * Randomizes each set of card and takes one of each for the murder set
+             */
             Collections.shuffle(weaponCards);
             Collections.shuffle(estateCards);
             Collections.shuffle(characterCards);
@@ -38,7 +38,10 @@ public class Game {
             murderSet.add(estateCards.get(0));
           
             /**
-             * Dummy Initialization (to be completed...)
+             * Combine all cards (correct me if I'm wrong about this rule interpretation:
+             * "The remaining weapon, estate and character cards are then combined and distributed at random to players.
+                Some players may end up with more cards than others but only at most one more"
+                -At the moment this rule is followed due to: Some players may end up with more cards than others but only at most one more
              */
             HashSet<Card> cards = new HashSet<Card>();
             cards.addAll(weaponCards);
@@ -55,23 +58,13 @@ public class Game {
                 players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>()));
             }
 
-            while (!weaponCards.isEmpty()){
+            while (!cards.isEmpty()){
                 for (Player player : players){
-                    player.cards.add(weaponCards.get(0));
+                    player.cards.add(cards.get(0));
                 }
             }
 
-            while (!estateCards.isEmpty()){
-                for (Player player : players){
-                    player.cards.add(estateCards.get(0));
-                }
-            }
-
-            while (!characterCards.isEmpty()){
-                for (Player player : players){
-                    player.cards.add(characterCards.get(0));
-                }
-            }
+            
         } catch (IOException e) {
             throw e;
         }
