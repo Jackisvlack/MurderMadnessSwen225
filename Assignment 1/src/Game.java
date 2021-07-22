@@ -9,7 +9,7 @@ import java.util.HashSet;
 public class Game {
     Board board;
     ArrayList<Player> players;
-    HashSet<Card> murderSet;
+    Guess murderCircumstance;
     ArrayList<String> characters = {"lucilla", "bert", "maline", "percy"};
     ArrayList<WeaponCard> weaponCards = {new WeaponCard("broom"), new WeaponCard("scissors"), new WeaponCard("knife"), new WeaponCard("shovel"), new WeaponCard("ipad")};
     ArrayList<CharCard> characterCards = {new CharCard("lucilla"), new CharCard("bert"), new CharCard("maline"), new CharCard("percy")};
@@ -33,9 +33,10 @@ public class Game {
             Collections.shuffle(weaponCards);
             Collections.shuffle(estateCards);
             Collections.shuffle(characterCards);
-            murderSet.add(weaponCards.get(0));
-            murderSet.add(charCards.get(0));
-            murderSet.add(estateCards.get(0));
+            WeaponCard murderWeapon = (weaponCards.get(0));
+            CharacterCard murderCharacter = (charCards.get(0));
+            EstateCard murderEstate = (estateCards.get(0));
+            murderCircumstance = new Guess(murderEstate.name, murderWeapon.name, murderCharacter.name);
           
             /**
              * Combine all cards (correct me if I'm wrong about this rule interpretation:
