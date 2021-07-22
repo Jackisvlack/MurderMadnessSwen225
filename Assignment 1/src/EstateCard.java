@@ -1,5 +1,5 @@
 public class EstateCard extends Card{
-    public estateCard(String name) {
+    public EstateCard(String name) {
         super(name);
     }
 }
