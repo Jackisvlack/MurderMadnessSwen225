@@ -11,10 +11,9 @@ public class Game {
     ArrayList<Player> players;
     HashSet<Card> murderSet;
     ArrayList<String> characters = {"lucilla", "bert", "maline", "percy"};
-    ArrayList<weaponCard> weaponCards = {new weaponCard("broom"), new weaponCard("scissors"), new weaponCard("knife"), new weaponCard("shovel"), new weaponCard("ipad")};
-    ArrayList<charCard> characterCards = {new charCard("lucilla"), new charCard("bert"), new charCard("maline"), new charCard("percy")};
-    ArrayList<estateCard> estateCards = {new esateCard("manic manor"), new esateCard("villa celia"), new esateCard("haunted house"), new esateCard("calamity castle"),new esateCard("peril palace")};
-
+    ArrayList<WeaponCard> weaponCards = {new WeaponCard("broom"), new WeaponCard("scissors"), new WeaponCard("knife"), new WeaponCard("shovel"), new WeaponCard("ipad")};
+    ArrayList<CharCard> characterCards = {new CharCard("lucilla"), new CharCard("bert"), new CharCard("maline"), new CharCard("percy")};
+    ArrayList<EstateCard> EstateCards = {new EstateCards("manic manor"), new EstateCards("villa celia"), new EstateCards("haunted house"), new EstateCards("calamity castle"),new EstateCards("peril palace")};
     public Game() {
     }
 
