@@ -13,7 +13,7 @@ public class Game {
     ArrayList<String> characters = {"lucilla", "bert", "maline", "percy"};
     ArrayList<WeaponCard> weaponCards = {new WeaponCard("broom"), new WeaponCard("scissors"), new WeaponCard("knife"), new WeaponCard("shovel"), new WeaponCard("ipad")};
     ArrayList<CharCard> characterCards = {new CharCard("lucilla"), new CharCard("bert"), new CharCard("maline"), new CharCard("percy")};
-    ArrayList<EstateCard> EstateCards = {new EstateCards("manic manor"), new EstateCards("villa celia"), new EstateCards("haunted house"), new EstateCards("calamity castle"),new EstateCards("peril palace")};
+    ArrayList<EstateCard> estateCards = {new EstateCard("manic manor"), new EstateCard("villa celia"), new EstateCard("haunted house"), new EstateCard("calamity castle"),new EstateCard("peril palace")};
     public Game() {
     }
 
