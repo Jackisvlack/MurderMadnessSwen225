@@ -1,5 +1,5 @@
 public class CharCard extends Card{
-    public charCard(String name) {
+    public CharCard(String name) {
         super(name);
     }
 }
