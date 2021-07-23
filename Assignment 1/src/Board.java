@@ -144,7 +144,7 @@ public class Board {
                 else if ((9 < i && i < 14) && (8 < j && j < 15)){
                     if ((i == 10 && j == 12) || (i == 12 && j == 9) || (i == 11 && j == 14) || (i == 13 && j == 11)){
                         squares[i][j].setWeapon(vcWeapon);
-                    } else if ((i == 11 && i <= 12) && (j >= 10 && j <= 13)){
+                    } else if ((i == 11 && i <= 13) && (j >= 10 && j <= 13)){
                         continue;
                     } else {
                         squares[i][j].setWall();
