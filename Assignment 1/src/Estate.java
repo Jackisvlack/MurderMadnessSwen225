@@ -11,6 +11,7 @@ public class Estate extends Location{
 
     public String estateWelcome(){
         String welcome = "You have entered " + super.name + " you see a " + super.getWeaponName();
+        return welcome;
     }
    
 }
