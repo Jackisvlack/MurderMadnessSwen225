@@ -1,5 +1,4 @@
 public class Estate extends Location{
-    Weapon estatesWeapon;
 
     public Estate(Position pos, String name) {
         super(pos, name);
@@ -10,11 +9,8 @@ public class Estate extends Location{
         super.isWall = true;
     }
 
-    public void setWeapon(Weapon weapon){
-        this.estatesWeapon = weapon;
+    public String estateWelcome(){
+        string welcome = "You have entered " + super.name + " you see a " + super.getWeaponName();
     }
-
-    public String getWeaponName(){
-        return estatesWeapon.getName();
-    }
+   
 }

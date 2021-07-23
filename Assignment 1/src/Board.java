@@ -1,5 +1,8 @@
+import java.util.Collections;
+
 public class Board {
     Location[][] squares = new Location[24][24];
+    ArrayList<Weapon> weapons;
     public Board() {
         /**
          * Creating the board objects in an array
@@ -55,9 +58,10 @@ public class Board {
                  * setting north and west neighbours as the north exit
                  *  & setting east and south neighbours as the east exit
                  */
+                Weapon hhWeapon = weapons.get(0);
                 if ((1 < i && i < 7) && (1 < j && j < 7)) {
                     if ((i == 3 && j == 6) ||(i == 6 && j == 5)){
-                        continue;
+                        squares[i][j].setWeapon(hhWeapon);
                     } else if ((i >= 3 && i <= 5) && (j >= 3 && j <= 5)){
                         continue;
                     }else {
@@ -73,9 +77,10 @@ public class Board {
                  * Setting south and west neighbours as the south exit
                  * and north and east as the east exit
                  */
+                Weapon ccWeapon = weapons.get(0);
                 else if ((16 < i && i < 22) && (1 < j && j < 7)){
                     if ((i == 17 && j == 3) ||(i == 18 && j == 6)){
-                        continue;
+                        squares[i][j].setWeapon(ccWeapon);
                     } else if ((i >= 18 && i <= 20) && (j >= 3 && j <= 5)){
                         continue;
                     } else {
@@ -91,9 +96,10 @@ public class Board {
                  * setting south and east neighbours as south exit
                  * and west and north as west exit
                  */
+                Weapon mmWeapon = weapons.get(0);
                 else if ((1 < i && i < 7) && (16 < j && j < 22)){
                     if ((i == 5 && j == 17) ||(i == 6 && j == 20)){
-                        continue;
+                        squares[i][j].setWeapon(mmWeapon);
                     } else if ((i >= 3 && i <= 5) && (j >= 18 && j <= 20)){
                         continue;
                     } else {
@@ -109,9 +115,10 @@ public class Board {
                  * setting south and west neighbours as west exit
                  * and north and east neighbours as north exit
                  */
+                Weapon ppWeapon = weapons.get(0);
                 else if ((16 < i && i < 22) && (16 < j && j < 22)){
                     if ((i == 17 && j == 18) ||(i == 20 && j == 17)){
-                        continue;
+                        squares[i][j].setWeapon(ppWeapon);
                     } else if ((i >= 18 && i <= 20) && (j >= 18 && j <= 20)){
                         continue;
                     } else {
@@ -126,9 +133,10 @@ public class Board {
                  * villa Celia
                  * Setting north neighbour as north exit, south as south etc...
                  */
+                Weapon vcWeapon = weapons.get(0);
                 else if ((9 < i && i < 14) && (8 < j && j < 15)){
                     if ((i == 10 && j == 12) || (i == 12 && j == 9) || (i == 11 && j == 14) || (i == 13 && j == 11)){
-                       continue;
+                        squares[i][j].setWeapon(vcWeapon);
                     } else if ((i == 11 && i <= 12) && (j >= 10 && j <= 13)){
                         continue;
                     } else {
@@ -146,6 +154,18 @@ public class Board {
         }
     }
 
+    /**
+     * Create all the weapons and randomises them.
+     *  Broom • Scissors • Knife • Shovel • iPad
+     */
+    public void weaponDistribution(){
+        weapons.add(new Weapon("knife"));
+        weapons.add(new Weapon("broom"));
+        weapons.add(new Weapon("scissors"));
+        weapons.add(new Weapon("ipad"));
+        weapons.add(new Weapon("shovel"));
+        Collections.shuffle(weapons);
+    }
 
     /**
      * Draws the game board and pieces

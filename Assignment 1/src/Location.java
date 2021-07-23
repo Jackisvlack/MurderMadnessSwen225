@@ -6,6 +6,7 @@ public class Location {
     private Location east;
     public boolean isWall;
     String name;
+    Weapon estatesWeapon;
 
     public void setEast(Location east){
         this.east = east;
@@ -49,5 +50,13 @@ public class Location {
     }
     public void setWall(){
         this.isWall = true;
+    }
+
+    public void setWeapon(Weapon weapon){
+        this.estatesWeapon = weapon;
+    }
+
+    public String getWeaponName(){
+        return estatesWeapon.getName();
     }
 }
