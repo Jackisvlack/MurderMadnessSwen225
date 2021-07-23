@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Board {
     Location[][] squares = new Location[24][24];
-    ArrayList<Weapon> weapons;
+    ArrayList<Weapon> weapons = new ArrayList<>();
     public Board() {
         /**
          * Creating the board objects in an array
