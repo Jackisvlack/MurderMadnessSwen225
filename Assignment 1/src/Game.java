@@ -93,6 +93,10 @@ public class Game {
         }
     }
 
+    /**
+     * Method to simlate two 6 sided dice
+     * @return int: the sum of two dice
+     */
     public int roll(){
         int diceOne = (int) (Math.random()*6 + 1);
         int diceTwo = (int) (Math.random()*6 + 1);
