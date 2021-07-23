@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class Game {
-    Board board;
+    private static Board board;
     ArrayList<Player> players;
     Guess murderCircumstance;
     ArrayList<String> characters;
@@ -136,7 +136,6 @@ public class Game {
     public static void main(String... args) throws IOException {
         Game newGame = new Game();
         newGame.startGame();
-        Board board = new Board();
         board.drawBoard();
     }
 }
