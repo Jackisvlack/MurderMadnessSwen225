@@ -93,6 +93,12 @@ public class Game {
         }
     }
 
+    public int roll(){
+        int diceOne = (int) (Math.random()*6 + 1);
+        int diceTwo = (int) (Math.random()*6 + 1);
+        return diceOne + diceTwo;
+    }
+
     public static void main(String... args) throws IOException {
         Game newGame = new Game();
         newGame.startGame();
