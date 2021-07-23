@@ -19,9 +19,7 @@ public class Game {
 
     public Game() {
         
-        while (!solved){
-            turn();
-        }
+
     }
 
     public void startGame() throws IOException {
