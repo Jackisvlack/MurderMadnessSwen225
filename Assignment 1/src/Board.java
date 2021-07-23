@@ -56,7 +56,11 @@ public class Board {
                  *  & setting east and south neighbours as the east exit
                  */
                 if ((1 < i && i < 7) && (1 < j && j < 7)) {
-                    if (squares[i][j] != squares[3][7] || squares[i][j] != squares[7][5]){
+                    if ((i == 3 && j == 6) ||(i == 6 && j == 5)){
+                        continue;
+                    } else if ((i >= 3 && i <= 5) && (j >= 3 && j <= 5)){
+                        continue;
+                    }else {
                         squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[3][7]);
@@ -70,7 +74,11 @@ public class Board {
                  * and north and east as the east exit
                  */
                 else if ((16 < i && i < 22) && (1 < j && j < 7)){
-                    if (squares[i][j] != squares[16][3] || squares[i][j] != squares[18][7]){
+                    if ((i == 17 && j == 3) ||(i == 18 && j == 6)){
+                        continue;
+                    } else if ((i >= 18 && i <= 20) && (j >= 3 && j <= 5)){
+                        continue;
+                    } else {
                         squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[16][3]);
@@ -84,7 +92,11 @@ public class Board {
                  * and west and north as west exit
                  */
                 else if ((1 < i && i < 7) && (16 < j && j < 22)){
-                    if (squares[i][j] != squares[5][16] || squares[i][j] != squares[7][20]){
+                    if ((i == 5 && j == 17) ||(i == 6 && j == 20)){
+                        continue;
+                    } else if ((i >= 3 && i <= 5) && (j >= 18 && j <= 20)){
+                        continue;
+                    } else {
                         squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[5][16]);
@@ -98,7 +110,11 @@ public class Board {
                  * and north and east neighbours as north exit
                  */
                 else if ((16 < i && i < 22) && (16 < j && j < 22)){
-                    if (squares[i][j] != squares[16][18] || squares[i][j] != squares[20][16]){
+                    if ((i == 17 && j == 18) ||(i == 20 && j == 17)){
+                        continue;
+                    } else if ((i >= 18 && i <= 20) && (j >= 18 && j <= 20)){
+                        continue;
+                    } else {
                         squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[16][18]);
@@ -111,11 +127,15 @@ public class Board {
                  * Setting north neighbour as north exit, south as south etc...
                  */
                 else if ((9 < i && i < 14) && (8 < j && j < 15)){
-                    if (squares[i][j] != squares[9][12] || squares[i][j] != squares[8][12] || squares[i][j] != squares[11][15] | squares[i][j] != squares[14][11]){
-                       squares[i][j].setWall();
+                    if ((i == 10 && j == 12) || (i == 12 && j == 9) || (i == 11 && j == 14) || (i == 13 && j == 11)){
+                       continue;
+                    } else if ((i == 11 && i <= 12) && (j >= 10 && j <= 13)){
+                        continue;
+                    } else {
+                        squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[9][12]);
-                    squares[i][j].setWest(squares[8][12]);
+                    squares[i][j].setWest(squares[12][8]);
                     squares[i][j].setEast(squares[11][15]);
                     squares[i][j].setSouth(squares[14][11]);
                 }
@@ -136,8 +156,9 @@ public class Board {
         for (int i = 0; i < 24; i++) {
             current = "";
             for (int j = 0; j < 24; j++) {
-                if (squares[i][j] instanceof Estate) current += "[]";
-                else if (squares[i][j] instanceof Wall) current += "WW";
+            if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "WW";
+                else if (squares[i][j] instanceof Estate) current += "[]";
+               else if (squares[i][j] instanceof Wall) current += "WW";
                 else current += "--";
             }
             board[i] = current;
