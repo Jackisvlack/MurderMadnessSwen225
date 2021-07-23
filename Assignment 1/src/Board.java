@@ -7,6 +7,12 @@ public class Board {
         /**
          * Creating the board objects in an array
          */
+        weaponDistribution();
+        Weapon hhWeapon = weapons.get(0);
+        Weapon ccWeapon = weapons.get(0);
+        Weapon mmWeapon = weapons.get(0);
+        Weapon ppWeapon = weapons.get(0);
+        Weapon vcWeapon = weapons.get(0);
         for (int i = 0; i < 24; i++) {
             for (int j = 0; j < 24; j++) {
                 if ((1 < i && i < 7) && (1 < j && j < 7))
@@ -58,7 +64,7 @@ public class Board {
                  * setting north and west neighbours as the north exit
                  *  & setting east and south neighbours as the east exit
                  */
-                Weapon hhWeapon = weapons.get(0);
+                
                 if ((1 < i && i < 7) && (1 < j && j < 7)) {
                     if ((i == 3 && j == 6) ||(i == 6 && j == 5)){
                         squares[i][j].setWeapon(hhWeapon);
@@ -77,7 +83,7 @@ public class Board {
                  * Setting south and west neighbours as the south exit
                  * and north and east as the east exit
                  */
-                Weapon ccWeapon = weapons.get(0);
+                
                 else if ((16 < i && i < 22) && (1 < j && j < 7)){
                     if ((i == 17 && j == 3) ||(i == 18 && j == 6)){
                         squares[i][j].setWeapon(ccWeapon);
@@ -96,7 +102,7 @@ public class Board {
                  * setting south and east neighbours as south exit
                  * and west and north as west exit
                  */
-                Weapon mmWeapon = weapons.get(0);
+                
                 else if ((1 < i && i < 7) && (16 < j && j < 22)){
                     if ((i == 5 && j == 17) ||(i == 6 && j == 20)){
                         squares[i][j].setWeapon(mmWeapon);
@@ -115,7 +121,7 @@ public class Board {
                  * setting south and west neighbours as west exit
                  * and north and east neighbours as north exit
                  */
-                Weapon ppWeapon = weapons.get(0);
+                
                 else if ((16 < i && i < 22) && (16 < j && j < 22)){
                     if ((i == 17 && j == 18) ||(i == 20 && j == 17)){
                         squares[i][j].setWeapon(ppWeapon);
@@ -133,7 +139,7 @@ public class Board {
                  * villa Celia
                  * Setting north neighbour as north exit, south as south etc...
                  */
-                Weapon vcWeapon = weapons.get(0);
+                
                 else if ((9 < i && i < 14) && (8 < j && j < 15)){
                     if ((i == 10 && j == 12) || (i == 12 && j == 9) || (i == 11 && j == 14) || (i == 13 && j == 11)){
                         squares[i][j].setWeapon(vcWeapon);
