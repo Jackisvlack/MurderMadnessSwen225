@@ -14,8 +14,15 @@ public class Game {
     ArrayList<Card> weaponCards;
     ArrayList<Card> characterCards;
     ArrayList<Card> estateCards; 
+    Player currentPlayer;
+    Enum turnSequence = {"Lucilla" , "Bert", "Malina", "Percy"};
+    boolean solved = false;
 
     public Game() {
+        
+        while (!solved){
+            turn();
+        }
     }
 
     public void startGame() throws IOException {
@@ -87,10 +94,34 @@ public class Game {
                 }
             }
 
-            
+            /**
+             * Selects the player who starts at random
+             */
+            Collections.shuffle(players);
+            currentPlayer = players.get(0);
+
         } catch (IOException e) {
             throw e;
         }
+    }
+
+    public void turn(){
+     
+
+    }
+
+    /**
+     * 
+     */
+    public void move(){
+
+    }
+
+    /**
+     * 
+     */
+    public void makeGuess(){
+
     }
 
     /**
