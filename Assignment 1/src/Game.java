@@ -15,7 +15,6 @@ public class Game {
     ArrayList<Card> characterCards;
     ArrayList<Card> estateCards; 
     Player currentPlayer;
-    Enum turnSequence = {"Lucilla" , "Bert", "Malina", "Percy"};
     boolean solved = false;
 
     public Game() {

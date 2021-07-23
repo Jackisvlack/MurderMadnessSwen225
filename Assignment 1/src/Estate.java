@@ -10,7 +10,7 @@ public class Estate extends Location{
     }
 
     public String estateWelcome(){
-        string welcome = "You have entered " + super.name + " you see a " + super.getWeaponName();
+        String welcome = "You have entered " + super.name + " you see a " + super.getWeaponName();
     }
    
 }
