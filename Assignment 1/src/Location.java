@@ -47,4 +47,7 @@ public class Location {
         this.pos = pos;
         this.name = name;
     }
+    public void setWall(){
+        this.isWall = true;
+    }
 }

@@ -56,6 +56,9 @@ public class Board {
                  *  & setting east and south neighbours as the east exit
                  */
                 if ((1 < i && i < 7) && (1 < j && j < 7)) {
+                    if (squares[i][j] != squares[3][7] || squares[i][j] != squares[7][5]){
+                        squares[i][j].setWall();
+                    }
                     squares[i][j].setNorth(squares[3][7]);
                     squares[i][j].setWest(squares[7][5]);
                     squares[i][j].setEast(squares[3][7]);
@@ -67,6 +70,9 @@ public class Board {
                  * and north and east as the east exit
                  */
                 else if ((16 < i && i < 22) && (1 < j && j < 7)){
+                    if (squares[i][j] != squares[16][3] || squares[i][j] != squares[18][7]){
+                        squares[i][j].setWall();
+                    }
                     squares[i][j].setNorth(squares[16][3]);
                     squares[i][j].setWest(squares[16][3]);
                     squares[i][j].setEast(squares[18][7]);
@@ -78,6 +84,9 @@ public class Board {
                  * and west and north as west exit
                  */
                 else if ((1 < i && i < 7) && (16 < j && j < 22)){
+                    if (squares[i][j] != squares[5][16] || squares[i][j] != squares[7][20]){
+                        squares[i][j].setWall();
+                    }
                     squares[i][j].setNorth(squares[5][16]);
                     squares[i][j].setWest(squares[5][16]);
                     squares[i][j].setEast(squares[7][20]);
@@ -89,6 +98,9 @@ public class Board {
                  * and north and east neighbours as north exit
                  */
                 else if ((16 < i && i < 22) && (16 < j && j < 22)){
+                    if (squares[i][j] != squares[16][18] || squares[i][j] != squares[20][16]){
+                        squares[i][j].setWall();
+                    }
                     squares[i][j].setNorth(squares[16][18]);
                     squares[i][j].setWest(squares[20][16]);
                     squares[i][j].setEast(squares[16][18]);
@@ -99,6 +111,9 @@ public class Board {
                  * Setting north neighbour as north exit, south as south etc...
                  */
                 else if ((9 < i && i < 14) && (8 < j && j < 15)){
+                    if (squares[i][j] != squares[9][12] || squares[i][j] != squares[8][12] || squares[i][j] != squares[11][15] | squares[i][j] != squares[14][11]){
+                       squares[i][j].setWall();
+                    }
                     squares[i][j].setNorth(squares[9][12]);
                     squares[i][j].setWest(squares[8][12]);
                     squares[i][j].setEast(squares[11][15]);

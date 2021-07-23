@@ -4,4 +4,8 @@ public class Estate extends Location{
         super(pos, name);
         super.isWall = false;
     }
+
+    public void setWall(){
+        super.isWall = true;
+    }
 }

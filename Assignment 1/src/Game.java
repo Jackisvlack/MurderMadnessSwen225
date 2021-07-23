@@ -10,10 +10,10 @@ public class Game {
     Board board;
     ArrayList<Player> players;
     Guess murderCircumstance;
-    ArrayList<String> characters = {"lucilla", "bert", "maline", "percy"};
-    ArrayList<WeaponCard> weaponCards = {new WeaponCard("broom"), new WeaponCard("scissors"), new WeaponCard("knife"), new WeaponCard("shovel"), new WeaponCard("ipad")};
-    ArrayList<CharCard> characterCards = {new CharCard("lucilla"), new CharCard("bert"), new CharCard("maline"), new CharCard("percy")};
-    ArrayList<EstateCard> EstateCards = {new EstateCards("manic manor"), new EstateCards("villa celia"), new EstateCards("haunted house"), new EstateCards("calamity castle"),new EstateCards("peril palace")};
+    ArrayList<String> characters;
+    ArrayList<WeaponCard> weaponCards;
+    ArrayList<CharCard> characterCards;
+    ArrayList<EstateCard> estateCards; 
 
     public Game() {
     }
@@ -26,6 +26,28 @@ public class Game {
             BufferedReader br = new BufferedReader(isr);
             int numplayers  = br.read();
             players = new ArrayList<>();
+            /**
+             * Create all of the cards
+             * {"lucilla", "bert", "maline", "percy"};
+             */
+            characters.add("lucilla");
+            characters.add("bert");
+            characters.add("maline");
+            characters.add("percy");
+            characterCards.add(new CharCard("lucilla"));
+            characterCards.add(new CharCard("bert"));
+            characterCards.add(new CharCard("maline"));
+            characterCards.add(new CharCard("percy"));
+            weaponCards.add(new WeaponCard("broom"));
+            weaponCards.add(new WeaponCard("scissors"));
+            weaponCards.add(new WeaponCard("knife"));
+            weaponCards.add(new WeaponCard("shovel"));
+            weaponCards.add(new WeaponCard("ipad"));
+            estateCards.add(new EstateCard("manic manor"));
+            estateCards.add(new EstateCard("villa celia"));
+            estateCards.add(new EstateCard("haunted house"));
+            estateCards.add(new EstateCard("calamity castle"));
+            estateCards.add(new EstateCard("calamity castle"));
 
             /**
              * Randomizes each set of card and takes one of each for the murder set
@@ -33,10 +55,10 @@ public class Game {
             Collections.shuffle(weaponCards);
             Collections.shuffle(estateCards);
             Collections.shuffle(characterCards);
-            WeaponCard murderWeapon = (weaponCards.get(0));
-            CharacterCard murderCharacter = (charCards.get(0));
-            EstateCard murderEstate = (estateCards.get(0));
-            murderCircumstance = new Guess(murderEstate.name, murderWeapon.name, murderCharacter.name);
+            Card murderWeapon = (weaponCards.get(0));
+            Card murderCharacter = (characterCards.get(0));
+            Card murderEstate = (estateCards.get(0));
+            murderCircumstance = new Guess(murderEstate.getName(), murderWeapon.getName(), murderCharacter.getName());
           
             /**
              * Combine all cards (correct me if I'm wrong about this rule interpretation:
@@ -44,7 +66,7 @@ public class Game {
                 Some players may end up with more cards than others but only at most one more"
                 -At the moment this rule is followed due to: Some players may end up with more cards than others but only at most one more
              */
-            HashSet<Card> cards = new HashSet<Card>();
+            ArrayList<Card> cards = new ArrayList<Card>();
             cards.addAll(weaponCards);
             cards.addAll(estateCards);
             cards.addAll(characterCards);
@@ -74,5 +96,7 @@ public class Game {
     public static void main(String... args) throws IOException {
         Game newGame = new Game();
         newGame.startGame();
+        Board board = new Board();
+        board.drawBoard();
     }
 }
