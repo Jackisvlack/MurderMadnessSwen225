@@ -11,9 +11,9 @@ public class Game {
     ArrayList<Player> players;
     Guess murderCircumstance;
     ArrayList<String> characters;
-    ArrayList<WeaponCard> weaponCards;
-    ArrayList<CharCard> characterCards;
-    ArrayList<EstateCard> estateCards; 
+    ArrayList<Card> weaponCards;
+    ArrayList<Card> characterCards;
+    ArrayList<Card> estateCards; 
 
     public Game() {
     }
@@ -34,20 +34,20 @@ public class Game {
             characters.add("bert");
             characters.add("maline");
             characters.add("percy");
-            characterCards.add(new CharCard("lucilla"));
-            characterCards.add(new CharCard("bert"));
-            characterCards.add(new CharCard("maline"));
-            characterCards.add(new CharCard("percy"));
-            weaponCards.add(new WeaponCard("broom"));
-            weaponCards.add(new WeaponCard("scissors"));
-            weaponCards.add(new WeaponCard("knife"));
-            weaponCards.add(new WeaponCard("shovel"));
-            weaponCards.add(new WeaponCard("ipad"));
-            estateCards.add(new EstateCard("manic manor"));
-            estateCards.add(new EstateCard("villa celia"));
-            estateCards.add(new EstateCard("haunted house"));
-            estateCards.add(new EstateCard("calamity castle"));
-            estateCards.add(new EstateCard("calamity castle"));
+            characterCards.add(new Card("lucilla"));
+            characterCards.add(new Card("bert"));
+            characterCards.add(new Card("maline"));
+            characterCards.add(new Card("percy"));
+            weaponCards.add(new Card("broom"));
+            weaponCards.add(new Card("scissors"));
+            weaponCards.add(new Card("knife"));
+            weaponCards.add(new Card("shovel"));
+            weaponCards.add(new Card("ipad"));
+            estateCards.add(new Card("manic manor"));
+            estateCards.add(new Card("villa celia"));
+            estateCards.add(new Card("haunted house"));
+            estateCards.add(new Card("calamity castle"));
+            estateCards.add(new Card("calamity castle"));
 
             /**
              * Randomizes each set of card and takes one of each for the murder set
