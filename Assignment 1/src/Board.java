@@ -181,7 +181,7 @@ public class Board {
     public void placeCharacters(ArrayList<Player> players){
         for (Player player : players){
             if (player.getCharName().equals("lucilla")){
-                squares[11][1].setPlayerAtLoc(player);
+                squares[1][11].setPlayerAtLoc(player);
             }
             else if (player.getCharName().equals("bert")){
                 squares[9][1].setPlayerAtLoc(player);
@@ -190,7 +190,7 @@ public class Board {
                 squares[22][9].setPlayerAtLoc(player);
             }
             else if (player.getCharName().equals("percy")){
-                squares[22][14].setPlayerAtLoc(player);
+                squares[14][22].setPlayerAtLoc(player);
             }
         }
     }
@@ -204,10 +204,10 @@ public class Board {
         for (int i = 0; i < 24; i++) {
             current = "";
             for (int j = 0; j < 24; j++) {
-            if (squares[i][j].hasPlayer(i, j)) current += " " + squares[i][j].getPlayerIcon() + " ";
-            if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "+++";
+                if (squares[i][j].hasPlayer(i, j)) current += "-" + squares[i][j].getPlayerIcon() + "-";
+                else if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "+++";
                 else if (squares[i][j] instanceof Estate) current += "[ ]";
-               else if (squares[i][j] instanceof Wall) current += "+++";
+                else if (squares[i][j] instanceof Wall) current += "+++";
                 else current += "---";
             }
             board[i] = current;
