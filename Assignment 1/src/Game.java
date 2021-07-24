@@ -49,7 +49,7 @@ public class Game {
             characters.add("percy");
             characterCards.add(new Card("lucilla"));
             characterCards.add(new Card("bert"));
-            characterCards.add(new Card("maline"));
+            characterCards.add(new Card("malina"));
             characterCards.add(new Card("percy"));
             weaponCards.add(new Card("broom"));
             weaponCards.add(new Card("scissors"));
@@ -72,12 +72,7 @@ public class Game {
             Card murderEstate = (estateCards.get(0));
             murderCircumstance = new Guess(murderEstate.getName(), murderWeapon.getName(), murderCharacter.getName());
           
-            /**
-             * Combine all cards (correct me if I'm wrong about this rule interpretation:
-             * "The remaining weapon, estate and character cards are then combined and distributed at random to players.
-                Some players may end up with more cards than others but only at most one more"
-                -At the moment this rule is followed due to: Some players may end up with more cards than others but only at most one more
-             */
+
             ArrayList<Card> cards = new ArrayList<Card>();
             cards.addAll(weaponCards);
             cards.addAll(estateCards);

@@ -179,13 +179,13 @@ public class Board {
             if (player.getCharName().equals("lucilla")){
                 squares[11][1].setPlayerAtLoc(player);
             }
-            if (player.getCharName().equals("bert")){
+            else if (player.getCharName().equals("bert")){
                 squares[9][1].setPlayerAtLoc(player);
             }
-            if (player.getCharName().equals("maline")){
-                squares[9][22].setPlayerAtLoc(player);
+            else if (player.getCharName().equals("malina")){
+                squares[22][9].setPlayerAtLoc(player);
             }
-            if (player.getCharName().equals("percy")){
+            else if (player.getCharName().equals("percy")){
                 squares[22][14].setPlayerAtLoc(player);
             }
         }
