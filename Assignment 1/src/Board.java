@@ -174,6 +174,10 @@ public class Board {
         Collections.shuffle(weapons);
     }
 
+    /**
+     * Takes list of players from game and then places each according to character starting position
+     * @param players
+     */
     public void placeCharacters(ArrayList<Player> players){
         for (Player player : players){
             if (player.getCharName().equals("lucilla")){
@@ -200,10 +204,10 @@ public class Board {
         for (int i = 0; i < 24; i++) {
             current = "";
             for (int j = 0; j < 24; j++) {
+            if (squares[i][j].hasPlayer(i, j)) current += " " + squares[i][j].getPlayerIcon() + " ";
             if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "+++";
                 else if (squares[i][j] instanceof Estate) current += "[ ]";
                else if (squares[i][j] instanceof Wall) current += "+++";
-               else if (squares[i][j].hasPlayer(i, j)) current += " " + squares[i][j].getPlayerIcon() + " ";
                 else current += "---";
             }
             board[i] = current;

@@ -79,6 +79,9 @@ public class Game {
             cards.addAll(characterCards);
             Collections.shuffle(cards);
             
+            //Note: have changed so that locations hold players, easier to have board read that info from Location rater than Players
+
+
             Collections.shuffle(characters); //TODO must set the starting locations setHasPlayer to true for all starting locs of players 
             players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
             Collections.shuffle(characters);

@@ -74,11 +74,19 @@ public class Location {
         return this.player;
     }
 
+    /**
+     * Takes player and sets them to this locaton, sets hasPlayer to true
+     * @param player
+     */
     public void setPlayerAtLoc(Player player){
         hasPlayer = true;
         this.player = player;
     }
 
+    /**
+     * Helper method to assist board in drawing
+     * @return
+     */
     public String getPlayerIcon(){
         String icon = "";
         if (player.getCharName().equals("lucilla")){
