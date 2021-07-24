@@ -89,10 +89,9 @@ public class Game {
                 players.add(new Player("Player" + i, characters.get(i), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
             }
 
-            for (Player player : players){
-                System.out.println(player.getCharName());
-            }
-            
+            /**
+             * Sets starting locations of players
+             */
             board.placeCharactersStart(players);
             board.drawBoard();
             

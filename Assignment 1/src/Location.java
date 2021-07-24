@@ -98,7 +98,7 @@ public class Location {
         if (player.getCharName().equals("percy")){
             icon = "P";
         }
-        if (player.getCharName().equals("lucilla")){
+        if (player.getCharName().equals("malina")){
             icon = "M";
         }
         return icon;
