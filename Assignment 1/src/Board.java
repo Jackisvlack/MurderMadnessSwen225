@@ -182,15 +182,19 @@ public class Board {
       for (Player player : players){
             if (player.getCharName().equals("lucilla")){
                 squares[1][11].setPlayerAtLoc(player);
+                player.setLocation(squares[1][11]);
             }
             else if (player.getCharName().equals("bert")){
                 squares[9][1].setPlayerAtLoc(player);
+                player.setLocation(squares[9][1]);
             }
             else if (player.getCharName().equals("malina")){
                 squares[22][9].setPlayerAtLoc(player);
+                player.setLocation(squares[22][9]);
             }
             else if (player.getCharName().equals("percy")){
                 squares[14][22].setPlayerAtLoc(player);
+                player.setLocation(squares[14][22]);
             }
         }
     }

@@ -5,6 +5,7 @@ public class Player {
     String playerName;
     String charName;
     HashSet<Card> cards; 
+    Location location;
     public Player(String name, String charName, HashSet<Card> cards) {
         this.playerName = name;
         this.charName = charName;
@@ -17,5 +18,9 @@ public class Player {
 
     public String getPlayerName() {
     	return this.charName;
+    }
+
+    public void setLocation(Location location){
+        this.location = location;
     }
 }
