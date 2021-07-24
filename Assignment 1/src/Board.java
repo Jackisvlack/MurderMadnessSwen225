@@ -178,16 +178,16 @@ public class Board {
      * Takes list of players from game and then places each according to character starting position
      * @param players
      */
-    public void placeCharacters(ArrayList<Player> players){
-        for (Player player : players){
+    public void placeCharactersStart(ArrayList<Player> players){
+      for (Player player : players){
             if (player.getCharName().equals("lucilla")){
-                squares[1][11].setPlayerAtLoc(player);
+                squares[11][1].setPlayerAtLoc(player);
             }
             else if (player.getCharName().equals("bert")){
                 squares[9][1].setPlayerAtLoc(player);
             }
             else if (player.getCharName().equals("malina")){
-                squares[22][9].setPlayerAtLoc(player);
+                squares[9][22].setPlayerAtLoc(player);
             }
             else if (player.getCharName().equals("percy")){
                 squares[14][22].setPlayerAtLoc(player);

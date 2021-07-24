@@ -45,7 +45,7 @@ public class Game {
              */
             characters.add("lucilla");
             characters.add("bert");
-            characters.add("maline");
+            characters.add("malina");
             characters.add("percy");
             characterCards.add(new Card("lucilla"));
             characterCards.add(new Card("bert"));
@@ -84,12 +84,16 @@ public class Game {
 
             Collections.shuffle(characters); //TODO must set the starting locations setHasPlayer to true for all starting locs of players 
             players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
-            players.add(new Player("player2", characters.get(0), new HashSet<Card>()));
-            for (int i = 3 ; i <= numplayers ; i++){
-                players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
+            players.add(new Player("player2", characters.get(1), new HashSet<Card>()));
+            for (int i = 2 ; i < numplayers ; i++){
+                players.add(new Player("Player" + i, characters.get(i), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
             }
 
-            board.placeCharacters(players);
+            for (Player player : players){
+                System.out.println(player.getCharName());
+            }
+            
+            board.placeCharactersStart(players);
             board.drawBoard();
             
             /**
