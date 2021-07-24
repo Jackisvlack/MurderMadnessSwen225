@@ -5,12 +5,10 @@ public class Player {
     String playerName;
     String charName;
     HashSet<Card> cards; 
-    private Location playerLocation;
-    public Player(String name, String charName, HashSet<Card> cards {
+    public Player(String name, String charName, HashSet<Card> cards) {
         this.playerName = name;
         this.charName = charName;
         this.cards = cards;
-        this.playerLocation = loc;
     }
     
     public String getCharName() {
