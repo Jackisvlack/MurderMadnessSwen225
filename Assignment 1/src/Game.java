@@ -88,7 +88,8 @@ public class Game {
                 players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
             }
 
-            
+            board.placeCharacters(players);
+            board.drawBoard();
             
             /**
              * Selects the player who starts at random
@@ -107,12 +108,10 @@ public class Game {
             /**
              * Selects the player who starts at random
              */
-            Collections.shuffle(players);
-            currentPlayer = players.get(0);
+            
             
             //Board will manage players, as it is boards responsibility to draw. Locations now hold players.
-            board.placeCharacters(players);
-            board.drawBoard();
+            
 
         /*} catch (IOException e) {
             throw e;
