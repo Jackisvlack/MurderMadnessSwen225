@@ -85,27 +85,29 @@ public class Game {
             Collections.shuffle(cards);
             
             Collections.shuffle(characters); //TODO must set the starting locations setHasPlayer to true for all starting locs of players 
-            players.add(new Player("player1", characters.get(0), new HashSet<Card>(), new Location(new Position(11, 1)) )); 
+            players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
             Collections.shuffle(characters);
-            players.add(new Player("player1", characters.get(1), new HashSet<Card>(), new Location(new Position(1, 9)) ));
+            players.add(new Player("player1", characters.get(1), new HashSet<Card>()));
             for (int i = 3 ; i <= numplayers ; i++){
                 Collections.shuffle(characters);
-                players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>(), null)); //TODO must fix locations of these characters, currently is null
+                players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
             }
+
+            
             
             /**
              * Selects the player who starts at random
              */
             Collections.shuffle(players);
             currentPlayer = players.get(0);
-            turn(); // initiates turn, here temporarily 
+            //turn(); // initiates turn, here temporarily 
             
             //TODO fix while loop, gets stuck as list of cards never empties
-            while (!cards.isEmpty()){
-                for (Player player : players) {
-                    player.cards.add(cards.get(0));
-                }
-            }
+           // while (!cards.isEmpty()){
+           //     for (Player player : players) {
+           //         player.cards.add(cards.get(0));
+           //     }
+           // }
             
             /**
              * Selects the player who starts at random
@@ -113,6 +115,9 @@ public class Game {
             Collections.shuffle(players);
             currentPlayer = players.get(0);
             
+            //Board will manage players, as it is boards responsibility to draw. Locations now hold players.
+            board.placeCharacters(players);
+            board.drawBoard();
 
         /*} catch (IOException e) {
             throw e;
@@ -127,7 +132,7 @@ public class Game {
     	String line = "";
     	
     	// greet player
-    	System.out.println("Hello, " + currentPlayer.getName());
+    	System.out.println("Hello, " + currentPlayer.getPlayerName());
     	System.out.println("Please roll the dice when ready by typing 'roll'");
     	
     	// wait
@@ -193,10 +198,11 @@ public class Game {
     	checkOrderValidity(moves, direction);
     	
     	for (Player p : players) {
-    		System.out.println(p.name);
+    		System.out.println(p.charName);
     	}
     	
     	// Cannot walk through walls or grey areas
+        
     	
     	// if on estate entrance, player is in the estate
     	

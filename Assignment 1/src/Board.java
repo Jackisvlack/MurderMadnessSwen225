@@ -174,6 +174,23 @@ public class Board {
         Collections.shuffle(weapons);
     }
 
+    public void placeCharacters(ArrayList<Player> players){
+        for (Player player : players){
+            if (player.getCharName().equals("lucilla")){
+                squares[11][1].setPlayerAtLoc(player);
+            }
+            if (player.getCharName().equals("bert")){
+                squares[9][1].setPlayerAtLoc(player);
+            }
+            if (player.getCharName().equals("maline")){
+                squares[9][22].setPlayerAtLoc(player);
+            }
+            if (player.getCharName().equals("percy")){
+                squares[22][14].setPlayerAtLoc(player);
+            }
+        }
+    }
+
     /**
      * Draws the game board and pieces
      */
@@ -183,16 +200,18 @@ public class Board {
         for (int i = 0; i < 24; i++) {
             current = "";
             for (int j = 0; j < 24; j++) {
-            if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "WW";
-                else if (squares[i][j] instanceof Estate) current += "[]";
-               else if (squares[i][j] instanceof Wall) current += "WW";
-                else current += "--";
+            if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "+++";
+                else if (squares[i][j] instanceof Estate) current += "[ ]";
+               else if (squares[i][j] instanceof Wall) current += "+++";
+               else if (squares[i][j].hasPlayer(i, j)) current += " " + squares[i][j].getPlayerIcon() + " ";
+                else current += "---";
             }
             board[i] = current;
         }
         for (int i = 0; i < 24; i++) {
             System.out.println(board[i]);
         }
+        System.out.print("\n\n");
 
 
     }

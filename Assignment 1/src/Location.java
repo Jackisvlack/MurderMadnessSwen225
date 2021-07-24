@@ -8,6 +8,7 @@ public class Location {
     String name;
     Weapon estatesWeapon;
 	private boolean hasPlayer = false;
+    private Player player;
 
     public void setEast(Location east){
         this.east = east;
@@ -67,5 +68,31 @@ public class Location {
 
     public String getWeaponName(){
         return estatesWeapon.getName();
+    }
+
+    public Player playerAtLoc(){
+        return this.player;
+    }
+
+    public void setPlayerAtLoc(Player player){
+        hasPlayer = true;
+        this.player = player;
+    }
+
+    public String getPlayerIcon(){
+        String icon = "";
+        if (player.getCharName().equals("lucilla")){
+            icon = "L";
+        }
+        if (player.getCharName().equals("bert")){
+            icon = "B";
+        }
+        if (player.getCharName().equals("percy")){
+            icon = "P";
+        }
+        if (player.getCharName().equals("lucilla")){
+            icon = "M";
+        }
+        return icon;
     }
 }
