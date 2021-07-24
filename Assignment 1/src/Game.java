@@ -82,7 +82,7 @@ public class Game {
             Collections.shuffle(characters); //TODO must set the starting locations setHasPlayer to true for all starting locs of players 
             players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
             Collections.shuffle(characters);
-            players.add(new Player("player1", characters.get(0), new HashSet<Card>()));
+            players.add(new Player("player2", characters.get(0), new HashSet<Card>()));
             for (int i = 3 ; i <= numplayers ; i++){
                 Collections.shuffle(characters);
                 players.add(new Player("Player" + i, characters.get(0), new HashSet<Card>())); //TODO must fix locations of these characters, currently is null
