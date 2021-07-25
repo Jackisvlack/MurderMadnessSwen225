@@ -55,6 +55,7 @@ public class Location {
     }
     
     public void setHasPlayer(boolean b) {
+    	this.player = null;
     	this.hasPlayer = b;
     }
     
@@ -102,5 +103,21 @@ public class Location {
             icon = "M";
         }
         return icon;
+    }
+    
+    /**
+     * Identifies whether location has a player on it, is a wall, or is free
+     * */
+    public String toString() {
+    	if (this.hasPlayer) { return "Player"; }
+    	else if (isWall) {
+    		return "Wall";
+    	} else {
+    		return "Free";
+    	}
+    }
+    
+    public Position getPos() {
+    	return this.pos;
     }
 }
