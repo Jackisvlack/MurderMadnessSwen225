@@ -38,4 +38,7 @@ class Guess {
 		return true;
 	}
     
+	public String toString() {
+		return "guessed " + character + " in the " + estate + " with the " + weapon;
+	}
 }

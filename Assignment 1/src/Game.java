@@ -21,6 +21,8 @@ public class Game {
     Player currentPlayer;
     boolean solved = false;
 	private int movesLeft;
+	private String weapon;
+	private String player;
 	
 	public enum Characters {
 		lucilla,
@@ -361,7 +363,6 @@ public class Game {
 		} else {
 			System.out.println("South\n");
 		}
-
 	}
 
 
@@ -584,15 +585,23 @@ public class Game {
      * 
      */
     public void makeGuess(Location loc){
+    	String estate = loc.name;
     	
     	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
-    	System.out.println("You see a " + loc.getWeaponName() + " - mysterious...");
+    	System.out.println("You see " + loc.getWeaponName() + " - mysterious...");
     	System.out.println("This may be a clue to the puzzle! What do you think happened?");
     	System.out.println("Choose two cards : one player card and one weapon card");
-    	for (Card c : currentPlayer.cards) {
-    		System.out.println(c.getName());
-    	}
     	
+      	printCardOptions();
+    	
+    	Guess playersGuess = new Guess(estate, weapon, player);
+    	
+    	if (playersGuess.equals(murderCircumstance)) {
+    		this.solved = true;
+    	} else {
+    		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
+    		System.out.println("Who disagrees?");
+    	}
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
@@ -612,9 +621,57 @@ public class Game {
     	// circumstances, they win. If not, the player is excluded from making further
     	// Guesses
     }
+    
+    /**
+     * Get the players guesses and check them
+     * */
+    public void printCardOptions() {
+    	int i = 1;
+    	System.out.println("Choose a weapon: ");
+    	for (Card c : weaponCards) {
+    		System.out.println(i + ". " + c.getName());
+    		i++;
+    	}
+    	i = 1;
+    	System.out.println("");
+    	
+    	weapon = getInput();
+    	
+    	System.out.println("Characters:");
+    	for (Card c : characterCards) {
+    		System.out.println(i + ". " + c.getName());
+    		i++;
+    	}
+    	i = 1;
+    	System.out.println("");
+    	
+    	player = getInput();
+    	
+    	checkInputs(weapon, player);
+    }
+    
+    /**
+     * Checks the guess inputs validity
+     * */
+    public void checkInputs(String w, String p) {
+    	int checked = 0;
+    	for (Card c : weaponCards) {
+    		if (c.getName().equalsIgnoreCase(w)) {
+    			checked++;
+    		}
+    	}
+    	for (Card c : characterCards) {
+    		if (c.getName().equalsIgnoreCase(p)) {
+    			checked++;
+    		}
+    	}
+    	if (checked != 2) {
+    		printCardOptions();
+    	}
+    }
 
     /**
-     * Method to simlate two 6 sided dice
+     * Method to simulate two 6 sided dice
      * @return int: the sum of two dice
      */
     public int roll(){
