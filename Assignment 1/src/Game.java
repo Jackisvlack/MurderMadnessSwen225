@@ -597,6 +597,8 @@ public class Game {
      */
     public void makeGuess(Location loc){
     	String estate = loc.name;
+    	List<Integer> idxList = new ArrayList<>();
+    	int curIndex = players.indexOf(currentPlayer);
     	
     	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
     	System.out.println("You see " + loc.getWeaponName() + " - mysterious...");
@@ -609,10 +611,71 @@ public class Game {
     	
     	if (playersGuess.equals(murderCircumstance)) {
     		this.solved = true;
-    	} else {
-    		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
-    		System.out.println("Who disagrees?");
-    	}
+    	} 
+		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
+		System.out.println("Who disagrees?");
+    	
+		if (curIndex == 0) {
+			idxList.add(1);
+			idxList.add(2);
+			idxList.add(3);
+		} else if (curIndex == 1) {
+			idxList.add(2);
+			idxList.add(3);
+			idxList.add(0);
+		} else if (curIndex == 2) {
+			idxList.add(3);
+			idxList.add(0);
+			idxList.add(1);
+		} else {
+			idxList.add(0);
+			idxList.add(1);
+			idxList.add(2);
+		}
+		
+		for (int i = 0; i < idxList.size(); i++) { 
+			List<Card> options = new ArrayList<Card>();
+			List<String> finalCards = new ArrayList<>();
+			Player p = players.get(idxList.get(i));
+			if (p.controlled == true) {
+				for (Card c : p.cards) {
+					if (c.getName().equals(estate)) {
+						options.add(c);
+					} else if (c.getName().equals(weapon)) {
+						options.add(c);
+					} else if (c.getName().equals(player)) {
+						options.add(c);
+					}
+				}
+				
+				System.out.println("Please pass the screen on to: " + p.charName);
+				wait(2);
+				System.out.println("Hello, " + p.charName);
+				if (options.isEmpty()) {
+					System.out.println("Sorry, " + p.getCharName() + ". You have no eligible refutation cards.");
+				} else {
+					printEligibleCards(options);
+					int counter = 0;
+					String cardPicked = getInput();
+					for (Card c : options) {
+						counter = 0;
+						if (c.getName().equals(cardPicked)) {
+							finalCards.add(cardPicked);
+							counter++;
+							break;
+						}
+					}
+					
+					if (counter == 0) {
+						
+					}
+					
+					
+				}
+				
+			}
+		}
+		
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
@@ -631,6 +694,13 @@ public class Game {
     	// if solve guess matches exactly the cards chosen as the murder
     	// circumstances, they win. If not, the player is excluded from making further
     	// Guesses
+    }
+    
+    public void printEligibleCards(List<Card> options) {
+    	System.out.println("Please choose one of the card(s):");
+		for (Card c : options) {
+			System.out.println(c.getName());
+		}
     }
     
     /**
