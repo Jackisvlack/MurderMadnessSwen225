@@ -405,21 +405,15 @@ public class Game {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
     		
-    		if (playerLoc instanceof Estate) {
-				this.movesLeft = 0;
-				if (!currentPlayer.hasGuessed()) {
-					makeGuess(playerLoc);
-				} else {
-					System.out.println("You are not elgibile to guess!\n"
-							+ "Next person!");
-				}
-			}
-    		
     		if (!currentPlayer.location.getNorth().isWall) {
     			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getNorth());
     			playerLoc.setHasPlayer(false);
     			this.movesLeft--;
+    			
+    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
+    				makeGuess(currentPlayer.location);
+    			}
     		} 
     	}
     	
@@ -430,21 +424,15 @@ public class Game {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
     		
-    		if (playerLoc instanceof Estate) {
-				this.movesLeft = 0;
-				if (!currentPlayer.hasGuessed()) {
-					makeGuess(playerLoc);
-				} else {
-					System.out.println("You are not elgibile to guess!\n"
-							+ "Next person!");
-				}
-			}
-    		
     		if (!currentPlayer.location.getSouth().isWall) {
     			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getSouth());
     			playerLoc.setHasPlayer(false);
     			this.movesLeft--;
+    			
+    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
+    				makeGuess(currentPlayer.location);
+    			}
     		} 
     	}
     	board.drawBoard();
@@ -454,21 +442,15 @@ public class Game {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
     		
-    		if (playerLoc instanceof Estate) {
-				this.movesLeft = 0;
-				if (!currentPlayer.hasGuessed()) {
-					makeGuess(playerLoc);
-				} else {
-					System.out.println("You are not elgibile to guess!\n"
-							+ "Next person!");
-				}
-			}
-    		
     		if (!currentPlayer.location.getEast().isWall) {
     			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getEast());
     			playerLoc.setHasPlayer(false);
     			this.movesLeft--;
+    			
+    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
+    				makeGuess(currentPlayer.location);
+    			}
     		} 
     	}
     	
@@ -479,21 +461,15 @@ public class Game {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
     		
-    		if (playerLoc instanceof Estate) {
-				this.movesLeft = 0;
-				if (!currentPlayer.hasGuessed()) {
-					makeGuess(playerLoc);
-				} else {
-					System.out.println("You are not elgibile to guess!\n"
-							+ "Next person!");
-				}
-			}
-    		
     		if (!currentPlayer.location.getWest().isWall) {
     			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getWest());
     			playerLoc.setHasPlayer(false);
     			this.movesLeft--;
+    			
+    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
+    				makeGuess(currentPlayer.location);
+    			}
     		} 
     	}
     	
@@ -551,6 +527,7 @@ public class Game {
 		}
 		
 		List<String> finalCards = new ArrayList<>();
+		
 		/**
 		 * For each of the players that aren't currentPlayer, 
 		 * get the eligible cards
