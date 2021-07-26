@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -546,8 +547,14 @@ public class Game {
      */
     public void makeGuess(Location loc){
     	
-    	System.out.println("Welcome to the " + loc.name+"!");
+    	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
     	System.out.println("You see a " + loc.getWeaponName() + " - mysterious...");
+    	System.out.println("This may be a clue to the puzzle! What do you think happened?");
+    	System.out.println("Choose two cards : one player card and one weapon card");
+    	for (Card c : currentPlayer.cards) {
+    		System.out.println(c.getName());
+    	}
+    	
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
