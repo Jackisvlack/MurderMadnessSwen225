@@ -382,16 +382,16 @@ public class Game {
 
 	public void checkEstateExits(Location location){
 		System.out.println("You can leave the estate via the following exits: \n");
-		if (location.getEast() != null){
+		if (!location.getEast().equals(null)){
 			System.out.println("East\n");
 		}
-		if (location.getWest() != null){
+		if (!location.getWest().equals(null)){
 			System.out.println("West\n");
 		}
-		if (location.getNorth() != null){
+		if (!location.getNorth().equals(null)){
 			System.out.println("North\n");
 		}
-	    if (location.getSouth() != null){
+	    if (!location.getSouth().equals(null)){
 			System.out.println("South\n");
 		}
 	}
