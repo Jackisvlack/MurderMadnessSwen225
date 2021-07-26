@@ -7,7 +7,7 @@ public class Player {
     HashSet<Card> cards; 
     Location location;
     boolean controlled;
-    public Player(String name, String charName, HashSet<Card> cards, boolean controlled) {
+    public Player(String name, String charName, HashSet<Card> cards) {
         this.playerName = name;
         this.charName = charName;
         this.cards = cards;
