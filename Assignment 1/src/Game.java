@@ -14,13 +14,19 @@ public class Game {
     private static Board board;
     ArrayList<Player> players = new ArrayList<>();
     Guess murderCircumstance;
-    ArrayList<String> characters = new ArrayList<>();
     ArrayList<Card> weaponCards = new ArrayList<>();
     ArrayList<Card> characterCards = new ArrayList<>();
     ArrayList<Card> estateCards = new ArrayList<>(); 
     Player currentPlayer;
     boolean solved = false;
 	private int movesLeft;
+	
+	public enum Characters {
+		lucilla,
+		bert,
+		malina,
+		percy
+	}
 
     public Game() {
         
@@ -40,14 +46,7 @@ public class Game {
             
             
             players = new ArrayList<>();
-            /**
-             * Create all of the cards
-             * {"lucilla", "bert", "malina", "percy"};
-             */
-            characters.add("lucilla");
-            characters.add("bert");
-            characters.add("malina");
-            characters.add("percy");
+
             characterCards.add(new Card("lucilla"));
             characterCards.add(new Card("bert"));
             characterCards.add(new Card("malina"));
@@ -80,13 +79,11 @@ public class Game {
             cards.addAll(characterCards);
             Collections.shuffle(cards);
             
-
-            Collections.shuffle(characters);
-            players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
-            players.add(new Player("player2", characters.get(1), new HashSet<Card>()));
-            for (int i = 2 ; i < numplayers ; i++){
-                players.add(new Player("Player" + i, characters.get(i), new HashSet<Card>()));
-            }
+            players.add(new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
+            players.add(new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
+            players.add(new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
+            players.add(new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
+            
 
             /**
              * Sets starting locations of players
@@ -134,24 +131,26 @@ public class Game {
     			+"------------------"
     			);
     	wait(1);
+    	System.out.println("Loading...");
     	System.out.println(
     			"------------------\n"+
     			"|###--------------|\n"+
     			"------------------"
     			);
     	wait(1);
+    	System.out.println("Loading...");
     	System.out.println(
     			"------------------\n"+
     			"|########---------|\n"+
     			"------------------"
     			);
     	wait(1);
+    	System.out.println("Loading...");
     	System.out.println(
     			"------------------\n"+
     			"|#################|\n"+
     			"------------------"
     			);
-    	System.out.flush();
     	wait(1);
     	System.out.println(
     	"				#################################\n"
@@ -177,7 +176,6 @@ public class Game {
     	       +"				#    P R E S S  - E N T E R     #\n"
     	       +"				#################################\n");
     	getInput();
-    	System.out.flush();
     	System.out.println("please enter the number of players playing (minimum 2, maximum 4): ");
     	String players = getInput();
     	System.out.println(
@@ -199,12 +197,16 @@ public class Game {
     			);
     	System.out.println("When everyone is ready to play, press ENTER:");
     	getInput();
-    	int np = Integer.valueOf(players);
+    	int np = 2;
+    	try {
+    		np = Integer.valueOf(players);
+    	} catch (NumberFormatException e) {
+    		System.out.println("Not a real number! Defaulting to two players.");
+    	}
     	try {
 			startGame(np);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException n) {
+			
 		}
     }
     
@@ -310,7 +312,11 @@ public class Game {
     	
     	// {"lucilla", "bert", "maline", "percy"};
     	if (this.movesLeft == 0) {
-    		System.out.println(players.indexOf(currentPlayer.playerName));
+    		for (Player p : players) {
+    			if (p.getCharName().equals(currentPlayer.getCharName())) {
+    				
+    			}
+    		}
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
@@ -537,6 +543,8 @@ public class Game {
      * 
      */
     public void makeGuess(){
+    	
+    	System.out.println("In estate!");
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
@@ -569,7 +577,7 @@ public class Game {
 
     public static void main(String... args) throws IOException {
         Game newGame = new Game();
-        newGame.startScreen();
+        newGame.startGame(4);
     }
 
 }
