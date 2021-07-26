@@ -113,7 +113,7 @@ public class Game {
              * Selects the player who starts at random
              */
             
-			int random = (int) (Math.random() * numplayers + 1);
+			int random = (int) (Math.random() * numplayers);
             currentPlayer = players.get(random);
             turn(); 
             
