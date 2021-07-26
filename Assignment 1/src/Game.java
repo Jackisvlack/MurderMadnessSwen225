@@ -127,7 +127,7 @@ public class Game {
     }
     
     /**
-     * Incredible 
+     * Incredible starting sequence that definitely does not take too long
      * */
     public void startScreen() {
     	System.out.println("Welcome to Murder Madness!");
@@ -274,7 +274,7 @@ public class Game {
     
     public boolean checkLine(String line) {
 		
-    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsew]?")) ) {
+    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsewNSEW]?")) ) {
     		System.out.println("Error recognizing distance or direction, try again.");
     		checkLine(getInput());
     		return false;
@@ -394,7 +394,10 @@ public class Game {
 		}
     	
     }
-
+    
+    /**
+     * Helper method to help players know which way they can go once in an estate
+     * */
 	public void checkEstateExits(Location location){
 		System.out.println("You can leave the estate via the following exits: \n");
 		if (location.getEast() != null){
@@ -412,7 +415,9 @@ public class Game {
 	}
 
 
-    
+    /**
+     * Moves the player north, if on an estate location starts the makeGuess cycle
+     * */
     public void moveNorth(int moves) {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
@@ -433,6 +438,9 @@ public class Game {
     	board.drawBoard();
     }
     
+    /**
+     * Moves the player south, if on an estate location starts the makeGuess cycle
+     * */
     public void moveSouth(int moves) {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
@@ -452,6 +460,9 @@ public class Game {
     	board.drawBoard();
     }
     
+    /**
+     * Moves the player east, if on an estate location starts the makeGuess cycle
+     * */
     public void moveEast(int moves) {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
@@ -472,6 +483,9 @@ public class Game {
     	board.drawBoard();
     }
     
+    /**
+     * Moves the player west, if on an estate location starts the makeGuess cycle
+     * */
     public void moveWest(int moves) {
     	for (int i = 0; i < moves; i++) {
     		Location playerLoc = currentPlayer.location;
@@ -493,9 +507,12 @@ public class Game {
     }
 
     /**
-     * 
+     * The main guess cycle method
+     * Manages the round of guessing that takes place when a player
+     * that has not guessed enters an estate
      */
     public void makeGuess(Location loc){
+    	System.out.println(murderCircumstance.toString());
     	String estate = loc.name;
     	List<Integer> idxList = new ArrayList<>();
     	int curIndex = players.indexOf(currentPlayer);
@@ -621,6 +638,10 @@ public class Game {
 		currentPlayer.setGuessed(true);
     }
     
+    /**
+     * prints out eligible refutation cards, is a method so that it can be called multiple times until it has 
+     * good guessing input
+     * */
     public void printEligibleCards(List<Card> options) {
     	System.out.println("Please choose one of the card(s):");
 		for (Card c : options) {

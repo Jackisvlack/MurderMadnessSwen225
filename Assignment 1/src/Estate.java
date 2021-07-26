@@ -1,3 +1,6 @@
+/**
+ * Estate: instance of location, stores isWall, name and position
+ * */
 public class Estate extends Location{
 
     public Estate(Position pos, String name) {
