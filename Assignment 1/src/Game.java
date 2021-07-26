@@ -391,7 +391,7 @@ public class Game {
 		if (location.getNorth() != null){
 			System.out.println("North\n");
 		}
-	    if (location.getNorth() != null){
+	    if (location.getSouth() != null){
 			System.out.println("South\n");
 		}
 	}
