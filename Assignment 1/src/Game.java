@@ -248,6 +248,8 @@ public class Game {
     	System.out.println("Moves available: " + movesLeft);
     	
     	// present instructions / get move order
+
+		//Check estates exists and present list of exists to player
 		if (currentPlayer.location instanceof Estate){
 			checkEstateExits(currentPlayer.location);
 		}
@@ -327,7 +329,8 @@ public class Game {
     	}
     	
 		/**
-		 * When in estates, you can only move out of the exits of that estate
+		 * When in estates, you can only move out of the exits of that estate this shows players which exits
+		 * are avaliable to move from
 		 */
 		if (currentPlayer.location instanceof Estate){
 			if (direction.equals("N") || direction.equals("n")) {
@@ -409,269 +412,102 @@ public class Game {
 
     
     public void moveNorth(int moves) {
-    	List<Location> moveSq = new ArrayList<>();
-    	// x and y, if going north, we decrement x, south, increment x, east increment y, west, decrement y
-		int x = currentPlayer.location.getPos().getX()-1;
-		int y = currentPlayer.location.getPos().getY();
-		
-		// original location of current player, used at end to tell the board there is not a player there
-		// anymore, if the player was able to move in the chosen direction at all
-		Location ogLoc = currentPlayer.location;
-		
-		// counts the valid moves taken by the player
-		int moveCounter = 0;
-		
-		// add the square the player has chosen to move to, and all the squares in between to a list
-		Position pos = currentPlayer.location.getPos();
-		while (pos.getX() - moves < 0){
-			moves--;
-		}
-
-		for (int i = 0; i < moves; i++) {
-			moveSq.add(board.squares[x-i][y]);
-		}
-		
-		// go through that list and check if each square is either 'Free' or is an estate
-		// if square is free or an estate, move there and increment move counter
-		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
-		// start the guess cycle
-		for (int i = 0; i < moves; i++) {
-			if (moveSq.get(i).isWall) {
-				break;
-			}
-			if (!moveSq.get(i).isWall) {
-				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
-					moveSq.get(i).setPlayerAtLoc(currentPlayer);
-	                currentPlayer.setLocation(moveSq.get(i));
-	                moveCounter++;
-	                this.movesLeft--;
-				} else { break; }
-				
-				if (moveSq.get(i) instanceof Estate) {
-					this.movesLeft = 0;
-					if (!currentPlayer.hasGuessed()) {
-						makeGuess(moveSq.get(i));
-					} else {
-						System.out.println("You are not elgibile to guess!\n"
-								+ "Next person!");
-					}
+    	for (int i = 0; i < moves; i++) {
+    		Location playerLoc = currentPlayer.location;
+    		
+    		if (playerLoc instanceof Estate) {
+				this.movesLeft = 0;
+				if (!currentPlayer.hasGuessed()) {
+					makeGuess(playerLoc);
+				} else {
+					System.out.println("You are not elgibile to guess!\n"
+							+ "Next person!");
 				}
 			}
-		}
-		
-		// go through the locations moved to and tell those locations there is no longer a player there
-		// up until the current player location
-		for (int i = 0; i < moveCounter-1; i++) {
-			moveSq.get(i).setHasPlayer(false);
-		}
-		
-		// if the player has moved, erase the original location of its player
-		if (moveCounter > 0) {
-			ogLoc.setHasPlayer(false);
-		}
-		
-		board.drawBoard();
+    		
+    		if (!currentPlayer.location.getNorth().isWall) {
+    			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
+    			currentPlayer.setLocation(playerLoc.getNorth());
+    			playerLoc.setHasPlayer(false);
+    			this.movesLeft--;
+    		} 
+    	}
+    	
+    	board.drawBoard();
     }
     
     public void moveSouth(int moves) {
-    	List<Location> moveSq = new ArrayList<>();
-    	// x and y, if going north, we decrement x, south, increment x, east increment y, west, decrement y
-		int x = currentPlayer.location.getPos().getX()+1;
-		int y = currentPlayer.location.getPos().getY();
-		
-		// original location of current player, used at end to tell the board there is not a player there
-		// anymore, if the player was able to move in the chosen direction at all
-		Location ogLoc = currentPlayer.location;
-		
-		// counts the valid moves taken by the player
-		int moveCounter = 0;
-
-		Position pos = currentPlayer.location.getPos();
-		while (pos.getX() + moves > 23){
-			moves--;
-		}
-		
-		// add the square the player has chosen to move to, and all the squares in between to a list
-		for (int i = 0; i < moves; i++) {
-			moveSq.add(board.squares[x+i][y]);
-		}
-		
-		// go through that list and check if each square is either 'Free' or is an estate
-		// if square is free or an estate, move there and increment move counter
-		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
-		// start the guess cycle
-		for (int i = 0; i < moves; i++) {
-			if (moveSq.get(i).isWall) {
-				break;
-			}
-			if (!moveSq.get(i).isWall) {
-				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
-					moveSq.get(i).setPlayerAtLoc(currentPlayer);
-	                currentPlayer.setLocation(moveSq.get(i));
-	                moveCounter++;
-	                this.movesLeft--;
-				} else { break; }
-				
-				if (moveSq.get(i) instanceof Estate) {
-					this.movesLeft = 0;
-					if (!currentPlayer.hasGuessed()) {
-						makeGuess(moveSq.get(i));
-					} else {
-						System.out.println("You are not elgibile to guess!\n"
-								+ "Next person!");
-					}
+    	for (int i = 0; i < moves; i++) {
+    		Location playerLoc = currentPlayer.location;
+    		
+    		if (playerLoc instanceof Estate) {
+				this.movesLeft = 0;
+				if (!currentPlayer.hasGuessed()) {
+					makeGuess(playerLoc);
+				} else {
+					System.out.println("You are not elgibile to guess!\n"
+							+ "Next person!");
 				}
 			}
-		}
-		
-		// go through the locations moved to and tell those locations there is no longer a player there
-		// up until the current player location
-		for (int i = 0; i < moveCounter-1; i++) {
-			moveSq.get(i).setHasPlayer(false);
-		}
-		
-		// if the player has moved, erase the original location of its player
-		if (moveCounter > 0) {
-			ogLoc.setHasPlayer(false);
-		}
-		
-		moves = moves - moveCounter;
-		
-		board.drawBoard();
+    		
+    		if (!currentPlayer.location.getSouth().isWall) {
+    			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
+    			currentPlayer.setLocation(playerLoc.getSouth());
+    			playerLoc.setHasPlayer(false);
+    			this.movesLeft--;
+    		} 
+    	}
+    	board.drawBoard();
     }
     
     public void moveEast(int moves) {
-    	List<Location> moveSq = new ArrayList<>();
-    	// x and y, if going north, we decrement x, south, increment x, east increment y, west, decrement y
-		int x = currentPlayer.location.getPos().getX();
-		int y = currentPlayer.location.getPos().getY()+1;
-		
-		// original location of current player, used at end to tell the board there is not a player there
-		// anymore, if the player was able to move in the chosen direction at all
-		Location ogLoc = currentPlayer.location;
-		
-		// counts the valid moves taken by the player
-		int moveCounter = 0;
-
-		Position pos = currentPlayer.location.getPos();
-		while (pos.getY() + moves > 23){
-			moves--;
-		}
-		
-		// add the square the player has chosen to move to, and all the squares in between to a list
-		for (int i = 0; i < moves; i++) {
-			moveSq.add(board.squares[x][y+i]);
-		}
-		
-		// go through that list and check if each square is either 'Free' or is an estate
-		// if square is free or an estate, move there and increment move counter
-		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
-		// start the guess cycle
-		for (int i = 0; i < moves; i++) {
-			if (moveSq.get(i).isWall) {
-				break;
-			}
-			if (!moveSq.get(i).isWall) {
-				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
-					moveSq.get(i).setPlayerAtLoc(currentPlayer);
-	                currentPlayer.setLocation(moveSq.get(i));
-	                moveCounter++;
-	                this.movesLeft--;
-				} else { break; }
-				
-				if (moveSq.get(i) instanceof Estate) {
-					this.movesLeft = 0;
-					if (!currentPlayer.hasGuessed()) {
-						makeGuess(moveSq.get(i));
-					} else {
-						System.out.println("You are not elgibile to guess!\n"
-								+ "Next person!");
-					}
+    	for (int i = 0; i < moves; i++) {
+    		Location playerLoc = currentPlayer.location;
+    		
+    		if (playerLoc instanceof Estate) {
+				this.movesLeft = 0;
+				if (!currentPlayer.hasGuessed()) {
+					makeGuess(playerLoc);
+				} else {
+					System.out.println("You are not elgibile to guess!\n"
+							+ "Next person!");
 				}
 			}
-		}
-		
-		// go through the locations moved to and tell those locations there is no longer a player there
-		// up until the current player location
-		for (int i = 0; i < moveCounter-1; i++) {
-			moveSq.get(i).setHasPlayer(false);
-		}
-		
-		// if the player has moved, erase the original location of its player
-		if (moveCounter > 0) {
-			ogLoc.setHasPlayer(false);
-		}
-		
-		moves = moves - moveCounter;
-		
-		board.drawBoard();
+    		
+    		if (!currentPlayer.location.getEast().isWall) {
+    			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
+    			currentPlayer.setLocation(playerLoc.getEast());
+    			playerLoc.setHasPlayer(false);
+    			this.movesLeft--;
+    		} 
+    	}
+    	
+    	board.drawBoard();
     }
     
     public void moveWest(int moves) {
-    	List<Location> moveSq = new ArrayList<>();
-    	// x and y, if going north, we decrement x, south, increment x, east increment y, west, decrement y
-		int x = currentPlayer.location.getPos().getX();
-		int y = currentPlayer.location.getPos().getY()-1;
-		
-		// original location of current player, used at end to tell the board there is not a player there
-		// anymore, if the player was able to move in the chosen direction at all
-		Location ogLoc = currentPlayer.location;
-		
-		// counts the valid moves taken by the player
-		int moveCounter = 0;
-
-		Position pos = currentPlayer.location.getPos();
-		while (pos.getY() - moves < 0){
-			moves--;
-		}
-		
-		// add the square the player has chosen to move to, and all the squares in between to a list
-		for (int i = 0; i < moves; i++) {
-			moveSq.add(board.squares[x][y-i]);
-		}
-		
-		// go through that list and check if each square is either 'Free' or is an estate
-		// if square is free or an estate, move there and increment move counter
-		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
-		// start the guess cycle
-		for (int i = 0; i < moves; i++) {
-			if (moveSq.get(i).isWall) {
-				break;
-			}
-			if (!moveSq.get(i).isWall) {
-				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
-					moveSq.get(i).setPlayerAtLoc(currentPlayer);
-	                currentPlayer.setLocation(moveSq.get(i));
-	                moveCounter++;
-	                this.movesLeft--;
-				} else { break; }
-				
-				if (moveSq.get(i) instanceof Estate) {
-					this.movesLeft = 0;
-					if (!currentPlayer.hasGuessed()) {
-						makeGuess(moveSq.get(i));
-					} else {
-						System.out.println("You are not elgibile to guess!\n"
-								+ "Next person!");
-					}
+    	for (int i = 0; i < moves; i++) {
+    		Location playerLoc = currentPlayer.location;
+    		
+    		if (playerLoc instanceof Estate) {
+				this.movesLeft = 0;
+				if (!currentPlayer.hasGuessed()) {
+					makeGuess(playerLoc);
+				} else {
+					System.out.println("You are not elgibile to guess!\n"
+							+ "Next person!");
 				}
 			}
-		}
-		
-		// go through the locations moved to and tell those locations there is no longer a player there
-		// up until the current player location
-		for (int i = 0; i < moveCounter-1; i++) {
-			moveSq.get(i).setHasPlayer(false);
-		}
-		
-		// if the player has moved, erase the original location of its player
-		if (moveCounter > 0) {
-			ogLoc.setHasPlayer(false);
-		}
-		
-		moves = moves - moveCounter;
-		
-		board.drawBoard();
+    		
+    		if (!currentPlayer.location.getWest().isWall) {
+    			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
+    			currentPlayer.setLocation(playerLoc.getWest());
+    			playerLoc.setHasPlayer(false);
+    			this.movesLeft--;
+    		} 
+    	}
+    	
+    	board.drawBoard();
     }
 
     /**
