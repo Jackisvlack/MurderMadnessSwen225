@@ -236,7 +236,7 @@ public class Game {
     	String line = "";
     	
     	// greet player
-    	System.out.println("Hello, " + currentPlayer.getPlayerName());
+    	System.out.println("Hello, " + currentPlayer.getCharName());
     	System.out.println("Please roll the dice when ready by typing 'roll'");
     	
     	// wait
@@ -270,14 +270,12 @@ public class Game {
     
     public boolean checkLine(String line) {
 		
-		
     	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsew]?")) ) {
     		System.out.println("Error recognizing distance or direction, try again.");
     		checkLine(getInput());
     		return false;
     	}
 		return true;
-
     
     }
     
