@@ -248,6 +248,9 @@ public class Game {
     	System.out.println("Moves available: " + movesLeft);
     	
     	// present instructions / get move order
+		if (currentPlayer.location instanceof Estate){
+			checkEstateExits(currentPlayer.location);
+		}
     	System.out.println("North = Up - East = Left - West = Right - South = Down");
     	System.out.println("To move, type the number of squares to move, space, the first letter of a given direction");
     	System.out.println("Example: 5 N - 5 squares North, 3 E, 3 squares East - not case sensitive");
@@ -318,7 +321,6 @@ public class Game {
 		 * When in estates, you can only move out of the exits of that estate
 		 */
 		if (currentPlayer.location instanceof Estate){
-			checkEstateExits(currentPlayer.location);
 			if (direction.equals("N") || direction.equals("n")) {
 				Location orgLoc = currentPlayer.location;
 				currentPlayer.location.getNorth().setPlayerAtLoc(currentPlayer);
@@ -379,14 +381,17 @@ public class Game {
     }
 
 	public void checkEstateExits(Location location){
-		System.out.println("You can leave via the following exits: \n");
+		System.out.println("You can leave the estate via the following exits: \n");
 		if (location.getEast() != null){
 			System.out.println("East\n");
-		} else if (location.getWest() != null){
+		}
+		if (location.getWest() != null){
 			System.out.println("West\n");
-		} else if (location.getNorth() != null){
+		}
+		if (location.getNorth() != null){
 			System.out.println("North\n");
-		} else {
+		}
+	    if (location.getNorth() != null){
 			System.out.println("South\n");
 		}
 	}

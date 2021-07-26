@@ -74,8 +74,8 @@ public class Board {
                     }else {
                         squares[i][j].setWall();
                     }
-                    squares[i][j].setNorth(squares[3][7]);
-                    squares[i][j].setWest(squares[7][5]);
+                    squares[i][j].setNorth(null);
+                    squares[i][j].setWest(null);
                     squares[i][j].setEast(squares[3][7]);
                     squares[i][j].setSouth(squares[7][5]);
                 }
@@ -94,9 +94,9 @@ public class Board {
                         squares[i][j].setWall();
                     }
                     squares[i][j].setNorth(squares[16][3]);
-                    squares[i][j].setWest(squares[16][3]);
+                    squares[i][j].setWest(null);
                     squares[i][j].setEast(squares[18][7]);
-                    squares[i][j].setSouth(squares[18][7]);
+                    squares[i][j].setSouth(null);
                 }
                 /**
                  * Manic Manor Squares
@@ -112,9 +112,9 @@ public class Board {
                     } else {
                         squares[i][j].setWall();
                     }
-                    squares[i][j].setNorth(squares[5][16]);
+                    squares[i][j].setNorth(null);
                     squares[i][j].setWest(squares[5][16]);
-                    squares[i][j].setEast(squares[7][20]);
+                    squares[i][j].setEast(null);
                     squares[i][j].setSouth(squares[7][20]);
                 }
                 /**
@@ -131,10 +131,10 @@ public class Board {
                     } else {
                         squares[i][j].setWall();
                     }
+                    squares[i][j].setNorth(null);
                     squares[i][j].setNorth(squares[16][18]);
                     squares[i][j].setWest(squares[20][16]);
-                    squares[i][j].setEast(squares[16][18]);
-                    squares[i][j].setSouth(squares[20][16]);
+                    squares[i][j].setSouth(null);
                 }
                 /**
                  * villa Celia
