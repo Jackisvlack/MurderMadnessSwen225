@@ -86,6 +86,13 @@ public class Game {
             players.add(new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
             players.add(new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
             players.add(new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
+
+			
+			for (int i = 0; i < numplayers; i++){
+				players.get(i).setControlled(true);
+			}
+
+
             
 
 

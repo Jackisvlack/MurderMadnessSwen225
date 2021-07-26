@@ -25,4 +25,12 @@ public class Player {
     public void setLocation(Location location){
         this.location = location;
     }
+
+    public void setControlled(boolean controlled){
+        this.controlled = controlled;
+    }
+
+    public boolean getControlled(){
+        return this.controlled;
+    }
 }
