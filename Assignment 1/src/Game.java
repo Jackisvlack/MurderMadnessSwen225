@@ -255,19 +255,28 @@ public class Game {
     	System.out.println("To move, type the number of squares to move, space, the first letter of a given direction");
     	System.out.println("Example: 5 N - 5 squares North, 3 E, 3 squares East - not case sensitive");
     	line = getInput();
-    	
-    	checkLine(line);
+    		checkLine(line);
+    
+		line = getInput();
+    	while (!checkLine(line)){line = getInput();} //infinite loop until input is correct
+		move(line);
     }
     
     /**
-     * method to check line length, as the line can only be either 3 or 4 chars in length
+     * method to check line to length and regex, is used in line 381 aswell
      * */
-    public void checkLine(String line) {
-    	if (line.length() < 3 || line.length() > 4) {
+    
+    public boolean checkLine(String line) {
+		
+		
+    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsew]?")) ) {
     		System.out.println("Error recognizing distance or direction, try again.");
     		checkLine(getInput());
+    		return false;
     	}
-    	move(line);
+		return true;
+
+    
     }
     
     /**
@@ -369,7 +378,8 @@ public class Game {
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
-    		checkLine(line);
+    		while (!checkLine(line)){line = getInput();}
+			move(line);
     	}
 
 		int curPlayer = players.indexOf(currentPlayer);
