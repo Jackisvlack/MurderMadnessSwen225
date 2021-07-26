@@ -94,7 +94,11 @@ public class Game {
              */
             board.placeCharactersStart(players);
             board.drawBoard();
-                        
+            
+            weaponCards.remove(0);
+            characterCards.remove(0);
+            estateCards.remove(0);
+            
             int c = 0;
             for (int i = 0; i < cards.size()-1; i++) {
             	if (c == players.size()-1) { c = 0; }
@@ -102,7 +106,9 @@ public class Game {
             	c++;
             }
             
-            
+            weaponCards.add(murderWeapon);
+            characterCards.add(murderCharacter);
+            estateCards.add(murderEstate);
             
             /**
              * Selects the player who starts at random
