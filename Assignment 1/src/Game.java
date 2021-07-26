@@ -223,7 +223,12 @@ public class Game {
      * gives move order to checkLine, if valid passes on to move method
      * */
     public void turn(){
-    	
+		int curIndex = players.indexOf(currentPlayer);
+		
+    	while(!currentPlayer.getControlled()){
+			curIndex++;
+			currentPlayer = players.get(curIndex);
+		}
 		
     	this.movesLeft = 0;
     	String line = "";
@@ -258,7 +263,7 @@ public class Game {
     		checkLine(getInput());
     	}
     	move(line);
-;    }
+    }
     
     /**
      * Simple helper function to pause game and wait for input.
