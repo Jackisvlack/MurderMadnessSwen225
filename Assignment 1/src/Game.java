@@ -32,6 +32,9 @@ public class Game {
         
 
     }
+
+
+
     //TODO need to look at this class, could not get to work in its native way, had to comment out the try/catch
     //TODO had to also work above the while loop on lines 104 to 108. Seems to get stuck in this loop
     public void startGame(int np) throws IOException {
@@ -84,6 +87,7 @@ public class Game {
             players.add(new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
             players.add(new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
             
+
 
             /**
              * Sets starting locations of players

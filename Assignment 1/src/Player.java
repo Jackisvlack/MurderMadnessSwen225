@@ -6,10 +6,12 @@ public class Player {
     String charName;
     HashSet<Card> cards; 
     Location location;
-    public Player(String name, String charName, HashSet<Card> cards) {
+    boolean controlled;
+    public Player(String name, String charName, HashSet<Card> cards, boolean controlled) {
         this.playerName = name;
         this.charName = charName;
         this.cards = cards;
+        this.controlled = controlled;
     }
     
     public String getCharName() {
