@@ -256,8 +256,7 @@ public class Game {
     	System.out.println("North = Up - East = Left - West = Right - South = Down");
     	System.out.println("To move, type the number of squares to move, space, the first letter of a given direction");
     	System.out.println("Example: 5 N - 5 squares North, 3 E, 3 squares East - not case sensitive");
-    	line = getInput();
-    		checkLine(line);
+    	
     
 		line = getInput();
     	while (!checkLine(line)){line = getInput();} //infinite loop until input is correct
