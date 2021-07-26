@@ -314,7 +314,11 @@ public class Game {
     	
     	// {"lucilla", "bert", "maline", "percy"};
     	if (this.movesLeft == 0) {
-    		System.out.println(players.get(players.indexOf(currentPlayer)+1));
+    		if (currentPlayer.getCharName().equals("percy")) {
+    			currentPlayer = players.get(0);
+    		} else {
+    			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
+    		}
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
