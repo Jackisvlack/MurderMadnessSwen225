@@ -248,6 +248,8 @@ public class Game {
     	System.out.println("Moves available: " + movesLeft);
     	
     	// present instructions / get move order
+
+		//Check estates exists and present list of exists to player
 		if (currentPlayer.location instanceof Estate){
 			checkEstateExits(currentPlayer.location);
 		}
@@ -318,7 +320,8 @@ public class Game {
     	}
     	
 		/**
-		 * When in estates, you can only move out of the exits of that estate
+		 * When in estates, you can only move out of the exits of that estate this shows players which exits
+		 * are avaliable to move from
 		 */
 		if (currentPlayer.location instanceof Estate){
 			if (direction.equals("N") || direction.equals("n")) {
@@ -382,16 +385,16 @@ public class Game {
 
 	public void checkEstateExits(Location location){
 		System.out.println("You can leave the estate via the following exits: \n");
-		if (!location.getEast().equals(null)){
+		if (location.getEast() != null){
 			System.out.println("East\n");
 		}
-		if (!location.getWest().equals(null)){
+		if (location.getWest() != null){
 			System.out.println("West\n");
 		}
-		if (!location.getNorth().equals(null)){
+		if (location.getNorth() != null){
 			System.out.println("North\n");
 		}
-	    if (!location.getSouth().equals(null)){
+	    if (location.getSouth() != null){
 			System.out.println("South\n");
 		}
 	}
