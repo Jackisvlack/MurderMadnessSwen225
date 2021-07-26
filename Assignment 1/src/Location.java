@@ -1,4 +1,5 @@
 public class Location {
+	
     private Location west;
     private Location north;
     private Location south;
@@ -9,51 +10,88 @@ public class Location {
     Weapon estatesWeapon;
 	private boolean hasPlayer = false;
     private Player player;
-
+    
+    /**
+     * set the east neighbor of this square
+     * */
     public void setEast(Location east){
         this.east = east;
     }
-
+    
+    /**
+     * set the west neighbor of this square
+     * */
     public void setWest(Location west) {
         this.west = west;
     }
-
+    
+    /**
+     * set the north neighbor of this square
+     * */
     public void setNorth(Location north) {
         this.north = north;
     }
-
+    
+    /**
+     * set the south neighbor of this square
+     * */
     public void setSouth(Location south) {
         this.south = south;
     }
 
-
+    /**
+     * return the east neighbor of this square
+     * */
     public Location getEast() {
         return east;
     }
-
+    
+    /**
+     * return the west neighbor of this square
+     * */
     public Location getWest() {
         return west;
     }
-
+    
+    /**
+     * return the north neighbor of this square
+     * */
     public Location getNorth() {
         return north;
     }
-
+    
+    /**
+     * return the south neighbor of this square
+     * */
     public Location getSouth() {
         return south;
     }
-
+    
+    /**
+     * set only the position of this location
+     * */
     public Location(Position pos) {
         this.pos = pos;
     }
+    
+    /**
+     * set position and name of this location
+     * */
     public Location(Position pos, String name) {
         this.pos = pos;
         this.name = name;
     }
+    
+    /**
+     * set if this location is a wall
+     * */
     public void setWall(){
         this.isWall = true;
     }
     
+    /**
+     * set if this location has a player
+     * */
     public void setHasPlayer(boolean b) {
     	this.player = null;
     	this.hasPlayer = b;
@@ -62,15 +100,21 @@ public class Location {
     public boolean hasPlayer(int x, int y) {
     	return this.hasPlayer;
     }
-
+    
+    /**
+     * set this locations weapon
+     * */
     public void setWeapon(Weapon weapon){
         this.estatesWeapon = weapon;
     }
 
+    /**
+     * gets the name of this locations weapon
+     * */
     public String getWeaponName(){
         return estatesWeapon.getName();
     }
-
+    
     public Player playerAtLoc(){
         return this.player;
     }
@@ -117,6 +161,9 @@ public class Location {
     	}
     }
     
+    /**
+     * get this locations position (x and y)
+     * */
     public Position getPos() {
     	return this.pos;
     }

@@ -114,7 +114,6 @@ public class Game {
 			while(!solved){
 				turn();
 			} 
-            
       
     }
     
@@ -127,6 +126,9 @@ public class Game {
 		}
     }
     
+    /**
+     * Incredible 
+     * */
     public void startScreen() {
     	System.out.println("Welcome to Murder Madness!");
     	System.out.println("Loading...");
@@ -223,6 +225,9 @@ public class Game {
      * gives move order to checkLine, if valid passes on to move method
      * */
     public void turn(){
+    	
+    	
+    	
 		int curIndex = players.indexOf(currentPlayer);
 		
     	while(!currentPlayer.getControlled()){
@@ -420,6 +425,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				return;
     			}
     		} 
     	}
@@ -439,6 +445,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				return;
     			}
     		} 
     	}
@@ -457,6 +464,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				return;
     			}
     		} 
     	}
@@ -476,6 +484,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				return;
     			}
     		} 
     	}
