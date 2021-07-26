@@ -360,7 +360,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -412,7 +412,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -466,7 +466,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -520,7 +520,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -544,9 +544,10 @@ public class Game {
     /**
      * 
      */
-    public void makeGuess(){
+    public void makeGuess(Location loc){
     	
-    	System.out.println("In estate!");
+    	System.out.println("Welcome to the " + loc.name+"!");
+    	System.out.println("You see a " + loc.getWeaponName() + " - mysterious...");
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
@@ -563,7 +564,7 @@ public class Game {
     	// if player has choice of two refutation cards, they can choose
     	
     	// if solve guess matches exactly the cards chosen as the murder
-    	// circumstances, they win. If not, the player is excluded from making futher
+    	// circumstances, they win. If not, the player is excluded from making further
     	// Guesses
     }
 
