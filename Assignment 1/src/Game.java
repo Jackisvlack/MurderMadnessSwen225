@@ -226,7 +226,9 @@ public class Game {
 		int curIndex = players.indexOf(currentPlayer);
 		
     	while(!currentPlayer.getControlled()){
-			curIndex++;
+			if (curIndex == 3){
+				curIndex = 0;
+			} else {curIndex++;}
 			currentPlayer = players.get(curIndex);
 		}
 		
@@ -419,6 +421,9 @@ public class Game {
 		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
 		// start the guess cycle
 		for (int i = 0; i < moves; i++) {
+			if (moveSq.get(i).isWall) {
+				break;
+			}
 			if (!moveSq.get(i).isWall) {
 				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
 					moveSq.get(i).setPlayerAtLoc(currentPlayer);
@@ -481,6 +486,9 @@ public class Game {
 		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
 		// start the guess cycle
 		for (int i = 0; i < moves; i++) {
+			if (moveSq.get(i).isWall) {
+				break;
+			}
 			if (!moveSq.get(i).isWall) {
 				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
 					moveSq.get(i).setPlayerAtLoc(currentPlayer);
@@ -545,6 +553,9 @@ public class Game {
 		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
 		// start the guess cycle
 		for (int i = 0; i < moves; i++) {
+			if (moveSq.get(i).isWall) {
+				break;
+			}
 			if (!moveSq.get(i).isWall) {
 				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
 					moveSq.get(i).setPlayerAtLoc(currentPlayer);
@@ -609,6 +620,9 @@ public class Game {
 		// if square is an estate, make moveCounter and moves equal (no more moves are needed)
 		// start the guess cycle
 		for (int i = 0; i < moves; i++) {
+			if (moveSq.get(i).isWall) {
+				break;
+			}
 			if (!moveSq.get(i).isWall) {
 				if (moveSq.get(i).toString().equals("Free") || (moveSq.get(i) instanceof Estate)) {
 					moveSq.get(i).setPlayerAtLoc(currentPlayer);
