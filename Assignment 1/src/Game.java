@@ -635,6 +635,7 @@ public class Game {
     	// if not, the player continues on to guess cycle.
     	if (playersGuess.equals(murderCircumstance)) {
     		this.solved = true;
+			System.out.println("Congratulations!! You have solved the murder!");
     		return;
     	} 
 		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
