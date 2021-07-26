@@ -110,7 +110,10 @@ public class Game {
             
 			int random = (int) (Math.random() * numplayers);
             currentPlayer = players.get(random);
-            turn(); 
+
+			while(!solved){
+				turn();
+			} 
             
       
     }
@@ -357,6 +360,12 @@ public class Game {
     		String line = getInput();
     		checkLine(line);
     	}
+
+		int curPlayer = players.indexOf(currentPlayer);
+		curPlayer++;
+		if (curPlayer == 3){
+			currentPlayer = players.get(curPlayer);
+		}
     	
     }
 
