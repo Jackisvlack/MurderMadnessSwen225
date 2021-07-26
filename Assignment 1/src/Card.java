@@ -1,3 +1,6 @@
+/**
+ * Stores a type (weapon, character, estate) as a card
+ * */
 public class Card {
     public Card(String name) {
         this.name = name;

@@ -1,8 +1,11 @@
-
+/**
+ * Stores a guess comprised of a weapon, estate and a character
+ * Allows easy comparison between guesses
+ * */
 class Guess {
-    String estate;
-    String weapon;
-    String character;
+    private String estate;
+    private String weapon;
+    private String character;
 
     
     public Guess (String estate, String weapon, String character){
