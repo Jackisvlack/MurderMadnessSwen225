@@ -26,6 +26,9 @@ public class Game {
         
 
     }
+
+
+
     //TODO need to look at this class, could not get to work in its native way, had to comment out the try/catch
     //TODO had to also work above the while loop on lines 104 to 108. Seems to get stuck in this loop
     public void startGame(int np) throws IOException {
@@ -82,11 +85,13 @@ public class Game {
             
 
             Collections.shuffle(characters);
-            players.add(new Player("player1", characters.get(0), new HashSet<Card>())); 
-            players.add(new Player("player2", characters.get(1), new HashSet<Card>()));
+            players.add(new Player("player1", characters.get(0), new HashSet<Card>(), true)); 
+            players.add(new Player("player2", characters.get(1), new HashSet<Card>(), true));
             for (int i = 2 ; i < numplayers ; i++){
-                players.add(new Player("Player" + i, characters.get(i), new HashSet<Card>()));
+                players.add(new Player("Player" + i, characters.get(i), new HashSet<Card>(), true));
             }
+
+
 
             /**
              * Sets starting locations of players
