@@ -205,7 +205,7 @@ public class Game {
     	getInput();
     	int np = 2;
     	try {
-    		np = Integer.valueOf(getInput());
+    		np = Integer.valueOf(players);
     	} catch (NumberFormatException e) {
     		System.out.println("Not a real number! Defaulting to two players.");
     	}
