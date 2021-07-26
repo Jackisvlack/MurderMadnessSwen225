@@ -82,20 +82,11 @@ public class Game {
             cards.addAll(characterCards);
             Collections.shuffle(cards);
             
-            players.add(new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
-            players.add(new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
-            players.add(new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
-            players.add(new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
-
-			
-			for (int i = 0; i < numplayers; i++){
-				players.get(i).setControlled(true);
-			}
-
-
+            players.add(0, new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
+            players.add(1, new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
+            players.add(2, new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
+            players.add(3, new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
             
-
-
             /**
              * Sets starting locations of players
              */
@@ -114,8 +105,9 @@ public class Game {
             /**
              * Selects the player who starts at random
              */
-            Collections.shuffle(players);
-            currentPlayer = players.get(0);
+            
+			int random = (int) (Math.random() * numplayers + 1);
+            currentPlayer = players.get(random);
             turn(); 
             
         /*} catch (IOException e) {
@@ -311,6 +303,27 @@ public class Game {
     		move(getInput());
     	}
     	
+		if (currentPlayer.location instanceof Estate){
+			checkEstateExits(currentPlayer.location);
+			if (direction.equals("N") || direction.equals("n")) {
+				currentPlayer.location.getNorth();
+				moves--;
+				moveNorth(moves);
+			} else if (direction.equals("E") || direction.equals("e")) {
+				currentPlayer.location.getNorth();
+				moves--;
+				moveNorth(moves);
+			} else if (direction.equals("S") || direction.equals("s")) {
+				currentPlayer.location.getNorth();
+				moves--;
+				moveNorth(moves);
+			} else {
+				currentPlayer.location.getNorth();
+				moves--;
+				moveNorth(moves);
+			}
+		}
+
     	if (direction.equals("N") || direction.equals("n")) {
     		moveNorth(moves);
     	} else if (direction.equals("E") || direction.equals("e")) {
@@ -323,11 +336,7 @@ public class Game {
     	
     	// {"lucilla", "bert", "maline", "percy"};
     	if (this.movesLeft == 0) {
-    		for (Player p : players) {
-    			if (p.getCharName().equals(currentPlayer.getCharName())) {
-    				
-    			}
-    		}
+    		System.out.println(players.get(players.indexOf(currentPlayer)+1));
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
@@ -335,6 +344,22 @@ public class Game {
     	}
     	
     }
+
+	public void checkEstateExits(Location location){
+		System.out.println("You can leave via the following exits: \n");
+		if (location.getEast() != null){
+			System.out.println("East\n");
+		} else if (location.getWest() != null){
+			System.out.println("West\n");
+		} else if (location.getNorth() != null){
+			System.out.println("North\n");
+		} else {
+			System.out.println("South\n");
+		}
+
+	}
+
+
     
     public void moveNorth(int moves) {
     	List<Location> moveSq = new ArrayList<>();
