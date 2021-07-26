@@ -90,6 +90,10 @@ public class Game {
             players.add(2, new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
             players.add(3, new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
             
+            for (int i = 0; i < numplayers; i++) {
+            	players.get(i).setControlled(true);
+            }
+            
             /**
              * Sets starting locations of players
              */
@@ -411,7 +415,12 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess(moveSq.get(i));
+					if (!currentPlayer.hasGuessed()) {
+						makeGuess(moveSq.get(i));
+					} else {
+						System.out.println("You are not elgibile to guess!\n"
+								+ "Next person!");
+					}
 				}
 			}
 		}
@@ -463,7 +472,12 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess(moveSq.get(i));
+					if (!currentPlayer.hasGuessed()) {
+						makeGuess(moveSq.get(i));
+					} else {
+						System.out.println("You are not elgibile to guess!\n"
+								+ "Next person!");
+					}
 				}
 			}
 		}
@@ -517,7 +531,12 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess(moveSq.get(i));
+					if (!currentPlayer.hasGuessed()) {
+						makeGuess(moveSq.get(i));
+					} else {
+						System.out.println("You are not elgibile to guess!\n"
+								+ "Next person!");
+					}
 				}
 			}
 		}
@@ -571,7 +590,12 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess(moveSq.get(i));
+					if (!currentPlayer.hasGuessed()) {
+						makeGuess(moveSq.get(i));
+					} else {
+						System.out.println("You are not elgibile to guess!\n"
+								+ "Next person!");
+					}
 				}
 			}
 		}
@@ -600,17 +624,25 @@ public class Game {
     	List<Integer> idxList = new ArrayList<>();
     	int curIndex = players.indexOf(currentPlayer);
     	
+    	// Welcome message to this estate
     	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
     	System.out.println("You see " + loc.getWeaponName() + " - mysterious...");
     	System.out.println("This may be a clue to the puzzle! What do you think happened?");
     	System.out.println("Choose two cards : one player card and one weapon card");
     	
+    	// Prints the players options to choose from
+    	// Also gets and checks the players input
       	printCardOptions();
     	
+      	// Make an official guess object
     	Guess playersGuess = new Guess(estate, weapon, player);
     	
+    	// check if this is the murder circumstances,
+    	// if yes, the player wins,
+    	// if not, the player continues on to guess cycle.
     	if (playersGuess.equals(murderCircumstance)) {
     		this.solved = true;
+    		return;
     	} 
 		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
 		System.out.println("Who disagrees?");
@@ -633,10 +665,18 @@ public class Game {
 			idxList.add(2);
 		}
 		
+		List<String> finalCards = new ArrayList<>();
+		/**
+		 * For each of the players that aren't currentPlayer, 
+		 * get the eligible cards
+		 * if they have eligible cards, make them choose which card they wish to present
+		 * if they are not an 'active' player do the same but always choose the first eligible card, if any
+		 * */
 		for (int i = 0; i < idxList.size(); i++) { 
 			List<Card> options = new ArrayList<Card>();
-			List<String> finalCards = new ArrayList<>();
 			Player p = players.get(idxList.get(i));
+			
+			// Get all eligible refutation cards
 			if (p.controlled == true) {
 				for (Card c : p.cards) {
 					if (c.getName().equals(estate)) {
@@ -647,6 +687,7 @@ public class Game {
 						options.add(c);
 					}
 				}
+				
 				
 				System.out.println("Please pass the screen on to: " + p.charName);
 				wait(2);
@@ -667,33 +708,39 @@ public class Game {
 					}
 					
 					if (counter == 0) {
-						
+						System.out.println("Please try again as we did not recognize that card!");
+						printEligibleCards(options);
 					}
-					
 					
 				}
 				
+			} else {
+				for (Card c : p.cards) {
+					if (c.getName().equals(estate)) {
+						options.add(c);
+					} else if (c.getName().equals(weapon)) {
+						options.add(c);
+					} else if (c.getName().equals(player)) {
+						options.add(c);
+					}
+				}
+				
+				if (!options.isEmpty()) {
+					finalCards.add(options.get(0).getName());
+				}
 			}
+			
 		}
 		
-    	// Guess is made when an estate is entered
-    	// Guess comprised of player choosing two cards
-    	// Weapon and Player - Estate entered is 
-    	// a given card in the guess
-    	
-    	// Player makes guess, then each player starting one after
-    	// the player that made the guess, going around all players
-    	
-    	// Guess is refuted by producing a card that matches 
-    	// one of the suggest murder circumstances
-    	
-    	// if a refutation can be made, it must
-    	
-    	// if player has choice of two refutation cards, they can choose
-    	
-    	// if solve guess matches exactly the cards chosen as the murder
-    	// circumstances, they win. If not, the player is excluded from making further
-    	// Guesses
+		System.out.println("Please pass the screen on to " + currentPlayer.charName);
+		System.out.println("Hello, " + currentPlayer.charName + " here are what your hopefully loyal associates had to say...");
+		for (String s : finalCards) {
+			System.out.println(s);
+		}
+		
+		System.out.println("Your turn is now over! You have not guessed the right murder circumstances, therefore\n"
+				+ "you are now excluded from guessing in the future!");
+		currentPlayer.setGuessed(true);
     }
     
     public void printEligibleCards(List<Card> options) {
@@ -708,7 +755,7 @@ public class Game {
      * */
     public void printCardOptions() {
     	int i = 1;
-    	System.out.println("Choose a weapon: ");
+    	System.out.println("Choose a weapon: (type in name)");
     	for (Card c : weaponCards) {
     		System.out.println(i + ". " + c.getName());
     		i++;
@@ -718,7 +765,7 @@ public class Game {
     	
     	weapon = getInput();
     	
-    	System.out.println("Characters:");
+    	System.out.println("Characters: (type in name)");
     	for (Card c : characterCards) {
     		System.out.println(i + ". " + c.getName());
     		i++;

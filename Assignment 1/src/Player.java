@@ -7,11 +7,11 @@ public class Player {
     HashSet<Card> cards; 
     Location location;
     boolean controlled;
+	private boolean hasGuessed;
     public Player(String name, String charName, HashSet<Card> cards) {
         this.playerName = name;
         this.charName = charName;
         this.cards = cards;
-        this.controlled = controlled;
     }
     
     public String getCharName() {
@@ -32,5 +32,13 @@ public class Player {
 
     public boolean getControlled(){
         return this.controlled;
+    }
+    
+    public void setGuessed(boolean b) {
+    	this.hasGuessed = b;
+    }
+    
+    public boolean hasGuessed() {
+    	return this.hasGuessed;
     }
 }
