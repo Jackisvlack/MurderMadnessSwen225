@@ -459,8 +459,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
@@ -482,8 +482,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
@@ -506,8 +506,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
