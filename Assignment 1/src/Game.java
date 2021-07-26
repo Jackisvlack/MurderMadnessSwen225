@@ -224,6 +224,7 @@ public class Game {
      * */
     public void turn(){
     	
+		
     	this.movesLeft = 0;
     	String line = "";
     	
@@ -337,6 +338,7 @@ public class Game {
 				moveWest(moves);
 			}
 		}
+		
 
     	if (direction.equals("N") || direction.equals("n")) {
     		moveNorth(moves);
