@@ -398,6 +398,11 @@ public class Game {
 		int moveCounter = 0;
 		
 		// add the square the player has chosen to move to, and all the squares in between to a list
+		Position pos = currentPlayer.location.getPos();
+		while (pos.getX() - moves < 0){
+			moves--;
+		}
+
 		for (int i = 0; i < moves; i++) {
 			moveSq.add(board.squares[x-i][y]);
 		}
@@ -453,6 +458,11 @@ public class Game {
 		
 		// counts the valid moves taken by the player
 		int moveCounter = 0;
+
+		Position pos = currentPlayer.location.getPos();
+		while (pos.getX() + moves > 23){
+			moves--;
+		}
 		
 		// add the square the player has chosen to move to, and all the squares in between to a list
 		for (int i = 0; i < moves; i++) {
@@ -512,6 +522,11 @@ public class Game {
 		
 		// counts the valid moves taken by the player
 		int moveCounter = 0;
+
+		Position pos = currentPlayer.location.getPos();
+		while (pos.getY() + moves > 23){
+			moves--;
+		}
 		
 		// add the square the player has chosen to move to, and all the squares in between to a list
 		for (int i = 0; i < moves; i++) {
@@ -571,6 +586,11 @@ public class Game {
 		
 		// counts the valid moves taken by the player
 		int moveCounter = 0;
+
+		Position pos = currentPlayer.location.getPos();
+		while (pos.getY() - moves < 0){
+			moves--;
+		}
 		
 		// add the square the player has chosen to move to, and all the squares in between to a list
 		for (int i = 0; i < moves; i++) {
