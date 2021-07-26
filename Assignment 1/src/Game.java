@@ -304,24 +304,35 @@ public class Game {
     		move(getInput());
     	}
     	
+		/**
+		 * When in estates, you can only move out of the exits of that estate
+		 */
 		if (currentPlayer.location instanceof Estate){
 			checkEstateExits(currentPlayer.location);
 			if (direction.equals("N") || direction.equals("n")) {
-				currentPlayer.location.getNorth();
+				Location orgLoc = currentPlayer.location;
+				currentPlayer.location.getNorth().setPlayerAtLoc(currentPlayer);
+				orgLoc.setHasPlayer(false);
 				moves--;
 				moveNorth(moves);
 			} else if (direction.equals("E") || direction.equals("e")) {
-				currentPlayer.location.getNorth();
+				Location orgLoc = currentPlayer.location;
+				currentPlayer.location.getEast().setPlayerAtLoc(currentPlayer);
+				orgLoc.setHasPlayer(false);
 				moves--;
-				moveNorth(moves);
+				moveEast(moves);
 			} else if (direction.equals("S") || direction.equals("s")) {
-				currentPlayer.location.getNorth();
+				Location orgLoc = currentPlayer.location;
+				currentPlayer.location.getSouth().setPlayerAtLoc(currentPlayer);
+				orgLoc.setHasPlayer(false);
 				moves--;
-				moveNorth(moves);
+				moveSouth(moves);
 			} else {
-				currentPlayer.location.getNorth();
+				Location orgLoc = currentPlayer.location;
+				currentPlayer.location.getWest().setPlayerAtLoc(currentPlayer);
+				orgLoc.setHasPlayer(false);
 				moves--;
-				moveNorth(moves);
+				moveWest(moves);
 			}
 		}
 
