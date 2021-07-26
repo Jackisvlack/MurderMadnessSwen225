@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -336,7 +337,11 @@ public class Game {
     	
     	// {"lucilla", "bert", "maline", "percy"};
     	if (this.movesLeft == 0) {
-    		System.out.println(players.get(players.indexOf(currentPlayer)+1));
+    		if (currentPlayer.getCharName().equals("percy")) {
+    			currentPlayer = players.get(0);
+    		} else {
+    			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
+    		}
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
@@ -394,7 +399,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -446,7 +451,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -500,7 +505,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -554,7 +559,7 @@ public class Game {
 				
 				if (moveSq.get(i) instanceof Estate) {
 					this.movesLeft = 0;
-					makeGuess();
+					makeGuess(moveSq.get(i));
 				}
 			}
 		}
@@ -578,9 +583,16 @@ public class Game {
     /**
      * 
      */
-    public void makeGuess(){
+    public void makeGuess(Location loc){
     	
-    	System.out.println("In estate!");
+    	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
+    	System.out.println("You see a " + loc.getWeaponName() + " - mysterious...");
+    	System.out.println("This may be a clue to the puzzle! What do you think happened?");
+    	System.out.println("Choose two cards : one player card and one weapon card");
+    	for (Card c : currentPlayer.cards) {
+    		System.out.println(c.getName());
+    	}
+    	
     	// Guess is made when an estate is entered
     	// Guess comprised of player choosing two cards
     	// Weapon and Player - Estate entered is 
@@ -597,7 +609,7 @@ public class Game {
     	// if player has choice of two refutation cards, they can choose
     	
     	// if solve guess matches exactly the cards chosen as the murder
-    	// circumstances, they win. If not, the player is excluded from making futher
+    	// circumstances, they win. If not, the player is excluded from making further
     	// Guesses
     }
 
