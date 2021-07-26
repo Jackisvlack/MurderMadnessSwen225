@@ -95,9 +95,9 @@ public class Game {
             board.placeCharactersStart(players);
             board.drawBoard();
             
-            weaponCards.remove(0);
-            characterCards.remove(0);
-            estateCards.remove(0);
+            weaponCards.remove(weaponCards.indexOf(murderWeapon));
+            characterCards.remove(characterCards.indexOf(murderCharacter));
+            estateCards.remove(estateCards.indexOf(murderEstate));
             
             int c = 0;
             for (int i = 0; i < cards.size()-1; i++) {
@@ -436,6 +436,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				board.drawBoard();
     				return;
     			}
     		} 
@@ -459,6 +460,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				board.drawBoard();
     				return;
     			}
     		} 
@@ -481,6 +483,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				board.drawBoard();
     				return;
     			}
     		} 
@@ -504,6 +507,7 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+    				board.drawBoard();
     				return;
     			}
     		} 
