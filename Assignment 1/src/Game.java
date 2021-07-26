@@ -82,13 +82,11 @@ public class Game {
             cards.addAll(characterCards);
             Collections.shuffle(cards);
             
-            players.add(new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
-            players.add(new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
-            players.add(new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
-            players.add(new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
+            players.add(0, new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
+            players.add(1, new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
+            players.add(2, new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
+            players.add(3, new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
             
-
-
             /**
              * Sets starting locations of players
              */
@@ -107,7 +105,7 @@ public class Game {
             /**
              * Selects the player who starts at random
              */
-            Collections.shuffle(players);
+            
             currentPlayer = players.get(0);
             turn(); 
             
@@ -316,11 +314,7 @@ public class Game {
     	
     	// {"lucilla", "bert", "maline", "percy"};
     	if (this.movesLeft == 0) {
-    		for (Player p : players) {
-    			if (p.getCharName().equals(currentPlayer.getCharName())) {
-    				
-    			}
-    		}
+    		System.out.println(players.get(players.indexOf(currentPlayer)+1));
     	} else {
     		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
     		String line = getInput();
