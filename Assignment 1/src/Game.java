@@ -40,15 +40,10 @@ public class Game {
 
     //TODO need to look at this class, could not get to work in its native way, had to comment out the try/catch
     //TODO had to also work above the while loop on lines 104 to 108. Seems to get stuck in this loop
-    public void startGame(int np) throws IOException {
+    public void startGame(int np){
         board = new Board();
-        /*
-        try {*/
-            /*
-        	InputStreamReader isr = new InputStreamReader(System.in);
-            BufferedReader br = new BufferedReader(isr);
-            */
-            int numplayers  = np;/*br.read();*/
+
+            int numplayers  = np;
             
             
             players = new ArrayList<>();
@@ -117,9 +112,7 @@ public class Game {
             currentPlayer = players.get(random);
             turn(); 
             
-        /*} catch (IOException e) {
-            throw e;
-        }*/
+      
     }
     
     public void wait(int sec) {
@@ -215,8 +208,8 @@ public class Game {
     	}
     	try {
 			startGame(np);
-		} catch (IOException n) {
-			
+		} catch (Exception n) {
+			throw n;
 		}
     }
     
@@ -810,7 +803,7 @@ public class Game {
 
     public static void main(String... args) throws IOException {
         Game newGame = new Game();
-        newGame.startGame(4);
+		newGame.startScreen();
     }
 
 }
