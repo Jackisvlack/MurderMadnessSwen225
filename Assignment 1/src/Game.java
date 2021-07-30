@@ -231,9 +231,6 @@ public class Game {
      * gives move order to checkLine, if valid passes on to move method
      * */
     public void turn(){
-    	
-    	
-    	
 		int curIndex = players.indexOf(currentPlayer);
 		
     	while(!currentPlayer.getControlled()){
@@ -280,7 +277,7 @@ public class Game {
     
     public boolean checkLine(String line) {
 		
-    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsewNSEW]?")) ) {
+    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[nsewNSEW]?")) ) {
     		System.out.println("Error recognizing distance or direction, try again.");
     		checkLine(getInput());
     		return false;
@@ -522,7 +519,6 @@ public class Game {
      * that has not guessed enters an estate
      */
     public void makeGuess(Location loc){
-    	System.out.println(murderCircumstance.toString());
     	String estate = loc.name;
     	List<Integer> idxList = new ArrayList<>();
     	int curIndex = players.indexOf(currentPlayer);
