@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import GUI.StartGUI;
+
 public class Game {
     private static Board board;
     ArrayList<Player> players = new ArrayList<>();
@@ -714,8 +716,10 @@ public class Game {
     }
 
     public static void main(String... args) throws IOException {
-        Game newGame = new Game();
-		newGame.startScreen();
+    	StartGUI sgui = new StartGUI();
+    	sgui.main(null);
+//        Game newGame = new Game();
+//		newGame.startScreen();
     }
 
 }
