@@ -12,9 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.JLabel;
 
 public class GamePanel extends javax.swing.JPanel implements ActionListener {
 	
