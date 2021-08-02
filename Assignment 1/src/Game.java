@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import GUI.StartGUI;
+
 public class Game {
     private static Board board;
     ArrayList<Player> players = new ArrayList<>();
@@ -231,9 +233,6 @@ public class Game {
      * gives move order to checkLine, if valid passes on to move method
      * */
     public void turn(){
-    	
-    	
-    	
 		int curIndex = players.indexOf(currentPlayer);
 		
     	while(!currentPlayer.getControlled()){
@@ -280,7 +279,7 @@ public class Game {
     
     public boolean checkLine(String line) {
 		
-    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[\s][nsewNSEW]?")) ) {
+    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[nsewNSEW]?")) ) {
     		System.out.println("Error recognizing distance or direction, try again.");
     		checkLine(getInput());
     		return false;
@@ -459,8 +458,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
@@ -482,8 +481,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
@@ -506,8 +505,8 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
     				board.drawBoard();
+    				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
@@ -522,7 +521,6 @@ public class Game {
      * that has not guessed enters an estate
      */
     public void makeGuess(Location loc){
-    	System.out.println(murderCircumstance.toString());
     	String estate = loc.name;
     	List<Integer> idxList = new ArrayList<>();
     	int curIndex = players.indexOf(currentPlayer);
@@ -718,8 +716,10 @@ public class Game {
     }
 
     public static void main(String... args) throws IOException {
-        Game newGame = new Game();
-		newGame.startScreen();
+    	StartGUI sgui = new StartGUI();
+    	sgui.main(null);
+//        Game newGame = new Game();
+//		newGame.startScreen();
     }
 
 }
