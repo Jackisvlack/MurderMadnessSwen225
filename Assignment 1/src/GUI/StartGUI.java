@@ -17,10 +17,13 @@ import javax.swing.JFrame;
  * */
 public class StartGUI implements ActionListener {
 	
+	JFrame frame;
+	Menu menu;
+	
 	public StartGUI() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setSize(700, 700);
 		frame.setTitle("MURDER MADNESS");
 		frame.setVisible(true);
@@ -28,12 +31,17 @@ public class StartGUI implements ActionListener {
 		frame.setLocation((int)(screenSize.getWidth()/2 - frame.getSize().getWidth()/2),
 						  (int)(screenSize.getHeight()/2 - frame.getSize().getHeight()/2));
 		
-		Menu menu = new Menu();
+		menu = new Menu();
 		menu.setLocation(0,0);
 		menu.setSize(frame.getSize());
 		menu.setBackground(new Color(102, 204, 255));
 		menu.setVisible(true);
 		frame.add(menu);
+		
+	}
+	
+	public void moveToInstructions() {
+		
 	}
 	
 	public static void main(String[] args) {
