@@ -9,18 +9,17 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class Menu extends JPanel implements ActionListener {
 	public boolean clicked = false;
+	private JFrame frame;
 	
-	public Menu() {
+	public Menu(JFrame frame) {
+		this.frame = frame;
 		repaint();
 	}
 	
@@ -57,14 +56,13 @@ public class Menu extends JPanel implements ActionListener {
 	}
 	
 	public void getInstructions() {
-		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-		Instructions ins = new Instructions();
+		Instructions ins = new Instructions(this.frame, this);
 		ins.setLocation(0,0);
-		ins.setSize(frame.getSize());
+		ins.setSize(this.frame.getSize());
 		ins.setBackground(new Color(102, 204, 255));
 		ins.setVisible(true);
-		frame.remove(this);
-		frame.add(ins);
+		this.frame.remove(this);
+		this.frame.add(ins);
 		ins.repaint();
 	}
 

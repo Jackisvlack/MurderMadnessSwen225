@@ -1,14 +1,11 @@
 package GUI;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
@@ -31,7 +28,7 @@ public class StartGUI implements ActionListener {
 		frame.setLocation((int)(screenSize.getWidth()/2 - frame.getSize().getWidth()/2),
 						  (int)(screenSize.getHeight()/2 - frame.getSize().getHeight()/2));
 		
-		menu = new Menu();
+		menu = new Menu(frame);
 		menu.setLocation(0,0);
 		menu.setSize(frame.getSize());
 		menu.setBackground(new Color(102, 204, 255));
