@@ -21,12 +21,13 @@ public class StartGUI implements ActionListener {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		frame = new JFrame();
-		frame.setSize(700, 700);
+		frame.setSize(705, 705);
 		frame.setTitle("MURDER MADNESS");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocation((int)(screenSize.getWidth()/2 - frame.getSize().getWidth()/2),
 						  (int)(screenSize.getHeight()/2 - frame.getSize().getHeight()/2));
+		frame.setMinimumSize(new Dimension(700, 700));
 		
 		menu = new Menu(frame);
 		menu.setLocation(0,0);
