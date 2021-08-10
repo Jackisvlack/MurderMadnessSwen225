@@ -143,97 +143,6 @@ public class Game {
 		}
     }
     
-    /**
-     * Incredible starting sequence that definitely does not take too long
-     * */
-    public void startScreen() {
-    	System.out.println("Welcome to Murder Madness!");
-    	System.out.println("Loading...");
-    	wait(1);
-    	System.out.println(
-    			"------------------\n"
-    			+"|#----------------|\n"
-    			+"------------------"
-    			);
-    	wait(1);
-    	System.out.println("Loading...");
-    	System.out.println(
-    			"------------------\n"+
-    			"|###--------------|\n"+
-    			"------------------"
-    			);
-    	wait(1);
-    	System.out.println("Loading...");
-    	System.out.println(
-    			"------------------\n"+
-    			"|########---------|\n"+
-    			"------------------"
-    			);
-    	wait(1);
-    	System.out.println("Loading...");
-    	System.out.println(
-    			"------------------\n"+
-    			"|#################|\n"+
-    			"------------------"
-    			);
-    	wait(1);
-    	System.out.println(
-    	"				#################################\n"
-       +"				#  M U R D E R - M A D N E S S  #\n"
-       +"				#################################\n");
-    	
-    	System.out.println(
-				   "                                  _____________________________\r\n"
-				   + "                           _.-''``------------------------|`. |``''--..__\r\n"
-				   + "                      _.-'` ' ' ' ' ' ' ' ' ' ' ' ' ' ' ' | : |          ``'';';--..__\r\n"
-				   + "                 _.-'`                                    | : |         '   :';       ```';\r\n"
-				   + "            _.-'`                           ________/\\_/\\_|.'_|_       '   :';           /\r\n"
-				   + "       _.-'`                         _.-''``                    ``''--:.__;';           _|\r\n"
-				   + "     .'`                        _.-'`                                     `'`''-._     /\r\n"
-				   + "   .`                       _.-'                                                  `'-./\r\n"
-				   + " .'                    _.-'`\r\n"
-				   + "/               __..-'`\r\n"
-				   + "``'''----'''````"
-    			);
-    	wait(2);
-    	System.out.println(
-    	    	"				#################################\n"
-    	       +"				#    P R E S S  - E N T E R     #\n"
-    	       +"				#################################\n");
-    	getInput();
-    	System.out.println("please enter the number of players playing (minimum 2, maximum 4): ");
-    	String players = getInput();
-    	System.out.println(
-    			"##########################################################################################################################################\n"+
-    			"#		R	U	L	E	S                                                                                        #\n"+
-    			"#  Players cannot move through walls (+++), or other players (P,L,M,B)                                                                   #\n"+
-    			"#  A players goal is to get in to an estate, only in an estate can a guess attempt be made.                                              #\n"+
-    			"#  One of the 4 characters is a murderer, a player may move around the board trying to get in to one of the five estates.                #\n"
-    			+ "#  Once inside an estate, a player can guess the murderer and their murder weapon (choosing the respective cards) and which-             #\n"
-    			+ "#  ever estate they are in will be chosen as the third aspect of that guess.                                                             #\n"
-    			+ "#  If the accused player and murder weapon are not already inside that estate, they will be moved to sed estate.                         #\n"
-    			+ "#  Players then go around refuting the current players accusation by presenting cards which match the guessed cards.                     #\n"
-    			+ "#  If a refutation can be made, it must. If a player has more than one elegible card, it is up to the player to choose between them.     #\n"
-    			+ "#  If none of the players are able to present a refutation card, the current players accusation is likely close to a winning guess.      #\n"
-    			+ "#  If a player guesses the exact circumstances of the murder, they win. however, if a player does not get the guess correct, that player #\n"
-    			+ "#  is excluded for the rest of the game from making accusations and winning. An excluded player can still present refuation cards.       #\n"
-    			+ "#  Should every player fail to guess the murder circumstances, the murderer has won :O                                                   #\n"
-    			+ "##########################################################################################################################################\n"
-    			);
-    	System.out.println("When everyone is ready to play, press ENTER:");
-    	getInput();
-    	int np = 2;
-    	try {
-    		np = Integer.valueOf(players);
-    	} catch (NumberFormatException e) {
-    		System.out.println("Not a real number! Defaulting to two players.");
-    	}
-    	try {
-			startGame(np);
-		} catch (Exception n) {
-			throw n;
-		}
-    }
     
     /**
      * A method that starts the currentPlayers turn
@@ -723,6 +632,10 @@ public class Game {
         int diceTwo = (int) (Math.random()*6 + 1);
         return diceOne + diceTwo;
     }
+
+	public String getCurrentPlayerName(){
+		return currentPlayer.getPlayerName();
+	}
 
     public static void main(String... args) throws IOException {
     	StartGUI sgui = new StartGUI();
