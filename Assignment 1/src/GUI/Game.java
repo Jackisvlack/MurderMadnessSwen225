@@ -36,12 +36,14 @@ public class Game {
 
 	
     public Game(int numPlayers, List<String> pNames) {
+		board = new Board();
         this.numberOfPlayers = numPlayers;
 		playerCreation(pNames);
 		createCards();
 		chooseMurderCircumstance();
 		dealCards();
 		selectStartPlayer();
+		board.placeCharactersStart(players);
     }
 
 

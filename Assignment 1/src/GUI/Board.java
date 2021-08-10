@@ -202,7 +202,7 @@ public class Board {
 
 
     public Location[][] getLocationSet(){
-        return squares;
+        return this.squares;
     }
     
 }
