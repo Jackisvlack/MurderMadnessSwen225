@@ -6,21 +6,24 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 class GameGUI extends JPanel implements ActionListener {
     private Game game;
-    private JPanel frame;
+    private JFrame frame;
+    private JPanel panel;
+    private int squarelWidth, squareHeight = 25;
 
-    public GameGUI (Game game){
-        this.setVisible(true);
-        this.setSize(500, 500);
+    public GameGUI (Game game, JFrame frame){
         this.game = game;
-        redraw();
+        this.frame = frame;
     }
 
     public void redraw(){
+        Board board = game.getBoard();
+        Location[][] locations = board.getLocationSet();
+        panel = new JPanel();
         
     }
 

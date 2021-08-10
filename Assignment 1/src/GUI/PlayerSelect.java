@@ -292,7 +292,14 @@ public class PlayerSelect extends JPanel implements MouseListener {
 
 	public void startGame(){
 		Game game = new Game(np, pNames);
-		GameGUI playScreen = new GameGUI(game);
+		GameGUI playScreen = new GameGUI(game, frame);
+		playScreen.setLocation(0,0);
+		playScreen.setSize(this.frame.getSize());
+		playScreen.setBackground(new Color(102, 204, 255));
+		playScreen.setVisible(true);
+		this.frame.remove(this);
+		this.frame.add(playScreen);
+		playScreen.repaint();
 	}
 	
 
