@@ -21,7 +21,6 @@ public class Game {
     ArrayList<Card> estateCards = new ArrayList<>(); 
     Player currentPlayer;
     boolean solved = false;
-	private int movesLeft;
 	private String weapon;
 	private String player;
 	private int numberOfPlayers;
@@ -124,15 +123,6 @@ public class Game {
 	public Board getBoard(){
 		return board;
 	}
-
-
-    public void startGame(int np){
-        board = new Board();
-        board.placeCharactersStart(players);
-        while(!solved){
-			turn();
-		} 
-    }
     
     public void wait(int sec) {
     	try {
@@ -150,173 +140,24 @@ public class Game {
      * gives instructions
      * gives move order to checkLine, if valid passes on to move method
      * */
-    public void turn(){
+    public void nextPlayer(){
 		int curIndex = players.indexOf(currentPlayer);
-		
-    	while(!currentPlayer.getControlled()){
-			if (curIndex == 3){
-				curIndex = 0;
-			} else {curIndex++;}
-			currentPlayer = players.get(curIndex);
-		}
-		
-    	this.movesLeft = 0;
-    	String line = "";
-    	
-    	// greet player
-    	System.out.println("Hello, " + currentPlayer.getCharName());
-    	System.out.println("Please roll the dice when ready by typing 'roll'");
-    	
-    	// wait
-    	getInput();
-    	
-    	// roll
-    	System.out.println("Rolling...");
-    	movesLeft = roll();
-    	System.out.println("Moves available: " + movesLeft);
-    	
-    	// present instructions / get move order
-
-		//Check estates exists and present list of exists to player
-		if (currentPlayer.location instanceof Estate){
-			checkEstateExits(currentPlayer.location);
-		}
-    	System.out.println("North = Up - East = Left - West = Right - South = Down");
-    	System.out.println("To move, type the number of squares to move, space, the first letter of a given direction");
-    	System.out.println("Example: 5 N - 5 squares North, 3 E, 3 squares East - not case sensitive");
-    	
-    
-		line = getInput();
-    	while (!checkLine(line)){line = getInput();} //infinite loop until input is correct
-		move(line);
+				if (curIndex == 3){
+					curIndex = 0;
+					currentPlayer = players.get(curIndex);
+					while (!currentPlayer.getControlled()){
+						currentPlayer = players.get(curIndex);
+						curIndex++;
+					}
+				} else {
+					currentPlayer = players.get(curIndex);
+					while (!currentPlayer.getControlled()){
+						currentPlayer = players.get(curIndex);
+						curIndex++;
+					}
+				}
     }
     
-    /**
-     * method to check line to length and regex, is used in line 381 aswell
-     * */
-    
-    public boolean checkLine(String line) {
-		
-    	if (line.length() < 3 || line.length() > 4 || (!line.matches("^[1-9]{1,2}[nsewNSEW]?")) ) {
-    		System.out.println("Error recognizing distance or direction, try again.");
-    		checkLine(getInput());
-    		return false;
-    	}
-		return true;
-    
-    }
-    
-    /**
-     * Simple helper function to pause game and wait for input.
-     * */
-    public String getInput() {
-    	Scanner userInput = new Scanner(System.in);
-    	String line = "";
-    	line = userInput.nextLine();
-    	return line;
-    }
-    
-    /**
-     * Simple helper method that checks validity of order format
-     * */
-    public void checkOrderValidity(int moves, String direction) {
-    	List<String> dirList = Arrays.asList("S", "W", "E", "N", "s", "w", "e", "n");
-    	if (moves < 1 || moves > 12 || !dirList.contains(direction)) {
-    		System.out.println("Please type a valid distance and direction: ");
-    		move(getInput());
-    	} 
-    }
-
-    /**
-     * Moves the player a selected distance in a selected direction
-     * Keeps on asking for move inputs until movesLeft is zero
-     * if player is inside an estate, invokes guess cycle
-     * if player is out of moves and no guess cycle has started, selects new currentPlayer
-     * and invokes turn method
-     */
-    public void move(String mOrder){
-    	int moves = 0;
-    	String direction = "";
-    	
-    	if (mOrder.length() == 3) {
-    		moves = Integer.valueOf(String.valueOf(mOrder.charAt(0)));
-    		direction = String.valueOf(mOrder.charAt(2));
-    	} else {
-    		moves = Integer.valueOf(mOrder.substring(0,2));
-    		direction = String.valueOf(mOrder.charAt(3));
-    	}
-    	
-    	checkOrderValidity(moves, direction);
-    	
-    	if (moves > this.movesLeft) {
-    		System.out.println("Error: distance exceeds your total moves left, please type correct distance and direction again:");
-    		move(getInput());
-    	}
-    	
-		/**
-		 * When in estates, you can only move out of the exits of that estate this shows players which exits
-		 * are avaliable to move from
-		 */
-		if (currentPlayer.location instanceof Estate){
-			if (direction.equals("N") || direction.equals("n")) {
-				Location orgLoc = currentPlayer.location;
-				currentPlayer.location.getNorth().setPlayerAtLoc(currentPlayer);
-				orgLoc.setHasPlayer(false);
-				moves--;
-				moveNorth(moves);
-			} else if (direction.equals("E") || direction.equals("e")) {
-				Location orgLoc = currentPlayer.location;
-				currentPlayer.location.getEast().setPlayerAtLoc(currentPlayer);
-				orgLoc.setHasPlayer(false);
-				moves--;
-				moveEast(moves);
-			} else if (direction.equals("S") || direction.equals("s")) {
-				Location orgLoc = currentPlayer.location;
-				currentPlayer.location.getSouth().setPlayerAtLoc(currentPlayer);
-				orgLoc.setHasPlayer(false);
-				moves--;
-				moveSouth(moves);
-			} else {
-				Location orgLoc = currentPlayer.location;
-				currentPlayer.location.getWest().setPlayerAtLoc(currentPlayer);
-				orgLoc.setHasPlayer(false);
-				moves--;
-				moveWest(moves);
-			}
-		}
-		
-
-    	if (direction.equals("N") || direction.equals("n")) {
-    		moveNorth(moves);
-    	} else if (direction.equals("E") || direction.equals("e")) {
-    		moveEast(moves);
-    	} else if (direction.equals("S") || direction.equals("s")) {
-    		moveSouth(moves);
-    	} else {
-    		moveWest(moves);
-    	}
-    	
-    	// {"lucilla", "bert", "maline", "percy"};
-    	if (this.movesLeft == 0) {
-    		if (currentPlayer.getCharName().equals("percy")) {
-    			currentPlayer = players.get(0);
-    		} else {
-    			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
-    		}
-    	} else {
-    		System.out.println("You still have " + this.movesLeft + " moves left, please enter next distance and direction:");
-    		String line = getInput();
-    		while (!checkLine(line)){line = getInput();}
-			move(line);
-    	}
-
-		int curPlayer = players.indexOf(currentPlayer);
-		curPlayer++;
-		if (curPlayer == 3){
-			currentPlayer = players.get(curPlayer);
-		}
-    	
-    }
     
     /**
      * Helper method to help players know which way they can go once in an estate
@@ -342,95 +183,98 @@ public class Game {
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
     public void moveNorth(int moves) {
-    	for (int i = 0; i < moves; i++) {
+    	if (moves == 0){
+			nextPlayer();
+		}
     		Location playerLoc = currentPlayer.location;
     		
-    		if (!currentPlayer.location.getNorth().isWall) {
+		if (currentPlayer.location.getPos().getX()-1 != -1){
+    		if (!currentPlayer.location.getNorth().isWall && !currentPlayer.location.getNorth().hasPlayer()) {
     			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getNorth());
     			playerLoc.setHasPlayer(false);
-    			this.movesLeft--;
+    			moves = moves -1;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
-    				//board.drawBoard();
-    				return;
     			}
     		} 
-    	}
-    	
-    	//board.drawBoard();
+		}
     }
     
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
     public void moveSouth(int moves) {
-    	for (int i = 0; i < moves; i++) {
+    	if (moves == 0){
+			nextPlayer();
+		}
     		Location playerLoc = currentPlayer.location;
     		
-    		if (!currentPlayer.location.getSouth().isWall) {
+		if (currentPlayer.location.getPos().getX()+1 != 24){
+    		if (!currentPlayer.location.getSouth().isWall && !currentPlayer.location.getSouth().hasPlayer()) {
     			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getSouth());
     			playerLoc.setHasPlayer(false);
-    			this.movesLeft--;
+    			moves = moves -1;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				return;
+    				nextPlayer();
     			}
     		} 
-    	}
-    	//board.drawBoard();
+		}
     }
     
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
     public void moveEast(int moves) {
-    	for (int i = 0; i < moves; i++) {
+    	if (moves == 0){
+			nextPlayer();
+		}
     		Location playerLoc = currentPlayer.location;
     		
-    		if (!currentPlayer.location.getEast().isWall) {
+		if (currentPlayer.location.getPos().getY()+1 != 24){
+    		if (!currentPlayer.location.getEast().isWall && !currentPlayer.location.getEast().hasPlayer()) {
     			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getEast());
     			playerLoc.setHasPlayer(false);
-    			this.movesLeft--;
+    			moves = moves -1;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				return;
+    				nextPlayer();
     			}
     		} 
-    	}
-    	
-    	//board.drawBoard();
+		}
     }
     
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
     public void moveWest(int moves) {
-    	for (int i = 0; i < moves; i++) {
+    	if (moves == 0){
+			nextPlayer();
+		}
     		Location playerLoc = currentPlayer.location;
     		
-    		if (!currentPlayer.location.getWest().isWall) {
+		if (currentPlayer.location.getPos().getY()-1 != -1){
+    		if (!currentPlayer.location.getWest().isWall && !currentPlayer.location.getWest().hasPlayer()) {
     			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getWest());
     			playerLoc.setHasPlayer(false);
-    			this.movesLeft--;
+    			moves = moves -1;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				return;
+    				nextPlayer();
     			}
     		} 
-    	}
-    	
-    	//board.drawBoard();
+		}
     }
 
     /**
@@ -518,14 +362,14 @@ public class Game {
 				} else {
 					printEligibleCards(options);
 					int counter = 0;
-					String cardPicked = getInput();
+					
 					for (Card c : options) {
 						counter = 0;
-						if (c.getName().equals(cardPicked)) {
-							finalCards.add(cardPicked);
+						//if (c.getName().equals(cardPicked)) {
+							//finalCards.add(cardPicked);
 							counter++;
 							break;
-						}
+						//}
 					}
 					
 					if (counter == 0) {
@@ -588,7 +432,7 @@ public class Game {
     	i = 1;
     	System.out.println("");
     	
-    	weapon = getInput();
+    	//weapon = getInput();
     	
     	System.out.println("Characters: (type in name)");
     	for (Card c : characterCards) {
@@ -598,7 +442,7 @@ public class Game {
     	i = 1;
     	System.out.println("");
     	
-    	player = getInput();
+    	//player = getInput();
     	
     	checkInputs(weapon, player);
     }
@@ -636,12 +480,4 @@ public class Game {
 	public String getCurrentPlayerName(){
 		return currentPlayer.getPlayerName();
 	}
-
-    public static void main(String... args) throws IOException {
-    	StartGUI sgui = new StartGUI();
-    	sgui.main(null);
-//        Game newGame = new Game();
-//		newGame.startScreen();
-    }
-
 }

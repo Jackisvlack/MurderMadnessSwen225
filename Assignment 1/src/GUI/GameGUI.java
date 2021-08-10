@@ -39,6 +39,7 @@ class GameGUI extends JPanel implements ActionListener {
         displayCurrentPlayer(gtd);
         addMoveButtons(x, y);
         addButtons(x, y, gtd);
+        showMoves(gtd);
     }
 
     public void displayCurrentPlayer(Graphics2D gtd){
@@ -57,6 +58,13 @@ class GameGUI extends JPanel implements ActionListener {
         gtd.drawString(name + " it's your turn", 510, 20);
     }
 
+    public void showMoves(Graphics2D gtd){
+        gtd.setColor(Color.black);
+        Font font = new Font("Verdana", Font.BOLD, 12);
+        gtd.setFont(font);
+        gtd.drawString("Moves left: " + moves, 510, 40);
+    }
+
     public void addButtons(int x, int y, Graphics2D gtd){
         JButton roll = new JButton("ROLL");
 		roll.addActionListener(new ActionListener() {
@@ -65,6 +73,7 @@ class GameGUI extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				moves = game.roll();
                 JOptionPane.showMessageDialog(null, "You have " + moves + " moves!" );
+                repaint();
 			} 
         });
 

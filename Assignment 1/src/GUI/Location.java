@@ -18,8 +18,7 @@ public class Location {
      * @return String
      */
     public String getTypeIdentifier(){
-        Position pos = this.getPos();
-        if (this.hasPlayer(pos.getX(), pos.getY())) return ( "-" + this.getPlayerIcon() + "-");
+        if (this.hasPlayer()) return ( "-" + this.getPlayerIcon() + "-");
         else if (this instanceof Estate && this.isWall) return "+++";
         else if (this instanceof Estate) return "[ ]";
         else if (this instanceof Wall) return  "+++";
@@ -114,7 +113,7 @@ public class Location {
     	this.hasPlayer = b;
     }
     
-    public boolean hasPlayer(int x, int y) {
+    public boolean hasPlayer() {
     	return this.hasPlayer;
     }
     
@@ -164,6 +163,16 @@ public class Location {
             icon = "M";
         }
         return icon;
+    }
+
+    public boolean isOutOfBounds(){
+        if (this.getPos().getX() < 0 || this.getPos().getX() > 23){
+            return true;
+        }
+        if (this.getPos().getY() < 0 || this.getPos().getY() > 23){
+            return true;
+        }
+        return false;
     }
     
     /**
