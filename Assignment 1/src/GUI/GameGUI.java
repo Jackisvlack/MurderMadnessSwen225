@@ -6,13 +6,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 class GameGUI extends JPanel implements ActionListener {
     private Game game;
     private JFrame frame;
-    private JPanel panel;
     private int squarelWidth, squareHeight = 25;
 
     public GameGUI (Game game, JFrame frame){
@@ -20,11 +20,7 @@ class GameGUI extends JPanel implements ActionListener {
         this.frame = frame;
     }
 
-    public void redraw(){
-        Board board = game.getBoard();
-        Location[][] locations = board.getLocationSet();
-        panel = new JPanel();
-        
+    public void redraw(){ 
     }
 
     @Override
