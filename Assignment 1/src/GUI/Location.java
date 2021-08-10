@@ -1,3 +1,4 @@
+package GUI;
 public class Location {
 	
     private Location west;
@@ -10,6 +11,22 @@ public class Location {
     Weapon estatesWeapon;
 	private boolean hasPlayer = false;
     private Player player;
+
+
+    /**
+     * Method to assist GUI in drawing, location returns string based on type of Location or if Player is present
+     * @return String
+     */
+    public String getTypeIdentifier(){
+        Position pos = this.getPos();
+        if (this.hasPlayer(pos.getX(), pos.getY())) return ( "-" + this.getPlayerIcon() + "-");
+        else if (this instanceof Estate && this.isWall) return "+++";
+        else if (this instanceof Estate) return "[ ]";
+        else if (this instanceof Wall) return  "+++";
+        else return "---";
+    }
+
+
     
     /**
      * set the east neighbor of this square

@@ -1,3 +1,4 @@
+package GUI;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,6 +20,22 @@ public class Player {
     // returns the actual character name
     public String getCharName() {
     	return this.charName;
+    }
+
+    /**
+     * Sets the name of a player
+     * @param name
+     */
+    public void setPlayerName(String name){
+        this.playerName = name;
+    }
+
+    /**
+     *  
+     * @return name of the player
+     */
+    public String getPlayerName(){
+        return this.playerName;
     }
     
     // set location of this player

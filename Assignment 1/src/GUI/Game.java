@@ -1,3 +1,4 @@
+package GUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import GUI.StartGUI;
-
 public class Game {
     private static Board board;
     ArrayList<Player> players = new ArrayList<>();
@@ -25,6 +24,8 @@ public class Game {
 	private int movesLeft;
 	private String weapon;
 	private String player;
+	private int numberOfPlayers;
+	private List<Card> cards;
 	
 	public enum Characters {
 		lucilla,
@@ -33,96 +34,102 @@ public class Game {
 		percy
 	}
 
-    public Game() {
-        
-		
+	
+    public Game(int numPlayers, List<String> pNames) {
+        this.numberOfPlayers = numPlayers;
+		playerCreation(pNames);
+		createCards();
+		chooseMurderCircumstance();
+		dealCards();
+		selectStartPlayer();
     }
 
 
+	public void playerCreation(List<String> playerNames){
+		players.add(0, new Player("NPC", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
+		players.add(1, new Player("NPC", String.valueOf(Characters.bert), new HashSet<Card>()));
+		players.add(2, new Player("NPC", String.valueOf(Characters.malina), new HashSet<Card>()));
+		players.add(3, new Player("NPC", String.valueOf(Characters.percy), new HashSet<Card>()));
 
-    //TODO need to look at this class, could not get to work in its native way, had to comment out the try/catch
-    //TODO had to also work above the while loop on lines 104 to 108. Seems to get stuck in this loop
+		Collections.shuffle(playerNames);
+
+		for (int i = 0; i < numberOfPlayers; i++) {
+			players.get(i).setControlled(true);
+			players.get(i).setPlayerName(playerNames.get(0));
+		}
+	}
+
+	public void createCards(){
+		characterCards.add(new Card("lucilla"));
+		characterCards.add(new Card("bert"));
+		characterCards.add(new Card("malina"));
+		characterCards.add(new Card("percy"));
+		weaponCards.add(new Card("broom"));
+		weaponCards.add(new Card("scissors"));
+		weaponCards.add(new Card("knife"));
+		weaponCards.add(new Card("shovel"));
+		weaponCards.add(new Card("ipad"));
+		estateCards.add(new Card("manic manor"));
+		estateCards.add(new Card("villa celia"));
+		estateCards.add(new Card("haunted house"));
+		estateCards.add(new Card("calamity castle"));
+		estateCards.add(new Card("calamity castle"));
+	}
+
+	public void chooseMurderCircumstance(){
+		/**
+		 * Randomizes each set of card and takes one of each for the murder set
+		 */
+		Collections.shuffle(weaponCards);
+		Collections.shuffle(estateCards);
+		Collections.shuffle(characterCards);
+		Card murderWeapon = (weaponCards.get(0));
+		Card murderCharacter = (characterCards.get(0));
+		Card murderEstate = (estateCards.get(0));
+		murderCircumstance = new Guess(murderEstate.getName(), murderWeapon.getName(), murderCharacter.getName());
+		weaponCards.remove(weaponCards.indexOf(murderWeapon));
+		characterCards.remove(characterCards.indexOf(murderCharacter));
+		estateCards.remove(estateCards.indexOf(murderEstate));
+
+		cards = new ArrayList<Card>();
+		cards.addAll(weaponCards);
+		cards.addAll(estateCards);
+		cards.addAll(characterCards);
+		Collections.shuffle(cards);
+	}
+		 
+	/**
+	 * Deals the remaining cards to Players
+	 */
+	public void dealCards(){
+		int c = 0;
+		for (int i = 0; i < cards.size()-1; i++) {
+			if (c == players.size()-1) { c = 0; }
+			players.get(c).cards.add(cards.get(i));
+			c++;
+		}
+	}
+
+	/**
+	 * Randomly selects the player to start
+	 */
+	public void selectStartPlayer(){
+		int random = (int) (Math.random() * numberOfPlayers);
+        currentPlayer = players.get(random);
+	}
+
+
+	public Board getBoard(){
+		return board;
+	}
+
+
     public void startGame(int np){
         board = new Board();
-
-            int numplayers  = np;
-            
-            
-            players = new ArrayList<>();
-
-            characterCards.add(new Card("lucilla"));
-            characterCards.add(new Card("bert"));
-            characterCards.add(new Card("malina"));
-            characterCards.add(new Card("percy"));
-            weaponCards.add(new Card("broom"));
-            weaponCards.add(new Card("scissors"));
-            weaponCards.add(new Card("knife"));
-            weaponCards.add(new Card("shovel"));
-            weaponCards.add(new Card("ipad"));
-            estateCards.add(new Card("manic manor"));
-            estateCards.add(new Card("villa celia"));
-            estateCards.add(new Card("haunted house"));
-            estateCards.add(new Card("calamity castle"));
-            estateCards.add(new Card("calamity castle"));
-            /**
-             * Randomizes each set of card and takes one of each for the murder set
-             */
-            Collections.shuffle(weaponCards);
-            Collections.shuffle(estateCards);
-            Collections.shuffle(characterCards);
-            Card murderWeapon = (weaponCards.get(0));
-            Card murderCharacter = (characterCards.get(0));
-            Card murderEstate = (estateCards.get(0));
-            murderCircumstance = new Guess(murderEstate.getName(), murderWeapon.getName(), murderCharacter.getName());
-          
-
-            ArrayList<Card> cards = new ArrayList<Card>();
-            cards.addAll(weaponCards);
-            cards.addAll(estateCards);
-            cards.addAll(characterCards);
-            Collections.shuffle(cards);
-            
-            players.add(0, new Player("player1", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
-            players.add(1, new Player("player2", String.valueOf(Characters.bert), new HashSet<Card>()));
-            players.add(2, new Player("player3", String.valueOf(Characters.malina), new HashSet<Card>()));
-            players.add(3, new Player("player4", String.valueOf(Characters.percy), new HashSet<Card>()));
-            
-            for (int i = 0; i < numplayers; i++) {
-            	players.get(i).setControlled(true);
-            }
-            
-            /**
-             * Sets starting locations of players
-             */
-            board.placeCharactersStart(players);
-            board.drawBoard();
-            
-            weaponCards.remove(weaponCards.indexOf(murderWeapon));
-            characterCards.remove(characterCards.indexOf(murderCharacter));
-            estateCards.remove(estateCards.indexOf(murderEstate));
-            
-            int c = 0;
-            for (int i = 0; i < cards.size()-1; i++) {
-            	if (c == players.size()-1) { c = 0; }
-            	players.get(c).cards.add(cards.get(i));
-            	c++;
-            }
-            
-            weaponCards.add(murderWeapon);
-            characterCards.add(murderCharacter);
-            estateCards.add(murderEstate);
-            
-            /**
-             * Selects the player who starts at random
-             */
-            
-			int random = (int) (Math.random() * numplayers);
-            currentPlayer = players.get(random);
-
-			while(!solved){
-				turn();
-			} 
-      
+        board.placeCharactersStart(players);
+        while(!solved){
+			turn();
+		} 
     }
     
     public void wait(int sec) {
@@ -435,13 +442,13 @@ public class Game {
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
-    				board.drawBoard();
+    				//board.drawBoard();
     				return;
     			}
     		} 
     	}
     	
-    	board.drawBoard();
+    	//board.drawBoard();
     }
     
     /**
@@ -458,13 +465,13 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				board.drawBoard();
+    				//board.drawBoard();
     				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
     	}
-    	board.drawBoard();
+    	//board.drawBoard();
     }
     
     /**
@@ -481,14 +488,14 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				board.drawBoard();
+    				//board.drawBoard();
     				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
     	}
     	
-    	board.drawBoard();
+    	//board.drawBoard();
     }
     
     /**
@@ -505,14 +512,14 @@ public class Game {
     			this.movesLeft--;
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				board.drawBoard();
+    				//board.drawBoard();
     				makeGuess(currentPlayer.location);
     				return;
     			}
     		} 
     	}
     	
-    	board.drawBoard();
+    	//board.drawBoard();
     }
 
     /**

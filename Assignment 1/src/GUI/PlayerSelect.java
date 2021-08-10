@@ -26,6 +26,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	private JFrame frame;
 	private int np;
 	private String characters[] = { "Percy", "Malina", "Lucilla", "Bert" };
+	private List<String> pNames;
 	JTextField p1;
 	JTextField p2;
 	JTextField p3;
@@ -75,16 +76,8 @@ public class PlayerSelect extends JPanel implements MouseListener {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<String> pNames = new ArrayList<>();
-				if (np == 2) {
-					pNames.clear();
-					if (checkP1()) {
-						pNames.add(p1.getText());
-					}
-					if (checkP2()) {
-						pNames.add(p2.getText());
-					}
-				} else if (np == 3) {
+				pNames = new ArrayList<>();
+				 if (np == 3) {
 					pNames.clear();
 					if (checkP1()) {
 						pNames.add(p1.getText());
@@ -110,6 +103,8 @@ public class PlayerSelect extends JPanel implements MouseListener {
 						pNames.add(p4.getText());
 					}
 				}
+
+				startGame();
 			}
 
 			@Override
@@ -292,6 +287,13 @@ public class PlayerSelect extends JPanel implements MouseListener {
 //		
 //		gtd.drawImage(bert, this.getSize().width/2+this.getSize().width/3+10, this.getSize().height/5-20, null);
 //	}
+
+	
+
+	public void startGame(){
+		Game game = new Game(np, pNames);
+		GameGUI playScreen = new GameGUI(game);
+	}
 	
 
 	@Override
