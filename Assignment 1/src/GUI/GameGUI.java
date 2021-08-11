@@ -19,6 +19,7 @@ class GameGUI extends JPanel implements ActionListener {
     private JFrame frame;
     private int squarelWidth, squareHeight = 25;
     private int moves;
+    public boolean inEstate = false;
 
 
     public GameGUI (Game game, JFrame frame){
@@ -114,11 +115,14 @@ class GameGUI extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (moves != 0) {
-					moves = game.moveNorth();
+					moves = moveNorth();
 	                repaint();
-				} else {
+				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				} else {
+					System.out.println("You are in an estate");
 				}
+						
 			} 
         });
 
@@ -128,10 +132,12 @@ class GameGUI extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (moves != 0) {
-					moves = game.moveWest();
+					moves = moveWest();
 	                repaint();
-				} else {
+				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				} else {
+					System.out.println("You are in an estate");
 				}
 			} 
         });
@@ -142,10 +148,12 @@ class GameGUI extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (moves != 0) {
-					moves = game.moveEast();
+					moves = moveEast();
 	                repaint();
-				} else {
+				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				} else {
+					System.out.println("You are in an estate");
 				}
 			} 
         });
@@ -156,10 +164,12 @@ class GameGUI extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (moves != 0) {
-					moves = game.moveSouth();
+					moves = moveSouth();
 	                repaint();
-				} else {
+				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				} else {
+					System.out.println("You are in an estate");
 				}
 			} 
         });
@@ -184,6 +194,22 @@ class GameGUI extends JPanel implements ActionListener {
 		this.add(south);
         south.grabFocus();
     
+    }
+    
+    public int moveWest() {
+    	return game.moveWest(this);
+    }
+    
+    public int moveEast() {
+    	return game.moveEast(this);
+    }
+    
+    public int moveNorth() {
+    	return game.moveNorth(this);
+    }
+    
+    public int moveSouth() {
+    	return game.moveSouth(this);
     }
 
     public void drawBoard(Graphics2D gtd, int x, int y){

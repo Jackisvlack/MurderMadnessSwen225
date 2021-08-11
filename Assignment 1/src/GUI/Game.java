@@ -178,7 +178,7 @@ public class Game {
     /**
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
-    public int moveNorth() {
+    public int moveNorth(GameGUI gg) {
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -201,6 +201,9 @@ public class Game {
 	    				nextPlayer(curIndex);
 	    				return 0;
 	    			}
+	    			if ((currentPlayer.location instanceof Estate)) {
+	    				gg.inEstate = true;
+	    			}
 	    		} 
 			}
 		}
@@ -211,7 +214,7 @@ public class Game {
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
-    public int moveSouth() {
+    public int moveSouth(GameGUI gg) {
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -234,6 +237,9 @@ public class Game {
 	    				nextPlayer(curIndex);
 	    				return 0;
 	    			}
+	    			if ((currentPlayer.location instanceof Estate)) {
+	    				gg.inEstate = true;
+	    			}
 	    		} 
 			}
 		}
@@ -243,7 +249,7 @@ public class Game {
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
-    public int moveEast() {
+    public int moveEast(GameGUI gg) {
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -266,6 +272,9 @@ public class Game {
 	    				nextPlayer(curIndex);
 	    				return 0;
 	    			}
+	    			if ((currentPlayer.location instanceof Estate)) {
+	    				gg.inEstate = true;
+	    			}
 	    		} 
 			}
 		}
@@ -275,7 +284,7 @@ public class Game {
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
-    public int moveWest() {
+    public int moveWest(GameGUI gg) {
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -297,6 +306,10 @@ public class Game {
 	    				int curIndex = players.indexOf(currentPlayer);
 	    				nextPlayer(curIndex);
 	    				return 0;
+	    			}
+	    			
+	    			if ((currentPlayer.location instanceof Estate)) {
+	    				gg.inEstate = true;
 	    			}
 	    		} 
 			}
