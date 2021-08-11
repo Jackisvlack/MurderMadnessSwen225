@@ -177,11 +177,11 @@ public class Game {
     /**
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
-    public void moveNorth() {
+    public int moveNorth() {
     	if (moves == 0){
 			int curIndex = controlledPlayers.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -200,16 +200,18 @@ public class Game {
     			}
     		} 
 		}
+		
+		return moves;
     }
     
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
-    public void moveSouth() {
+    public int moveSouth() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -229,16 +231,17 @@ public class Game {
     			}
     		} 
 		}
+		return moves;
     }
     
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
-    public void moveEast() {
+    public int moveEast() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -258,16 +261,17 @@ public class Game {
     			}
     		} 
 		}
+		return moves;
     }
     
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
-    public void moveWest() {
+    public int moveWest() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -287,6 +291,7 @@ public class Game {
     			}
     		} 
 		}
+		return moves;
     }
 
     /**

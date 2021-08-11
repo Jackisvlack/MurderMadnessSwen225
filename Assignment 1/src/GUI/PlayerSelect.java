@@ -88,6 +88,9 @@ public class PlayerSelect extends JPanel implements MouseListener {
 					if (checkP3()) {
 						pNames.add(p3.getText());
 					}
+					if (pNames.size() == 3) {
+						startGame();
+					}
 				} else {
 					pNames.clear();
 					if (checkP1()) {
@@ -102,34 +105,16 @@ public class PlayerSelect extends JPanel implements MouseListener {
 					if (checkP4()) {
 						pNames.add(p4.getText());
 					}
+					if (pNames.size() == 4) {
+						startGame();
+					}
 				}
-
-				startGame();
 			}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
 			
 		});
 		play.setBounds(x/2-100, y-100-76, 200, 76);
@@ -139,7 +124,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	}
 	
 	public boolean checkP1() {
-		if (p1.getText().contains("player") || p1.getText().contains("name")) {
+		if (p1.getText().contains("player") || p1.getText().contains("name") || pNames.contains(p1.getText())) {
 			JOptionPane.showMessageDialog(frame,
 				    "Enter something unique player 1. >:(");
 			return false;
@@ -149,7 +134,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	}
 	
 	public boolean checkP2() {
-		if (p2.getText().contains("player") || p2.getText().contains("name")) {
+		if (p2.getText().contains("player") || p2.getText().contains("name") || pNames.contains(p2.getText())) {
 			JOptionPane.showMessageDialog(frame,
 				    "Enter something unique player 2. >:(");
 			return false;
@@ -159,7 +144,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	}
 	
 	public boolean checkP3() {
-		if (p3.getText().contains("player") || p3.getText().contains("name")) {
+		if (p3.getText().contains("player") || p3.getText().contains("name") || pNames.contains(p3.getText())) {
 			JOptionPane.showMessageDialog(frame,
 				    "Enter something unique player 3. >:(");
 			return false;
@@ -169,7 +154,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	}
 	
 	public boolean checkP4() {
-		if (p4.getText().contains("player") || p4.getText().contains("name")) {
+		if (p4.getText().contains("player") || p4.getText().contains("name") || pNames.contains(p4.getText())) {
 			JOptionPane.showMessageDialog(frame,
 				    "Enter something unique player 4. >:(");
 			return false;
@@ -182,10 +167,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 		Font font = new Font("Verdana", Font.BOLD, 12);
         gtd.setFont(font);
 		
-		if (np == 2) {
-        	playerOneOpt(x/2-x/4-50, y/3, 5, gtd);
-        	playerTwoOpt(x/2+x/4-50, y/3, 5, gtd);
-        } else if (np == 3) {
+        if (np == 3) {
         	playerOneOpt(x/2-x/4-50, y/3, 5, gtd);
         	playerTwoOpt(x/2-50, y/3, 5, gtd);
         	playerThreeOpt(x/2+x/4-50, y/3, 5, gtd);

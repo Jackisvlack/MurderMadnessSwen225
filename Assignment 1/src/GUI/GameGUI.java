@@ -104,7 +104,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveNorth();
+				moves = game.moveNorth();
                 repaint();
 			} 
         });
@@ -114,7 +114,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveWest();
+				moves = game.moveWest();
                 repaint();
 			} 
         });
@@ -124,7 +124,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveEast();
+				moves = game.moveEast();
                 repaint();
 			} 
         });
@@ -134,7 +134,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveSouth();
+				moves = game.moveSouth();
                 repaint();
 			} 
         });
