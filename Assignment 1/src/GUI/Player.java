@@ -8,7 +8,7 @@ public class Player {
     String charName;
     HashSet<Card> cards; 
     Location location;
-    boolean controlled;
+    boolean controlled = false;
 	private boolean hasGuessed;
 	
     public Player(String name, String charName, HashSet<Card> cards) {

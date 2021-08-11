@@ -71,7 +71,8 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moves = game.roll();
+				game.roll();
+                moves = game.getMoves();
                 JOptionPane.showMessageDialog(null, "You have " + moves + " moves!" );
                 repaint();
 			} 
@@ -103,7 +104,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveNorth(moves);
+				game.moveNorth();
                 repaint();
 			} 
         });
@@ -113,7 +114,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveWest(moves);
+				game.moveWest();
                 repaint();
 			} 
         });
@@ -123,7 +124,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveEast(moves);
+				game.moveEast();
                 repaint();
 			} 
         });
@@ -133,7 +134,7 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.moveSouth(moves);
+				game.moveSouth();
                 repaint();
 			} 
         });
@@ -192,6 +193,10 @@ class GameGUI extends JPanel implements ActionListener {
             top += 20;
             left = 10;
         }
+    }
+
+    public void getStatus(){
+        repaint();
     }
 
     @Override

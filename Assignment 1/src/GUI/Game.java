@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class Game {
     private static Board board;
     ArrayList<Player> players = new ArrayList<>();
+	ArrayList<Player> controlledPlayers = new ArrayList<>();
     Guess murderCircumstance;
     ArrayList<Card> weaponCards = new ArrayList<>();
     ArrayList<Card> characterCards = new ArrayList<>();
@@ -25,6 +26,7 @@ public class Game {
 	private String player;
 	private int numberOfPlayers;
 	private List<Card> cards;
+	private int moves;
 	
 	public enum Characters {
 		lucilla,
@@ -54,9 +56,10 @@ public class Game {
 
 		Collections.shuffle(playerNames);
 
-		for (int i = 0; i < numberOfPlayers; i++) {
+		for (int i = 0 ; i < numberOfPlayers; i++) {
 			players.get(i).setControlled(true);
-			players.get(i).setPlayerName(playerNames.get(0));
+			players.get(i).setPlayerName(playerNames.remove(0));
+			controlledPlayers.add(players.get(i));
 		}
 	}
 
@@ -105,8 +108,8 @@ public class Game {
 	public void dealCards(){
 		int c = 0;
 		for (int i = 0; i < cards.size()-1; i++) {
-			if (c == players.size()-1) { c = 0; }
-			players.get(c).cards.add(cards.get(i));
+			if (c == controlledPlayers.size()-1) { c = 0; }
+			controlledPlayers.get(c).cards.add(cards.get(i));
 			c++;
 		}
 	}
@@ -116,7 +119,7 @@ public class Game {
 	 */
 	public void selectStartPlayer(){
 		int random = (int) (Math.random() * numberOfPlayers);
-        currentPlayer = players.get(random);
+        currentPlayer = controlledPlayers.get(random);
 	}
 
 
@@ -140,21 +143,13 @@ public class Game {
      * gives instructions
      * gives move order to checkLine, if valid passes on to move method
      * */
-    public void nextPlayer(){
-		int curIndex = players.indexOf(currentPlayer);
-				if (curIndex == 3){
+    public void nextPlayer(int curIndex){
+				if (curIndex == numberOfPlayers - 1){
 					curIndex = 0;
-					currentPlayer = players.get(curIndex);
-					while (!currentPlayer.getControlled()){
-						currentPlayer = players.get(curIndex);
-						curIndex++;
-					}
+					currentPlayer = controlledPlayers.get(curIndex);
 				} else {
-					currentPlayer = players.get(curIndex);
-					while (!currentPlayer.getControlled()){
-						currentPlayer = players.get(curIndex);
-						curIndex++;
-					}
+					curIndex++;
+					currentPlayer = controlledPlayers.get(curIndex);
 				}
     }
     
@@ -182,9 +177,11 @@ public class Game {
     /**
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
-    public void moveNorth(int moves) {
+    public void moveNorth() {
     	if (moves == 0){
-			nextPlayer();
+			int curIndex = controlledPlayers.indexOf(currentPlayer);
+			nextPlayer(curIndex);
+			return;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -193,10 +190,13 @@ public class Game {
     			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getNorth());
     			playerLoc.setHasPlayer(false);
-    			moves = moves -1;
+    			moves--;
+				moveNorth();
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				makeGuess(currentPlayer.location);
+					int curIndex = players.indexOf(currentPlayer);
+					nextPlayer(curIndex);
     			}
     		} 
 		}
@@ -205,9 +205,11 @@ public class Game {
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
-    public void moveSouth(int moves) {
+    public void moveSouth() {
     	if (moves == 0){
-			nextPlayer();
+			int curIndex = players.indexOf(currentPlayer);
+			nextPlayer(curIndex);
+			return;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -216,12 +218,14 @@ public class Game {
     			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getSouth());
     			playerLoc.setHasPlayer(false);
-    			moves = moves -1;
+    			moves--;
+				moveSouth();
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				nextPlayer();
+    				int curIndex = players.indexOf(currentPlayer);
+					nextPlayer(curIndex);
     			}
     		} 
 		}
@@ -230,9 +234,11 @@ public class Game {
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
-    public void moveEast(int moves) {
+    public void moveEast() {
     	if (moves == 0){
-			nextPlayer();
+			int curIndex = players.indexOf(currentPlayer);
+			nextPlayer(curIndex);
+			return;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -241,12 +247,14 @@ public class Game {
     			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getEast());
     			playerLoc.setHasPlayer(false);
-    			moves = moves -1;
+    			moves--;
+				moveEast();
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				nextPlayer();
+    				int curIndex = players.indexOf(currentPlayer);
+					nextPlayer(curIndex);
     			}
     		} 
 		}
@@ -255,9 +263,11 @@ public class Game {
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
-    public void moveWest(int moves) {
+    public void moveWest() {
     	if (moves == 0){
-			nextPlayer();
+			int curIndex = players.indexOf(currentPlayer);
+			nextPlayer(curIndex);
+			return;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -266,12 +276,14 @@ public class Game {
     			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
     			currentPlayer.setLocation(playerLoc.getWest());
     			playerLoc.setHasPlayer(false);
-    			moves = moves -1;
+    			moves --;
+				moveWest();
     			
     			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
     				//board.drawBoard();
     				makeGuess(currentPlayer.location);
-    				nextPlayer();
+    				int curIndex = players.indexOf(currentPlayer);
+					nextPlayer(curIndex);
     			}
     		} 
 		}
@@ -471,11 +483,15 @@ public class Game {
      * Method to simulate two 6 sided dice
      * @return int: the sum of two dice
      */
-    public int roll(){
+    public void roll(){
         int diceOne = (int) (Math.random()*6 + 1);
         int diceTwo = (int) (Math.random()*6 + 1);
-        return diceOne + diceTwo;
+        this.moves = diceOne + diceTwo;
     }
+
+	public int getMoves(){
+		return this.moves;
+	}
 
 	public String getCurrentPlayerName(){
 		return currentPlayer.getPlayerName();
