@@ -34,7 +34,6 @@ class GameGUI extends JPanel implements ActionListener {
 		int y = this.getSize().height;
 		Graphics2D gtd = (Graphics2D) g;
 		
-
         drawBoard(gtd, x, y);
         displayCurrentPlayer(gtd);
         addMoveButtons(x, y);
@@ -71,10 +70,14 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.roll();
-                moves = game.getMoves();
-                JOptionPane.showMessageDialog(null, "You have " + moves + " moves!" );
-                repaint();
+				if (moves == 0) {
+					game.roll();
+	                moves = game.getMoves();
+	                JOptionPane.showMessageDialog(null, "You have " + moves + " moves!" );
+	                repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "You have just rolled! Use up your moves." );
+				}
 			} 
         });
 
@@ -88,7 +91,13 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (game.currentPlayer.location instanceof Estate && !game.currentPlayer.hasGuessed()) {
+    				game.makeGuess(game.currentPlayer.location, gtd);
+    				int curIndex = game.getPlayerList().indexOf(game.currentPlayer);
+					game.nextPlayer(curIndex);
+    			} else {
+    				JOptionPane.showMessageDialog(null, "You not currently in an estate, or you have guessed already!" );
+    			}
 			} 
         });
 
@@ -101,11 +110,15 @@ class GameGUI extends JPanel implements ActionListener {
     public void addMoveButtons(int x, int y) {
 		JButton north = new JButton("N");
 		north.addActionListener(new ActionListener() {
-        	        	
+        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moves = game.moveNorth();
-                repaint();
+				if (moves != 0) {
+					moves = game.moveNorth();
+	                repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				}
 			} 
         });
 
@@ -114,8 +127,12 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moves = game.moveWest();
-                repaint();
+				if (moves != 0) {
+					moves = game.moveWest();
+	                repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				}
 			} 
         });
 
@@ -124,8 +141,12 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moves = game.moveEast();
-                repaint();
+				if (moves != 0) {
+					moves = game.moveEast();
+	                repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				}
 			} 
         });
 
@@ -134,8 +155,12 @@ class GameGUI extends JPanel implements ActionListener {
         	        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				moves = game.moveSouth();
-                repaint();
+				if (moves != 0) {
+					moves = game.moveSouth();
+	                repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
+				}
 			} 
         });
 

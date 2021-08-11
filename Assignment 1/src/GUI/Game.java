@@ -1,4 +1,5 @@
 package GUI;
+import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -178,27 +179,30 @@ public class Game {
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
     public int moveNorth() {
-    	if (moves == 0){
-			int curIndex = controlledPlayers.indexOf(currentPlayer);
+    	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return -1;
+			return 0;
 		}
-    		Location playerLoc = currentPlayer.location;
+    	Location playerLoc = currentPlayer.location;
     		
 		if (currentPlayer.location.getPos().getX()-1 != -1){
-    		if (!currentPlayer.location.getNorth().isWall && !currentPlayer.location.getNorth().hasPlayer()) {
-    			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
-    			currentPlayer.setLocation(playerLoc.getNorth());
-    			playerLoc.setHasPlayer(false);
-    			moves--;
-				moveNorth();
-    			
-    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				makeGuess(currentPlayer.location);
-					int curIndex = players.indexOf(currentPlayer);
-					nextPlayer(curIndex);
-    			}
-    		} 
+			if (currentPlayer.location.getNorth() != null) {
+	    		if (!currentPlayer.location.getNorth().isWall && !currentPlayer.location.getNorth().hasPlayer()) {
+	    			playerLoc.getNorth().setPlayerAtLoc(currentPlayer);
+	    			currentPlayer.setLocation(playerLoc.getNorth());
+	    			playerLoc.setHasPlayer(false);
+	    			if (!(currentPlayer.location instanceof Estate)) {
+	    				moves--;
+	    			}
+	//				moveNorth();
+	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				int curIndex = players.indexOf(currentPlayer);
+	    				nextPlayer(curIndex);
+	    				return 0;
+	    			}
+	    		} 
+			}
 		}
 		
 		return moves;
@@ -208,28 +212,30 @@ public class Game {
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
     public int moveSouth() {
-    	if (moves == 0){
+    	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return -1;
+			return 0;
 		}
-    		Location playerLoc = currentPlayer.location;
+    	Location playerLoc = currentPlayer.location;
     		
 		if (currentPlayer.location.getPos().getX()+1 != 24){
-    		if (!currentPlayer.location.getSouth().isWall && !currentPlayer.location.getSouth().hasPlayer()) {
-    			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
-    			currentPlayer.setLocation(playerLoc.getSouth());
-    			playerLoc.setHasPlayer(false);
-    			moves--;
-				moveSouth();
-    			
-    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				//board.drawBoard();
-    				makeGuess(currentPlayer.location);
-    				int curIndex = players.indexOf(currentPlayer);
-					nextPlayer(curIndex);
-    			}
-    		} 
+			if (currentPlayer.location.getSouth() != null) {
+	    		if (!currentPlayer.location.getSouth().isWall && !currentPlayer.location.getSouth().hasPlayer()) {
+	    			playerLoc.getSouth().setPlayerAtLoc(currentPlayer);
+	    			currentPlayer.setLocation(playerLoc.getSouth());
+	    			playerLoc.setHasPlayer(false);
+	    			if (!(currentPlayer.location instanceof Estate)) {
+	    				moves--;
+	    			}
+	//				moveSouth();
+	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				int curIndex = players.indexOf(currentPlayer);
+	    				nextPlayer(curIndex);
+	    				return 0;
+	    			}
+	    		} 
+			}
 		}
 		return moves;
     }
@@ -238,28 +244,30 @@ public class Game {
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
     public int moveEast() {
-    	if (moves == 0){
+    	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return -1;
+			return 0;
 		}
-    		Location playerLoc = currentPlayer.location;
+    	Location playerLoc = currentPlayer.location;
     		
 		if (currentPlayer.location.getPos().getY()+1 != 24){
-    		if (!currentPlayer.location.getEast().isWall && !currentPlayer.location.getEast().hasPlayer()) {
-    			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
-    			currentPlayer.setLocation(playerLoc.getEast());
-    			playerLoc.setHasPlayer(false);
-    			moves--;
-				moveEast();
-    			
-    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				//board.drawBoard();
-    				makeGuess(currentPlayer.location);
-    				int curIndex = players.indexOf(currentPlayer);
-					nextPlayer(curIndex);
-    			}
-    		} 
+			if (currentPlayer.location.getEast() != null) {
+	    		if (!currentPlayer.location.getEast().isWall && !currentPlayer.location.getEast().hasPlayer()) {
+	    			playerLoc.getEast().setPlayerAtLoc(currentPlayer);
+	    			currentPlayer.setLocation(playerLoc.getEast());
+	    			playerLoc.setHasPlayer(false);
+	    			if (!(currentPlayer.location instanceof Estate)) {
+	    				moves--;
+	    			}
+	//				moveEast();
+	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				int curIndex = players.indexOf(currentPlayer);
+	    				nextPlayer(curIndex);
+	    				return 0;
+	    			}
+	    		} 
+			}
 		}
 		return moves;
     }
@@ -268,30 +276,36 @@ public class Game {
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
     public int moveWest() {
-    	if (moves == 0){
+    	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return -1;
+			return 0;
 		}
-    		Location playerLoc = currentPlayer.location;
+    	Location playerLoc = currentPlayer.location;
     		
 		if (currentPlayer.location.getPos().getY()-1 != -1){
-    		if (!currentPlayer.location.getWest().isWall && !currentPlayer.location.getWest().hasPlayer()) {
-    			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
-    			currentPlayer.setLocation(playerLoc.getWest());
-    			playerLoc.setHasPlayer(false);
-    			moves --;
-				moveWest();
-    			
-    			if (currentPlayer.location instanceof Estate && !currentPlayer.hasGuessed()) {
-    				//board.drawBoard();
-    				makeGuess(currentPlayer.location);
-    				int curIndex = players.indexOf(currentPlayer);
-					nextPlayer(curIndex);
-    			}
-    		} 
+			if (currentPlayer.location.getWest() != null) {
+	    		if (!currentPlayer.location.getWest().isWall && !currentPlayer.location.getWest().hasPlayer()) {
+	    			playerLoc.getWest().setPlayerAtLoc(currentPlayer);
+	    			currentPlayer.setLocation(playerLoc.getWest());
+	    			playerLoc.setHasPlayer(false);
+	    			if (!(currentPlayer.location instanceof Estate)) {
+	    				moves--;
+	    			}
+	//				moveWest();
+	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				int curIndex = players.indexOf(currentPlayer);
+	    				nextPlayer(curIndex);
+	    				return 0;
+	    			}
+	    		} 
+			}
 		}
 		return moves;
+    }
+    
+    public ArrayList<Player> getPlayerList() {
+    	return players;
     }
 
     /**
@@ -299,16 +313,11 @@ public class Game {
      * Manages the round of guessing that takes place when a player
      * that has not guessed enters an estate
      */
-    public void makeGuess(Location loc){
+    public void makeGuess(Location loc, Graphics2D gtd){
     	String estate = loc.name;
     	List<Integer> idxList = new ArrayList<>();
     	int curIndex = players.indexOf(currentPlayer);
     	
-    	// Welcome message to this estate
-    	System.out.println("Welcome to the " + loc.name+ " "+ currentPlayer.charName +"!");
-    	System.out.println("You see " + loc.getWeaponName() + " - mysterious...");
-    	System.out.println("This may be a clue to the puzzle! What do you think happened?");
-    	System.out.println("Choose two cards : one player card and one weapon card");
     	
     	// Prints the players options to choose from
     	// Also gets and checks the players input
@@ -359,58 +368,44 @@ public class Game {
 			Player p = players.get(idxList.get(i));
 			
 			// Get all eligible refutation cards
-			if (p.controlled == true) {
-				for (Card c : p.cards) {
-					if (c.getName().equals(estate)) {
-						options.add(c);
-					} else if (c.getName().equals(weapon)) {
-						options.add(c);
-					} else if (c.getName().equals(player)) {
-						options.add(c);
-					}
-				}
-				
-				
-				System.out.println("Please pass the screen on to: " + p.charName);
-				wait(2);
-				System.out.println("Hello, " + p.charName);
-				if (options.isEmpty()) {
-					System.out.println("Sorry, " + p.getCharName() + ". You have no eligible refutation cards.");
-				} else {
-					printEligibleCards(options);
-					int counter = 0;
-					
-					for (Card c : options) {
-						counter = 0;
-						//if (c.getName().equals(cardPicked)) {
-							//finalCards.add(cardPicked);
-							counter++;
-							break;
-						//}
-					}
-					
-					if (counter == 0) {
-						System.out.println("Please try again as we did not recognize that card!");
-						printEligibleCards(options);
-					}
-					
-				}
-				
-			} else {
-				for (Card c : p.cards) {
-					if (c.getName().equals(estate)) {
-						options.add(c);
-					} else if (c.getName().equals(weapon)) {
-						options.add(c);
-					} else if (c.getName().equals(player)) {
-						options.add(c);
-					}
-				}
-				
-				if (!options.isEmpty()) {
-					finalCards.add(options.get(0).getName());
+		
+			for (Card c : p.cards) {
+				if (c.getName().equals(estate)) {
+					options.add(c);
+				} else if (c.getName().equals(weapon)) {
+					options.add(c);
+				} else if (c.getName().equals(player)) {
+					options.add(c);
 				}
 			}
+			
+			
+			System.out.println("Please pass the screen on to: " + p.charName);
+			wait(2);
+			System.out.println("Hello, " + p.charName);
+			if (options.isEmpty()) {
+				System.out.println("Sorry, " + p.getCharName() + ". You have no eligible refutation cards.");
+			} else {
+				printEligibleCards(options);
+				int counter = 0;
+				
+				for (Card c : options) {
+					counter = 0;
+					//if (c.getName().equals(cardPicked)) {
+						//finalCards.add(cardPicked);
+						counter++;
+						break;
+					//}
+				}
+				
+				if (counter == 0) {
+					System.out.println("Please try again as we did not recognize that card!");
+					printEligibleCards(options);
+				}
+				
+			}
+				
+			
 			
 		}
 		
