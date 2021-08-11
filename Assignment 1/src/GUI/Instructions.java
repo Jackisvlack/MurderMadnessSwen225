@@ -79,7 +79,7 @@ public class Instructions extends JPanel implements ActionListener {
         		"present refuation cards. Should every player fail to guess the murder circumstances, \n",
         		"the murderer has won :O"));
         for (int i = 0; i < rules.size(); i++) {
-        	gtd.drawString(rules.get(i), this.getSize().width/2-340, this.getSize().height/4+(20*i));
+        	gtd.drawString(rules.get(i), this.getSize().width-680, this.getSize().height/4+(20*i));
         }
 	}
 	

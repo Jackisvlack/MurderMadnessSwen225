@@ -56,7 +56,6 @@ public class Game {
 
 		Collections.shuffle(playerNames);
 
-		//Uses controlled players list so game only cycles through controlled players
 		for (int i = 0 ; i < numberOfPlayers; i++) {
 			players.get(i).setControlled(true);
 			players.get(i).setPlayerName(playerNames.remove(0));
@@ -178,14 +177,11 @@ public class Game {
     /**
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
-    public void moveNorth() {
-		if (currentPlayer.getHasRolled() == true){
-			
-		
+    public int moveNorth() {
     	if (moves == 0){
 			int curIndex = controlledPlayers.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -204,18 +200,18 @@ public class Game {
     			}
     		} 
 		}
-	}
+		
+		return moves;
     }
     
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
-    public void moveSouth() {
-		if (currentPlayer.getHasRolled() == true){
+    public int moveSouth() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -235,18 +231,17 @@ public class Game {
     			}
     		} 
 		}
-	}
+		return moves;
     }
     
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
-    public void moveEast() {
-		if (currentPlayer.getHasRolled() == true){
+    public int moveEast() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -266,18 +261,17 @@ public class Game {
     			}
     		} 
 		}
-	}
+		return moves;
     }
     
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
-    public void moveWest() {
-		if (currentPlayer.getHasRolled() == true){
+    public int moveWest() {
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return;
+			return -1;
 		}
     		Location playerLoc = currentPlayer.location;
     		
@@ -297,7 +291,7 @@ public class Game {
     			}
     		} 
 		}
-	}
+		return moves;
     }
 
     /**
@@ -497,7 +491,6 @@ public class Game {
     public void roll(){
         int diceOne = (int) (Math.random()*6 + 1);
         int diceTwo = (int) (Math.random()*6 + 1);
-		currentPlayer.setHasRolled(true);
         this.moves = diceOne + diceTwo;
     }
 
