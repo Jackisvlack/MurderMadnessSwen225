@@ -10,16 +10,22 @@ public class Player {
     Location location;
     boolean controlled = false;
 	private boolean hasGuessed;
+    private char icon;
 	
-    public Player(String name, String charName, HashSet<Card> cards) {
+    public Player(String name, String charName, HashSet<Card> cards, char icon) {
         this.playerName = name;
         this.charName = charName;
         this.cards = cards;
+        this.icon = icon;
     }
     
     // returns the actual character name
     public String getCharName() {
     	return this.charName;
+    }
+
+    public Character getCharacterIcon(){
+        return this.icon;
     }
 
     /**

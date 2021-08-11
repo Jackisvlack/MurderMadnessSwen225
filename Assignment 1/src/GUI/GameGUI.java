@@ -19,6 +19,7 @@ class GameGUI extends JPanel implements ActionListener {
     private JFrame frame;
     private int squarelWidth, squareHeight = 25;
     private int moves;
+    private char currentPlayerIcon;
 
 
     public GameGUI (Game game, JFrame frame){
@@ -189,7 +190,7 @@ class GameGUI extends JPanel implements ActionListener {
     public void drawBoard(Graphics2D gtd, int x, int y){
         Board board = game.getBoard();
         Location[][] locations = board.getLocationSet();
-
+        this.currentPlayerIcon = game.getCurrentPlayerIcon();
         int left = 10;
         int top = 10;
         for (int i = 0; i < 24; i++){
@@ -206,7 +207,13 @@ class GameGUI extends JPanel implements ActionListener {
                     gtd.setColor(Color.white);
                     gtd.drawRect(left, top, 20, 20);
                     left += 20;
-                } else {
+                } else if (locations[i][j].getTypeIdentifier().equals("-" + currentPlayerIcon + "-")){
+                    gtd.setColor(Color.yellow);
+                    gtd.fillRect(left, top, 20, 20);
+                    gtd.setColor(Color.yellow);
+                    gtd.drawRect(left, top, 20, 20);
+                    left += 20;
+                }else {
                     gtd.setColor(Color.blue);
                     gtd.fillRect(left, top, 20, 20);
                     gtd.setColor(Color.black);
