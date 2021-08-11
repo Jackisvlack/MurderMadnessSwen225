@@ -182,7 +182,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	public void playerOneOpt(int x, int y, int padding, Graphics2D gtd) {
 		gtd.drawString("Player One: ", x, y-padding);
         
-		p1 = new JTextField("player name");
+		p1 = new JTextField("james");
 		p1.setEditable(true);
 		p1.setVisible(true);
 		p1.setBounds(x, y, 100, 20);
@@ -192,7 +192,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	public void playerTwoOpt(int x, int y, int padding, Graphics2D gtd) {
 		gtd.drawString("Player Two: ", x, y-padding);
         
-		p2 = new JTextField("player name");
+		p2 = new JTextField("john");
 		p2.setEditable(true);
 		p2.setVisible(true);
 		p2.setBounds(x, y, 100, 20);
@@ -202,7 +202,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	public void playerThreeOpt(int x, int y, int padding, Graphics2D gtd) {
 		gtd.drawString("Player Three: ", x, y-padding);
         
-		p3 = new JTextField("player name");
+		p3 = new JTextField("bonnie");
 		p3.setEditable(true);
 		p3.setVisible(true);
 		p3.setBounds(x, y, 100, 20);
@@ -212,7 +212,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	public void playerFourOpt(int x, int y, int padding, Graphics2D gtd) {
 		gtd.drawString("Player Four: ", x, y-padding);
         
-		p4 = new JTextField("player name");
+		p4 = new JTextField("honn");
 		p4.setEditable(true);
 		p4.setVisible(true);
 		p4.setBounds(x, y, 100, 20);
