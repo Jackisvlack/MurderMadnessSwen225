@@ -56,6 +56,7 @@ public class Game {
 
 		Collections.shuffle(playerNames);
 
+		//Uses controlled players list so game only cycles through controlled players
 		for (int i = 0 ; i < numberOfPlayers; i++) {
 			players.get(i).setControlled(true);
 			players.get(i).setPlayerName(playerNames.remove(0));
@@ -178,6 +179,9 @@ public class Game {
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
     public void moveNorth() {
+		if (currentPlayer.getHasRolled() == true){
+			
+		
     	if (moves == 0){
 			int curIndex = controlledPlayers.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -200,12 +204,14 @@ public class Game {
     			}
     		} 
 		}
+	}
     }
     
     /**
      * Moves the player south, if on an estate location starts the makeGuess cycle
      * */
     public void moveSouth() {
+		if (currentPlayer.getHasRolled() == true){
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -229,12 +235,14 @@ public class Game {
     			}
     		} 
 		}
+	}
     }
     
     /**
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
     public void moveEast() {
+		if (currentPlayer.getHasRolled() == true){
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -258,12 +266,14 @@ public class Game {
     			}
     		} 
 		}
+	}
     }
     
     /**
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
     public void moveWest() {
+		if (currentPlayer.getHasRolled() == true){
     	if (moves == 0){
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -287,6 +297,7 @@ public class Game {
     			}
     		} 
 		}
+	}
     }
 
     /**
@@ -486,6 +497,7 @@ public class Game {
     public void roll(){
         int diceOne = (int) (Math.random()*6 + 1);
         int diceTwo = (int) (Math.random()*6 + 1);
+		currentPlayer.setHasRolled(true);
         this.moves = diceOne + diceTwo;
     }
 

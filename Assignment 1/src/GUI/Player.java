@@ -10,6 +10,8 @@ public class Player {
     Location location;
     boolean controlled = false;
 	private boolean hasGuessed;
+    private boolean hasRolled;
+    private boolean hasMoved;
 	
     public Player(String name, String charName, HashSet<Card> cards) {
         this.playerName = name;
@@ -20,6 +22,21 @@ public class Player {
     // returns the actual character name
     public String getCharName() {
     	return this.charName;
+    }
+
+    public boolean getHasMoved(){
+        return hasMoved;
+    }
+    public void setHasMoved(boolean moved){
+        this.hasMoved = moved;
+    }
+
+    public boolean getHasRolled(){
+        return hasRolled;
+    }
+
+    public void setHasRolled(boolean rolled){
+        this.hasRolled = rolled;
     }
 
     /**
