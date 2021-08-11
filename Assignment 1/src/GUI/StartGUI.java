@@ -37,10 +37,6 @@ public class StartGUI implements ActionListener {
 		
 	}
 	
-	public void moveToInstructions() {
-		
-	}
-	
 	public static void main(String[] args) {
 		new StartGUI();
 	}

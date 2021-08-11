@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -15,7 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,17 +29,23 @@ public class PlayerSelect extends JPanel implements MouseListener {
 	
 	private JFrame frame;
 	private int np;
-	private String characters[] = { "Percy", "Malina", "Lucilla", "Bert" };
-	private List<String> pNames;
-	JTextField p1;
-	JTextField p2;
-	JTextField p3;
-	JTextField p4;
+	private List<String> characters = new ArrayList<>(Arrays.asList("Percy", "Malina", "Lucilla", "Bert"));
+	private JTextField p1, p2, p3, p4;
+	private BufferedImage bert, malina, lucilla, percy;
+	private Map<String, BufferedImage> charImageMap;
+	private List<BufferedImage> imagesToDraw = new ArrayList<>();
 	
 	public PlayerSelect(JFrame frame, int np) {
 		this.setLayout(null);
 		this.frame = frame;
 		this.np = np;
+		renderCharacters();
+		charImageMap = new HashMap<String, BufferedImage>() {{
+			put("Percy", percy);
+			put("Lucilla", lucilla);
+			put("Bert", bert);
+			put("Malina", malina);
+		}};
 		repaint();
 	}
 	
@@ -49,11 +59,10 @@ public class PlayerSelect extends JPanel implements MouseListener {
 		this.removeAll();
 		
 		paintBackgroundAndTitle(gtd, screenSize);
-
-        drawOptions(x, y, gtd);
 		
-        addButtons(x, y);
-        
+		addButtons(x, y);
+		
+		drawOptions(x, y, gtd);
 	}
 	
 	public void addButtons(int x, int y) {
@@ -72,106 +81,64 @@ public class PlayerSelect extends JPanel implements MouseListener {
 		back.grabFocus();
 		
 		JButton play = new JButton("PLAY");
-		play.addMouseListener(new MouseListener() {
-
+		play.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				pNames = new ArrayList<>();
-				 if (np == 3) {
+			public void actionPerformed(ActionEvent e) {
+				List<String> pNames = new ArrayList<>();
+				if (np == 2) {
 					pNames.clear();
-					if (checkP1()) {
+					if (checkPlayerInput(p1, "one")) {
 						pNames.add(p1.getText());
-					}
-					if (checkP2()) {
+					} 
+					if (checkPlayerInput(p2, "two")) {
 						pNames.add(p2.getText());
 					}
-					if (checkP3()) {
+					if (pNames.size() == 2) {
+						
+					}
+				} else if (np == 3) {
+					pNames.clear();
+					if (checkPlayerInput(p1, "one")) {
+						pNames.add(p1.getText());
+					}
+					if (checkPlayerInput(p2, "two")) {
+						pNames.add(p2.getText());
+					}
+					if (checkPlayerInput(p3, "three")) {
 						pNames.add(p3.getText());
+					}
+					if (pNames.size() == 2) {
+						
 					}
 				} else {
 					pNames.clear();
-					if (checkP1()) {
+					if (checkPlayerInput(p1, "one")) {
 						pNames.add(p1.getText());
 					}
-					if (checkP2()) {
+					if (checkPlayerInput(p2, "two")) {
 						pNames.add(p2.getText());
 					}
-					if (checkP3()) {
+					if (checkPlayerInput(p3, "three")) {
 						pNames.add(p3.getText());
 					}
-					if (checkP4()) {
+					if (checkPlayerInput(p4, "four")) {
 						pNames.add(p4.getText());
 					}
 				}
-
-				startGame();
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 		});
+		
 		play.setBounds(x/2-100, y-100-76, 200, 76);
 		play.setVisible(true);
 		this.add(play);
 		play.grabFocus();
+		
 	}
 	
-	public boolean checkP1() {
-		if (p1.getText().contains("player") || p1.getText().contains("name")) {
+	public boolean checkPlayerInput(JTextField field, String pNum) {
+		if (field.getText().contains("player") || field.getText().contains("name")) {
 			JOptionPane.showMessageDialog(frame,
-				    "Enter something unique player 1. >:(");
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	public boolean checkP2() {
-		if (p2.getText().contains("player") || p2.getText().contains("name")) {
-			JOptionPane.showMessageDialog(frame,
-				    "Enter something unique player 2. >:(");
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	public boolean checkP3() {
-		if (p3.getText().contains("player") || p3.getText().contains("name")) {
-			JOptionPane.showMessageDialog(frame,
-				    "Enter something unique player 3. >:(");
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	public boolean checkP4() {
-		if (p4.getText().contains("player") || p4.getText().contains("name")) {
-			JOptionPane.showMessageDialog(frame,
-				    "Enter something unique player 4. >:(");
+				    "Enter something UNIQUE player " + pNum + ". >:(");
 			return false;
 		} else {
 			return true;
@@ -249,6 +216,7 @@ public class PlayerSelect extends JPanel implements MouseListener {
         font = new Font("Verdana", Font.BOLD, 20);
         gtd.setFont(font);
         gtd.drawString("PLAYER SELECTION", this.getSize().width/2-120, this.getSize().height/5);
+        
 	}
 	
 	public void getInstructions() {
@@ -262,44 +230,26 @@ public class PlayerSelect extends JPanel implements MouseListener {
 		ins.repaint();
 	}
 	
-//	public void drawCharacters(Graphics2D gtd) {
-//		try {
-//			percy = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\percy.png"));
-//		} catch (IOException e) {e.printStackTrace();}
-//		
-//		gtd.drawImage(percy, this.getSize().width/22+10, this.getSize().height/5-20, null);
-//		
-//		try {
-//			lucilla = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\lucilla.png"));
-//		} catch (IOException e) {e.printStackTrace();}
-//		
-//		gtd.drawImage(lucilla, this.getSize().width/3+10, this.getSize().height/5-20, null);
-//		
-//		try {
-//			malina = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\malina.png"));
-//		} catch (IOException e) {e.printStackTrace();}
-//		
-//		gtd.drawImage(malina, this.getSize().width/2+this.getSize().width/22+10, this.getSize().height/5-20, null);
-//		
-//		try {
-//			bert = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\bert.png"));
-//		} catch (IOException e) {e.printStackTrace();}
-//		
-//		gtd.drawImage(bert, this.getSize().width/2+this.getSize().width/3+10, this.getSize().height/5-20, null);
-//	}
-
-	
-
-	public void startGame(){
-		Game game = new Game(np, pNames);
-		GameGUI playScreen = new GameGUI(game, frame);
-		playScreen.setLocation(0,0);
-		playScreen.setSize(this.frame.getSize());
-		playScreen.setBackground(new Color(102, 204, 255));
-		playScreen.setVisible(true);
-		this.frame.remove(this);
-		this.frame.add(playScreen);
-		playScreen.repaint();
+	public void renderCharacters() {
+		try {
+			percy = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\percy.png"));
+		} catch (IOException e) {e.printStackTrace();}
+		
+		
+		try {
+			lucilla = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\lucilla.png"));
+		} catch (IOException e) {e.printStackTrace();}
+		
+		
+		try {
+			malina = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\malina.png"));
+		} catch (IOException e) {e.printStackTrace();}
+		
+		
+		try {
+			bert = ImageIO.read(new File("C:\\Users\\New User\\OneDrive\\Desktop\\Trim2\\Swen225\\Assignments\\as1\\MurderMadness\\Assignment 1\\src\\GUI\\assets\\bert.png"));
+		} catch (IOException e) {e.printStackTrace();}
+		
 	}
 	
 
