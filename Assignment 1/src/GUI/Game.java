@@ -50,10 +50,10 @@ public class Game {
 
 
 	public void playerCreation(List<String> playerNames){
-		players.add(0, new Player("NPC", String.valueOf(Characters.lucilla), new HashSet<Card>())); 
-		players.add(1, new Player("NPC", String.valueOf(Characters.bert), new HashSet<Card>()));
-		players.add(2, new Player("NPC", String.valueOf(Characters.malina), new HashSet<Card>()));
-		players.add(3, new Player("NPC", String.valueOf(Characters.percy), new HashSet<Card>()));
+		players.add( new Player("NPC", String.valueOf(Characters.lucilla), new HashSet<Card>(), 'L')); 
+		players.add( new Player("NPC", String.valueOf(Characters.bert), new HashSet<Card>(), 'B'));
+		players.add( new Player("NPC", String.valueOf(Characters.malina), new HashSet<Card>(), 'M'));
+		players.add( new Player("NPC", String.valueOf(Characters.percy), new HashSet<Card>(), 'P'));
 
 		Collections.shuffle(playerNames);
 
@@ -81,10 +81,10 @@ public class Game {
 		estateCards.add(new Card("calamity castle"));
 	}
 
-	public void chooseMurderCircumstance(){
-		/**
+	/**
 		 * Randomizes each set of card and takes one of each for the murder set
 		 */
+	public void chooseMurderCircumstance(){
 		Collections.shuffle(weaponCards);
 		Collections.shuffle(estateCards);
 		Collections.shuffle(characterCards);
@@ -508,5 +508,9 @@ public class Game {
 
 	public String getCurrentPlayerName(){
 		return currentPlayer.getPlayerName();
+	}
+
+	public Character getCurrentPlayerIcon(){
+		return currentPlayer.getCharacterIcon();
 	}
 }
