@@ -208,12 +208,28 @@ class GameGUI extends JPanel implements ActionListener {
                     gtd.drawRect(left, top, 20, 20);
                     left += 20;
                 } else if (locations[i][j].getTypeIdentifier().equals("-" + currentPlayerIcon + "-")){
+                    gtd.setColor(Color.green);
+                    gtd.fillRect(left, top, 20, 20);
+                    gtd.setColor(Color.green);
+                    gtd.drawRect(left, top, 20, 20);
+                    string characterIcon = locations[i][j].getPlayerIcon();
+                    gtd.setColor(Color.black);
+                    Font font = new Font("Verdana", Font.BOLD, 12);
+                    gtd.setFont(font);
+                    gtd.drawString(characterIcon, left + 6, top + 14);
+                    left += 20;
+                } else if (locations[i][j].hasPlayer()){
+                    string characterIcon = locations[i][j].getPlayerIcon();
                     gtd.setColor(Color.yellow);
                     gtd.fillRect(left, top, 20, 20);
                     gtd.setColor(Color.yellow);
                     gtd.drawRect(left, top, 20, 20);
+                    gtd.setColor(Color.black);
+                    Font font = new Font("Verdana", Font.BOLD, 12);
+                    gtd.setFont(font);
+                    gtd.drawString(characterIcon, left + 6, top + 14);
                     left += 20;
-                }else {
+                } else {
                     gtd.setColor(Color.blue);
                     gtd.fillRect(left, top, 20, 20);
                     gtd.setColor(Color.black);

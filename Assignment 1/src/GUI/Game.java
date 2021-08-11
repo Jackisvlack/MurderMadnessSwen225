@@ -81,10 +81,10 @@ public class Game {
 		estateCards.add(new Card("calamity castle"));
 	}
 
-	public void chooseMurderCircumstance(){
-		/**
+	/**
 		 * Randomizes each set of card and takes one of each for the murder set
 		 */
+	public void chooseMurderCircumstance(){
 		Collections.shuffle(weaponCards);
 		Collections.shuffle(estateCards);
 		Collections.shuffle(characterCards);
