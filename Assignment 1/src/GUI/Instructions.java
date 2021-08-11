@@ -86,7 +86,12 @@ public class Instructions extends JPanel implements ActionListener {
 	private void addButtons() {
 		ButtonGroup bg = new ButtonGroup();
         
-        
+        JRadioButton two = new JRadioButton("2");
+        two.setBounds(this.getSize().width/28, this.getSize().height-100, 40, 20);
+        two.setVisible(true);
+        bg.add(two);
+        this.add(two);
+        two.grabFocus();
         JRadioButton three = new JRadioButton("3");
         three.setBounds(this.getSize().width/10, this.getSize().height-100, 40, 20);
         three.setVisible(true);
@@ -100,6 +105,37 @@ public class Instructions extends JPanel implements ActionListener {
         this.add(four);
         four.grabFocus();
         
+        two.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				numberOfPlayers = Integer.valueOf(two.getText());
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				numberOfPlayers = Integer.valueOf(two.getText());
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         
         three.addMouseListener(new MouseListener() {
 

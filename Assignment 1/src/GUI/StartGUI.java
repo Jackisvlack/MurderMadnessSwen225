@@ -19,6 +19,7 @@ public class StartGUI implements ActionListener {
 	
 	public StartGUI() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		frame = new JFrame();
 		frame.setSize(705, 705);
 		frame.setTitle("MURDER MADNESS");

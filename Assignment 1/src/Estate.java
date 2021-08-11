@@ -1,4 +1,3 @@
-package GUI;
 /**
  * Estate: instance of location, stores isWall, name and position
  * */

@@ -1,4 +1,3 @@
-package GUI;
 import java.util.Collections;
 import java.util.ArrayList;
 
@@ -200,10 +199,29 @@ public class Board {
         }
     }
 
+    /**
+     * Draws the game board and pieces
+     */
+    public void drawBoard() {
+        String[] board = new String[24];
+        String current = "";
+        for (int i = 0; i < 24; i++) {
+            current = "";
+            for (int j = 0; j < 24; j++) {
+                if (squares[i][j].hasPlayer(i, j)) current += "-" + squares[i][j].getPlayerIcon() + "-";
+                else if (squares[i][j] instanceof Estate && squares[i][j].isWall) current += "+++";
+                else if (squares[i][j] instanceof Estate) current += "[ ]";
+                else if (squares[i][j] instanceof Wall) current += "+++";
+                else current += "---";
+            }
+            board[i] = current;
+        }
+        for (int i = 0; i < 24; i++) {
+            System.out.println(board[i]);
+        }
+        System.out.print("\n\n");
 
-    public Location[][] getLocationSet(){
-        return this.squares;
+
     }
-    
 }
 

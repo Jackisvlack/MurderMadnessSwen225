@@ -1,4 +1,3 @@
-package GUI;
 /**
  * Position class to store the raw x and y coordinates
  * */

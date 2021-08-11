@@ -1,4 +1,3 @@
-package GUI;
 import java.util.ArrayList;
 
 class Weapon {

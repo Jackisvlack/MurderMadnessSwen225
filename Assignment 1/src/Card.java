@@ -1,4 +1,3 @@
-package GUI;
 /**
  * Stores a type (weapon, character, estate) as a card
  * */
