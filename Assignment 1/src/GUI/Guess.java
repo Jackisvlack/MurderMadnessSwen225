@@ -1,4 +1,4 @@
-package GUI;
+
 /**
  * Stores a guess comprised of a weapon, estate and a character
  * Allows easy comparison between guesses

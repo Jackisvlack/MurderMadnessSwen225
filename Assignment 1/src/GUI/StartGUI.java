@@ -1,5 +1,3 @@
-package GUI;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -39,10 +37,6 @@ public class StartGUI implements ActionListener {
 	
 	public void moveToInstructions() {
 		
-	}
-	
-	public static void main(String[] args) {
-		new StartGUI();
 	}
 
 	@Override

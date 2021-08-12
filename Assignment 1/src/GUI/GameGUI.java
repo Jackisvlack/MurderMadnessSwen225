@@ -1,4 +1,4 @@
-package GUI;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -122,28 +122,26 @@ class GameGUI extends JPanel implements ActionListener {
     private void addOptionButtons(List<String> cOptions) {
     	
     	ButtonGroup bg = new ButtonGroup();
-        int top = this.getSize().height/3;
+        int top = this.getSize().width/2+this.getSize().width/4;
         
             JRadioButton wop1 = new JRadioButton(cOptions.get(0));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4,this.getSize().height/3, 100, 20);
             JRadioButton wop2 = new JRadioButton(cOptions.get(1));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 22, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 22,this.getSize().height/3, 100, 20);
             JRadioButton wop3 = new JRadioButton(cOptions.get(2));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 44, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 44, this.getSize().height/3, 100, 20);
             JRadioButton wop4 = new JRadioButton(cOptions.get(3));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 66, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 66, this.getSize().height/3, 100, 20);
             JRadioButton wop5 = new JRadioButton(cOptions.get(4));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 88, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 88, this.getSize().height/3, 100, 20);
             JRadioButton wop6 = new JRadioButton(cOptions.get(5));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 110, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 110, this.getSize().height/3, 100, 20);
             JRadioButton wop7 = new JRadioButton(cOptions.get(6));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 132, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 132, this.getSize().height/3, 100, 20);
             JRadioButton wop8 = new JRadioButton(cOptions.get(7));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 154, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 154, this.getSize().height/3, 100, 20);
             JRadioButton wop9 = new JRadioButton(cOptions.get(8));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 176, 100, 20);
-            JRadioButton wop10 = new JRadioButton(cOptions.get(9));
-            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 198, 100, 20);
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4 + 176, this.getSize().height/3, 100, 20);
             wop1.setVisible(true);
             bg.add(wop1);
             this.add(wop1);
@@ -180,10 +178,6 @@ class GameGUI extends JPanel implements ActionListener {
             bg.add(wop9);
             this.add(wop9);
             wop9.grabFocus();
-            wop10.setVisible(true);
-            bg.add(wop10);
-            this.add(wop10);
-            wop10.grabFocus();
 	}
 
 	public void addMoveButtons(int x, int y) {

@@ -1,5 +1,4 @@
-package GUI;
-/**
+/** 
  * An instance of location with isWall set to true
  * */
 public class Wall extends Location{

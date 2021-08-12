@@ -1,4 +1,4 @@
-package GUI;
+
 public class Location {
 	
     private Location west;

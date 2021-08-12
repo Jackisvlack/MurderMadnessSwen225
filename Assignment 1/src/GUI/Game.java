@@ -1,4 +1,4 @@
-package GUI;
+
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -83,7 +83,9 @@ public class Game {
 		estateCards.add(new Card("haunted house"));
 		estateCards.add(new Card("calamity castle"));
 		estateCards.add(new Card("calamity castle"));
-		guessCards.addAll(cards);
+		guessCards = new ArrayList<>();
+		guessCards.addAll(characterCards);
+		guessCards.addAll(weaponCards);
 	}
 
 	/**
@@ -466,7 +468,11 @@ public class Game {
      * Get the players guesses and check them
      * */
     public List<String> getCardOptions() {
-    	return this.guessCards;
+    	ArrayList<String> cardOptions = new ArrayList<>();
+		for (int i = 0; i < guessCards.size(); i++){
+			cardOptions.add(guessCards.get(i).getName());
+		}
+		return cardOptions;
     }
 
     /**
