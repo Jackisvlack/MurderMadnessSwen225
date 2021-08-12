@@ -202,12 +202,16 @@ public class Game {
 	    				return 0;
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
+	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
 			}
 		}
-		
+		if ((currentPlayer.location instanceof Estate)) {
+    		System.out.println("Hi2");
+			gg.inEstate = true;
+		}
 		return moves;
     }
     
@@ -238,6 +242,7 @@ public class Game {
 	    				return 0;
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
+	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
@@ -250,6 +255,10 @@ public class Game {
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
     public int moveEast(GameGUI gg) {
+    	if ((currentPlayer.location instanceof Estate)) {
+    		System.out.println("Hi");
+			gg.inEstate = true;
+		}
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -273,6 +282,7 @@ public class Game {
 	    				return 0;
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
+	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
@@ -285,6 +295,10 @@ public class Game {
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
     public int moveWest(GameGUI gg) {
+    	if ((currentPlayer.location instanceof Estate)) {
+    		System.out.println("Hi");
+			gg.inEstate = true;
+		}
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
@@ -307,8 +321,8 @@ public class Game {
 	    				nextPlayer(curIndex);
 	    				return 0;
 	    			}
-	    			
 	    			if ((currentPlayer.location instanceof Estate)) {
+	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
