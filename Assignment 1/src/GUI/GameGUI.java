@@ -277,7 +277,29 @@ class GameGUI extends JPanel implements ActionListener {
                     gtd.setColor(Color.white);
                     gtd.drawRect(left, top, 20, 20);
                     left += 20;
-                } else {
+                }  else if (locations[i][j].getTypeIdentifier().equals("-" + game.getCurrentPlayerIcon() + "-")){
+                    gtd.setColor(Color.green);
+                    gtd.fillRect(left, top, 20, 20);
+                    gtd.setColor(Color.green);
+                    gtd.drawRect(left, top, 20, 20);
+                    gtd.setColor(Color.black);
+                    Font font = new Font("Verdana", Font.BOLD, 12);
+                    String name = locations[i][j].getPlayerIcon();
+                    gtd.setFont(font);
+                    gtd.drawString(name, left + 6, top - 12);
+                    left += 20;
+               } else if (locations[i][j].hasPlayer()){
+                    gtd.setColor(Color.yellow);
+                    gtd.fillRect(left, top, 20, 20);
+                    gtd.setColor(Color.yellow);
+                    gtd.drawRect(left, top, 20, 20);
+                    gtd.setColor(Color.black);
+                    Font font = new Font("Verdana", Font.BOLD, 12);
+                    String name = locations[i][j].getPlayerIcon();
+                    gtd.setFont(font);
+                    gtd.drawString(name, left + 6, top - 12);
+                    left += 20;
+               } else {
                     gtd.setColor(Color.blue);
                     gtd.fillRect(left, top, 20, 20);
                     gtd.setColor(Color.black);
