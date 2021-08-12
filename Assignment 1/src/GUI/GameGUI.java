@@ -122,14 +122,68 @@ class GameGUI extends JPanel implements ActionListener {
     private void addOptionButtons(List<String> cOptions) {
     	
     	ButtonGroup bg = new ButtonGroup();
+        int top = this.getSize().height/3;
         
-        JRadioButton wop1 = new JRadioButton(cOptions.get(0));
-        wop1.setBounds(this.getSize().width/2+this.getSize().width/4, this.getSize().height/3, 60, 20);
-        wop1.setVisible(true);
-        bg.add(wop1);
-        this.add(wop1);
-        wop1.grabFocus();
-        
+            JRadioButton wop1 = new JRadioButton(cOptions.get(0));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top, 100, 20);
+            JRadioButton wop2 = new JRadioButton(cOptions.get(1));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 22, 100, 20);
+            JRadioButton wop3 = new JRadioButton(cOptions.get(2));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 44, 100, 20);
+            JRadioButton wop4 = new JRadioButton(cOptions.get(3));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 66, 100, 20);
+            JRadioButton wop5 = new JRadioButton(cOptions.get(4));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 88, 100, 20);
+            JRadioButton wop6 = new JRadioButton(cOptions.get(5));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 110, 100, 20);
+            JRadioButton wop7 = new JRadioButton(cOptions.get(6));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 132, 100, 20);
+            JRadioButton wop8 = new JRadioButton(cOptions.get(7));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 154, 100, 20);
+            JRadioButton wop9 = new JRadioButton(cOptions.get(8));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 176, 100, 20);
+            JRadioButton wop10 = new JRadioButton(cOptions.get(9));
+            wop1.setBounds(this.getSize().width/2+this.getSize().width/4, top + 198, 100, 20);
+            wop1.setVisible(true);
+            bg.add(wop1);
+            this.add(wop1);
+            wop1.grabFocus();
+            wop2.setVisible(true);
+            bg.add(wop2);
+            this.add(wop2);
+            wop2.grabFocus();
+            wop3.setVisible(true);
+            bg.add(wop3);
+            this.add(wop3);
+            wop3.grabFocus();
+            wop4.setVisible(true);
+            bg.add(wop4);
+            this.add(wop4);
+            wop4.grabFocus();
+            wop5.setVisible(true);
+            bg.add(wop5);
+            this.add(wop5);
+            wop5.grabFocus();
+            wop6.setVisible(true);
+            bg.add(wop6);
+            this.add(wop6);
+            wop6.grabFocus();
+            wop7.setVisible(true);
+            bg.add(wop7);
+            this.add(wop7);
+            wop7.grabFocus();
+            wop8.setVisible(true);
+            bg.add(wop8);
+            this.add(wop8);
+            wop8.grabFocus();
+            wop9.setVisible(true);
+            bg.add(wop9);
+            this.add(wop9);
+            wop9.grabFocus();
+            wop10.setVisible(true);
+            bg.add(wop10);
+            this.add(wop10);
+            wop10.grabFocus();
 	}
 
 	public void addMoveButtons(int x, int y) {

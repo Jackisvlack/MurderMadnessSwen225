@@ -30,6 +30,7 @@ public class Game {
 	private String player;
 	private int numberOfPlayers;
 	private List<Card> cards;
+	private List<Card> guessCards;
 	private int moves;
 	
 	public enum Characters {
@@ -82,6 +83,7 @@ public class Game {
 		estateCards.add(new Card("haunted house"));
 		estateCards.add(new Card("calamity castle"));
 		estateCards.add(new Card("calamity castle"));
+		guessCards.addAll(cards);
 	}
 
 	/**
@@ -464,20 +466,7 @@ public class Game {
      * Get the players guesses and check them
      * */
     public List<String> getCardOptions() {
-    	List<String> cardStrings = new ArrayList<>();
-    	int i = 0;
-    	
-    	for (Card c : weaponCards) {
-    		cardStrings.add(i, c.getName());
-    		i++;
-    	}
-
-    	for (Card c : characterCards) {
-    		cardStrings.add(i, c.getName());
-    		i++;
-    	}
-    	
-    	return cardStrings;
+    	return this.guessCards;
     }
 
     /**
