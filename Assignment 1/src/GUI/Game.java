@@ -209,15 +209,10 @@ public class Game {
 	    			}
 	    			
 	    			if ((currentPlayer.location instanceof Estate)) {
-	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
 			}
-		}
-		if ((currentPlayer.location instanceof Estate)) {
-    		System.out.println("Hi2");
-			gg.inEstate = true;
 		}
 		return moves;
     }
@@ -252,7 +247,6 @@ public class Game {
 	    			}
 	    			
 	    			if ((currentPlayer.location instanceof Estate)) {
-	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
@@ -291,7 +285,6 @@ public class Game {
 	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
-	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 
@@ -331,7 +324,6 @@ public class Game {
 	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
-	    				System.out.println("Hi");
 	    				gg.inEstate = true;
 	    			}
 	    		} 

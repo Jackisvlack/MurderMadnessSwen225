@@ -44,6 +44,7 @@ class GameGUI extends JPanel implements ActionListener {
         addMoveButtons(x, y);
         addButtons(x, y, gtd);
         showMoves(gtd);
+        
     }
 
     public void displayCurrentPlayer(Graphics2D gtd){
@@ -119,13 +120,16 @@ class GameGUI extends JPanel implements ActionListener {
     }
 
     private void addOptionButtons(List<String> cOptions) {
+    	
     	ButtonGroup bg = new ButtonGroup();
-
+        
         JRadioButton wop1 = new JRadioButton(cOptions.get(0));
-        wop1.setBounds(this.getSize().width+this.getSize().width/2, this.getSize().height-200, 60, 20);
+        wop1.setBounds(this.getSize().width/2+this.getSize().width/4, this.getSize().height/3, 60, 20);
         wop1.setVisible(true);
         bg.add(wop1);
+        this.add(wop1);
         wop1.grabFocus();
+        
 	}
 
 	public void addMoveButtons(int x, int y) {
@@ -286,7 +290,7 @@ class GameGUI extends JPanel implements ActionListener {
                     Font font = new Font("Verdana", Font.BOLD, 12);
                     String name = locations[i][j].getPlayerIcon();
                     gtd.setFont(font);
-                    gtd.drawString(name, left + 6, top - 12);
+                    gtd.drawString(name, left + 6, top + 12);
                     left += 20;
                } else if (locations[i][j].hasPlayer()){
                     gtd.setColor(Color.yellow);
@@ -297,7 +301,7 @@ class GameGUI extends JPanel implements ActionListener {
                     Font font = new Font("Verdana", Font.BOLD, 12);
                     String name = locations[i][j].getPlayerIcon();
                     gtd.setFont(font);
-                    gtd.drawString(name, left + 6, top - 12);
+                    gtd.drawString(name, left + 6, top + 12);
                     left += 20;
                } else {
                     gtd.setColor(Color.blue);
