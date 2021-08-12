@@ -10,8 +10,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.JOptionPane;
 
 public class Game {
     private static Board board;
@@ -179,10 +182,12 @@ public class Game {
      * Moves the player north, if on an estate location starts the makeGuess cycle
      * */
     public int moveNorth(GameGUI gg) {
+    	
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+    		Player p = currentPlayer;
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return 0;
+			JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 		}
     	Location playerLoc = currentPlayer.location;
     		
@@ -195,12 +200,14 @@ public class Game {
 	    			if (!(currentPlayer.location instanceof Estate)) {
 	    				moves--;
 	    			}
-	//				moveNorth();
+
 	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				Player p = currentPlayer;
 	    				int curIndex = players.indexOf(currentPlayer);
 	    				nextPlayer(curIndex);
-	    				return 0;
+	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
+	    			
 	    			if ((currentPlayer.location instanceof Estate)) {
 	    				System.out.println("Hi");
 	    				gg.inEstate = true;
@@ -220,9 +227,10 @@ public class Game {
      * */
     public int moveSouth(GameGUI gg) {
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+    		Player p = currentPlayer;
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return 0;
+			JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 		}
     	Location playerLoc = currentPlayer.location;
     		
@@ -235,12 +243,14 @@ public class Game {
 	    			if (!(currentPlayer.location instanceof Estate)) {
 	    				moves--;
 	    			}
-	//				moveSouth();
+	    			
 	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				Player p = currentPlayer;
 	    				int curIndex = players.indexOf(currentPlayer);
 	    				nextPlayer(curIndex);
-	    				return 0;
+	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
+	    			
 	    			if ((currentPlayer.location instanceof Estate)) {
 	    				System.out.println("Hi");
 	    				gg.inEstate = true;
@@ -255,14 +265,12 @@ public class Game {
      * Moves the player east, if on an estate location starts the makeGuess cycle
      * */
     public int moveEast(GameGUI gg) {
-    	if ((currentPlayer.location instanceof Estate)) {
-    		System.out.println("Hi");
-			gg.inEstate = true;
-		}
+
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+    		Player p = currentPlayer;
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
-			return 0;
+			JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 		}
     	Location playerLoc = currentPlayer.location;
     		
@@ -277,9 +285,10 @@ public class Game {
 	    			}
 	//				moveEast();
 	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				Player p = currentPlayer;
 	    				int curIndex = players.indexOf(currentPlayer);
 	    				nextPlayer(curIndex);
-	    				return 0;
+	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
 	    				System.out.println("Hi");
@@ -295,13 +304,12 @@ public class Game {
      * Moves the player west, if on an estate location starts the makeGuess cycle
      * */
     public int moveWest(GameGUI gg) {
-    	if ((currentPlayer.location instanceof Estate)) {
-    		System.out.println("Hi");
-			gg.inEstate = true;
-		}
+
     	if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+    		Player p = currentPlayer;
 			int curIndex = players.indexOf(currentPlayer);
 			nextPlayer(curIndex);
+			JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 			return 0;
 		}
     	Location playerLoc = currentPlayer.location;
@@ -317,9 +325,10 @@ public class Game {
 	    			}
 	//				moveWest();
 	    			if ((moves == 0 && !(currentPlayer.location instanceof Estate))) {
+	    				Player p = currentPlayer;
 	    				int curIndex = players.indexOf(currentPlayer);
 	    				nextPlayer(curIndex);
-	    				return 0;
+	    				JOptionPane.showMessageDialog(null, "Your turn is now over, " + p.playerName + " please pass the screen to " + currentPlayer.playerName);
 	    			}
 	    			if ((currentPlayer.location instanceof Estate)) {
 	    				System.out.println("Hi");
@@ -341,110 +350,111 @@ public class Game {
      * that has not guessed enters an estate
      */
     public void makeGuess(Location loc, Graphics2D gtd){
-    	String estate = loc.name;
-    	List<Integer> idxList = new ArrayList<>();
-    	int curIndex = players.indexOf(currentPlayer);
+//    	String estate = loc.name;
+//    	List<Integer> idxList = new ArrayList<>();
+//    	int curIndex = players.indexOf(currentPlayer);
+//    	
     	
-    	
-    	// Prints the players options to choose from
-    	// Also gets and checks the players input
-      	printCardOptions();
+    	/*
+    		Returns list of card options
+    	 */
+//      	getCardOptions();
     	
       	// Make an official guess object
-    	Guess playersGuess = new Guess(estate, weapon, player);
+//    	Guess playersGuess = new Guess(estate, weapon, player);
     	
     	// check if this is the murder circumstances,
     	// if yes, the player wins,
     	// if not, the player continues on to guess cycle.
-    	if (playersGuess.equals(murderCircumstance)) {
-    		this.solved = true;
-			System.out.println("Congratulations!! You have solved the murder!");
-    		return;
-    	} 
-		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
-		System.out.println("Who disagrees?");
-    	
-		if (curIndex == 0) {
-			idxList.add(1);
-			idxList.add(2);
-			idxList.add(3);
-		} else if (curIndex == 1) {
-			idxList.add(2);
-			idxList.add(3);
-			idxList.add(0);
-		} else if (curIndex == 2) {
-			idxList.add(3);
-			idxList.add(0);
-			idxList.add(1);
-		} else {
-			idxList.add(0);
-			idxList.add(1);
-			idxList.add(2);
-		}
-		
-		List<String> finalCards = new ArrayList<>();
-		
-		/**
-		 * For each of the players that aren't currentPlayer, 
-		 * get the eligible cards
-		 * if they have eligible cards, make them choose which card they wish to present
-		 * if they are not an 'active' player do the same but always choose the first eligible card, if any
-		 * */
-		for (int i = 0; i < idxList.size(); i++) { 
-			List<Card> options = new ArrayList<Card>();
-			Player p = players.get(idxList.get(i));
-			
-			// Get all eligible refutation cards
-		
-			for (Card c : p.cards) {
-				if (c.getName().equals(estate)) {
-					options.add(c);
-				} else if (c.getName().equals(weapon)) {
-					options.add(c);
-				} else if (c.getName().equals(player)) {
-					options.add(c);
-				}
-			}
-			
-			
-			System.out.println("Please pass the screen on to: " + p.charName);
-			wait(2);
-			System.out.println("Hello, " + p.charName);
-			if (options.isEmpty()) {
-				System.out.println("Sorry, " + p.getCharName() + ". You have no eligible refutation cards.");
-			} else {
-				printEligibleCards(options);
-				int counter = 0;
-				
-				for (Card c : options) {
-					counter = 0;
-					//if (c.getName().equals(cardPicked)) {
-						//finalCards.add(cardPicked);
-						counter++;
-						break;
-					//}
-				}
-				
-				if (counter == 0) {
-					System.out.println("Please try again as we did not recognize that card!");
-					printEligibleCards(options);
-				}
-				
-			}
-				
-			
-			
-		}
-		
-		System.out.println("Please pass the screen on to " + currentPlayer.charName);
-		System.out.println("Hello, " + currentPlayer.charName + " here are what your hopefully loyal associates had to say...");
-		for (String s : finalCards) {
-			System.out.println(s);
-		}
-		
-		System.out.println("Your turn is now over! You have not guessed the right murder circumstances, therefore\n"
-				+ "you are now excluded from guessing in the future!");
-		currentPlayer.setGuessed(true);
+//    	if (playersGuess.equals(murderCircumstance)) {
+//    		this.solved = true;
+//			System.out.println("Congratulations!! You have solved the murder!");
+//    		return;
+//    	} 
+//		System.out.println(currentPlayer.charName + " " + playersGuess.toString() + "!");
+//		System.out.println("Who disagrees?");
+//    	
+//		if (curIndex == 0) {
+//			idxList.add(1);
+//			idxList.add(2);
+//			idxList.add(3);
+//		} else if (curIndex == 1) {
+//			idxList.add(2);
+//			idxList.add(3);
+//			idxList.add(0);
+//		} else if (curIndex == 2) {
+//			idxList.add(3);
+//			idxList.add(0);
+//			idxList.add(1);
+//		} else {
+//			idxList.add(0);
+//			idxList.add(1);
+//			idxList.add(2);
+//		}
+//		
+//		List<String> finalCards = new ArrayList<>();
+//		
+//		/**
+//		 * For each of the players that aren't currentPlayer, 
+//		 * get the eligible cards
+//		 * if they have eligible cards, make them choose which card they wish to present
+//		 * if they are not an 'active' player do the same but always choose the first eligible card, if any
+//		 * */
+//		for (int i = 0; i < idxList.size(); i++) { 
+//			List<Card> options = new ArrayList<Card>();
+//			Player p = players.get(idxList.get(i));
+//			
+//			// Get all eligible refutation cards
+//		
+//			for (Card c : p.cards) {
+//				if (c.getName().equals(estate)) {
+//					options.add(c);
+//				} else if (c.getName().equals(weapon)) {
+//					options.add(c);
+//				} else if (c.getName().equals(player)) {
+//					options.add(c);
+//				}
+//			}
+//			
+//			
+//			System.out.println("Please pass the screen on to: " + p.charName);
+//			wait(2);
+//			System.out.println("Hello, " + p.charName);
+//			if (options.isEmpty()) {
+//				System.out.println("Sorry, " + p.getCharName() + ". You have no eligible refutation cards.");
+//			} else {
+//				printEligibleCards(options);
+//				int counter = 0;
+//				
+//				for (Card c : options) {
+//					counter = 0;
+//					//if (c.getName().equals(cardPicked)) {
+//						//finalCards.add(cardPicked);
+//						counter++;
+//						break;
+//					//}
+//				}
+//				
+//				if (counter == 0) {
+//					System.out.println("Please try again as we did not recognize that card!");
+//					printEligibleCards(options);
+//				}
+//				
+//			}
+//				
+//			
+//			
+//		}
+//		
+//		System.out.println("Please pass the screen on to " + currentPlayer.charName);
+//		System.out.println("Hello, " + currentPlayer.charName + " here are what your hopefully loyal associates had to say...");
+//		for (String s : finalCards) {
+//			System.out.println(s);
+//		}
+//		
+//		System.out.println("Your turn is now over! You have not guessed the right murder circumstances, therefore\n"
+//				+ "you are now excluded from guessing in the future!");
+//		currentPlayer.setGuessed(true);
     }
     
     /**
@@ -461,49 +471,21 @@ public class Game {
     /**
      * Get the players guesses and check them
      * */
-    public void printCardOptions() {
-    	int i = 1;
-    	System.out.println("Choose a weapon: (type in name)");
+    public List<String> getCardOptions() {
+    	List<String> cardStrings = new ArrayList<>();
+    	int i = 0;
+    	
     	for (Card c : weaponCards) {
-    		System.out.println(i + ". " + c.getName());
+    		cardStrings.add(i, c.getName());
     		i++;
     	}
-    	i = 1;
-    	System.out.println("");
-    	
-    	//weapon = getInput();
-    	
-    	System.out.println("Characters: (type in name)");
+
     	for (Card c : characterCards) {
-    		System.out.println(i + ". " + c.getName());
+    		cardStrings.add(i, c.getName());
     		i++;
     	}
-    	i = 1;
-    	System.out.println("");
     	
-    	//player = getInput();
-    	
-    	checkInputs(weapon, player);
-    }
-    
-    /**
-     * Checks the guess inputs validity
-     * */
-    public void checkInputs(String w, String p) {
-    	int checked = 0;
-    	for (Card c : weaponCards) {
-    		if (c.getName().equalsIgnoreCase(w)) {
-    			checked++;
-    		}
-    	}
-    	for (Card c : characterCards) {
-    		if (c.getName().equalsIgnoreCase(p)) {
-    			checked++;
-    		}
-    	}
-    	if (checked != 2) {
-    		printCardOptions();
-    	}
+    	return cardStrings;
     }
 
     /**

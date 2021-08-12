@@ -5,13 +5,17 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JOptionPane;
 
 class GameGUI extends JPanel implements ActionListener {
@@ -93,7 +97,7 @@ class GameGUI extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (game.currentPlayer.location instanceof Estate && !game.currentPlayer.hasGuessed()) {
-    				game.makeGuess(game.currentPlayer.location, gtd);
+    				makeGuess(game.currentPlayer.location, gtd);
     				int curIndex = game.getPlayerList().indexOf(game.currentPlayer);
 					game.nextPlayer(curIndex);
     			} else {
@@ -107,8 +111,24 @@ class GameGUI extends JPanel implements ActionListener {
 		this.add(guess);
         guess.grabFocus();
     }
+    
+    public void makeGuess(Location loc, Graphics2D gtd) {
+    	List<String> cOptions = game.getCardOptions();
+    	
+    	addOptionButtons(cOptions);
+    }
 
-    public void addMoveButtons(int x, int y) {
+    private void addOptionButtons(List<String> cOptions) {
+    	ButtonGroup bg = new ButtonGroup();
+
+        JRadioButton wop1 = new JRadioButton(cOptions.get(0));
+        wop1.setBounds(this.getSize().width+this.getSize().width/2, this.getSize().height-200, 60, 20);
+        wop1.setVisible(true);
+        bg.add(wop1);
+        wop1.grabFocus();
+	}
+
+	public void addMoveButtons(int x, int y) {
 		JButton north = new JButton("N");
 		north.addActionListener(new ActionListener() {
         	
@@ -119,8 +139,12 @@ class GameGUI extends JPanel implements ActionListener {
 					moves = moveNorth();
 	                repaint();
 	                if (inEstate) {
-						JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " + game.currentPlayer.location.getWeaponName() + ", mysterious..." );
-						inEstate = false;
+	                	if (game.currentPlayer.location.getWeaponName() != null) {
+		                	JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " 
+								+ game.currentPlayer.location.getWeaponName() + ", mysterious..." + "\n"
+			                	+ "press the 'Guess' button to start a guessing cycle." );
+							inEstate = false;
+	                	}
 					}
 				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
@@ -138,8 +162,12 @@ class GameGUI extends JPanel implements ActionListener {
 					moves = moveWest();
 	                repaint();
 	                if (inEstate) {
-						JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " + game.currentPlayer.location.getWeaponName() + ", mysterious..." );
-						inEstate = false;
+	                	if (game.currentPlayer.location.getWeaponName() != null) {
+		                	JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " 
+								+ game.currentPlayer.location.getWeaponName() + ", mysterious..." + "\n"
+			                	+ "press the 'Guess' button to start a guessing cycle." );
+							inEstate = false;
+	                	}
 					}
 				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
@@ -156,8 +184,12 @@ class GameGUI extends JPanel implements ActionListener {
 					moves = moveEast();
 	                repaint();
 	                if (inEstate) {
-						JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " + game.currentPlayer.location.getWeaponName() + ", mysterious..." );
-						inEstate = false;
+	                	if (game.currentPlayer.location.getWeaponName() != null) {
+		                	JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " 
+								+ game.currentPlayer.location.getWeaponName() + ", mysterious..." + "\n"
+			                	+ "press the 'Guess' button to start a guessing cycle." );
+							inEstate = false;
+	                	}
 					}
 				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
@@ -174,8 +206,12 @@ class GameGUI extends JPanel implements ActionListener {
 					moves = moveSouth();
 	                repaint();
 	                if (inEstate) {
-						JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " + game.currentPlayer.location.getWeaponName() + ", mysterious..." );
-						inEstate = false;
+	                	if (game.currentPlayer.location.getWeaponName() != null) {
+		                	JOptionPane.showMessageDialog(null, "You have entered " + game.currentPlayer.location.name + "!" + "\n" + "You see " 
+								+ game.currentPlayer.location.getWeaponName() + ", mysterious..." + "\n"
+			                	+ "press the 'Guess' button to start a guessing cycle." );
+							inEstate = false;
+	                	}
 					}
 				} else if (!inEstate) {
 					JOptionPane.showMessageDialog(null, "Sorry, " + game.getCurrentPlayerName() + " you have no moves! Please roll." );
